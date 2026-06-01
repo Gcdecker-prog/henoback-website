@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HenoBack Office — Website Redesign
 
-## Getting Started
+Clean, lightweight marketing site for [henobackoffice.com](https://henobackoffice.com), built with **Next.js 14**, **TypeScript**, and **Tailwind**. Visual system follows [IFI Professionals](https://ifi-website.vercel.app); content migrates from the live WordPress site.
 
-First, run the development server:
+| Item | Value |
+|------|--------|
+| Vercel project | `henoback-website` |
+| Internal slug | `henoback-www` |
+| Product name | HenoBack Office |
+| Legal footer | Heno BackOffice Services |
+| Brand accent | `#F27830` |
+
+## Quick start
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Monorepo placement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+When merging into `gtm-sales-engine`, copy this tree to `sites/henoback-website` and set the Vercel **Root Directory** to that path. Keep GTM admin work in a separate Cursor context.
 
-## Learn More
+## Migration strategy
 
-To learn more about Next.js, take a look at the following resources:
+**B → A:** Preview on `henoback-website.vercel.app` until sign-off, then point `henobackoffice.com` DNS to Vercel. Documented in `docs/CONTENT-IA.md`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Cursor
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Rule: `.cursor/rules/henoback-website.mdc`
+- Kickoff prompt: see **Session kickoff** below
 
-## Deploy on Vercel
+### Session kickoff (paste in new chat)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+Project: HenoBack Office website redesign (henoback-website)
+Goal: Replace henobackoffice.com with a clean, white, IFI-inspired Next.js marketing site — migrate real content, do not shrink the offer.
+References: henobackoffice.com (content), ifi-website.vercel.app (layout)
+Priority v1: Home, Services (9), Industries (9), Why Heno, Get Started
+Constraints: CTAs → GTM (utm_source=henoback-www&utm_campaign=henoback_office), phone/email in chrome, no GTM admin in this site
+Start by auditing gaps vs live site, then build — see docs/CONTENT-IA.md
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Local dev |
+| `npm run build` | Production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` |
+
+## Vercel + Git deploy
+
+Full checklist: **[docs/DEPLOY.md](docs/DEPLOY.md)**  
+GTM UTM funnel: **[docs/GTM-ATTRIBUTION.md](docs/GTM-ATTRIBUTION.md)**
+
+### Vercel env (project `henoback-website`)
+
+```
+NEXT_PUBLIC_SITE_URL=https://henobackoffice.com
+NEXT_PUBLIC_GTM_APP_URL=https://<your-gtm-production-host>
+NEXT_PUBLIC_GTM_INTAKE_PATH=/intake
+```
+
+Every **Book a consultation** CTA uses `GtmOutboundButton` → GTM with `utm_source=henoback-www`, inbound campaign passthrough, and `landing_page`.

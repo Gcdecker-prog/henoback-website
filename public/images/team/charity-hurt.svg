@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Charity Hurt photo placeholder">
+  <rect width="400" height="500" fill="#f5f5f5"/>
+  <circle cx="200" cy="180" r="72" fill="#e5e5e5"/>
+  <rect x="100" y="280" width="200" height="160" rx="24" fill="#e5e5e5"/>
+  <text x="200" y="460" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#a3a3a3">Replace with photo</text>
+</svg>

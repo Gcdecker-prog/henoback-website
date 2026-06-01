@@ -1,0 +1,76 @@
+---
+description: HenoBack Office marketing site — scoped to this project only
+globs:
+  - "**/*"
+---
+
+# HenoBack Office — Marketing Website
+
+## Product
+
+HenoBack Office: outsourced accounting, controller support, and finance operations for **professional service firms**. Part of the Heno platform; advisory parent is IFI Professionals.
+
+## Canonical references
+
+- Production (content source of truth): https://henobackoffice.com
+- Design reference (layout / typography): https://ifi-website.vercel.app
+- Logo: `public/henoback-office-logo.png` (add asset; do not use emoji placeholders)
+- Brand accent: `#F27830` (Heno orange)
+
+## Stack
+
+Next.js 14 App Router, Tailwind, static marketing pages. Standalone site — **not** the GTM admin app.
+
+## Migration strategy
+
+**B → A (default):** Ship on Vercel project `henoback-website` (preview URL) until stakeholder sign-off, then point `henobackoffice.com` DNS to Vercel. Do not use hybrid “new home + legacy deep links” unless explicitly requested.
+
+## Design principles
+
+- White backgrounds, generous whitespace, real logo
+- Inter or system sans; neutral-900 text, neutral-100 borders
+- Subtle glass surfaces (`backdrop-blur`, white/70 panels) — 2027 designer feel, not heavy chrome
+- Rounded-full primary CTAs; minimal chrome like IFI site
+- Mobile-first; sticky header with logo + phone + Book a consultation
+
+## Brand strings (use consistently)
+
+| Context | String |
+|--------|--------|
+| Product / nav / CTAs | **HenoBack Office** |
+| Legal footer | **Heno BackOffice Services** |
+| Parent | **IFI Professionals** · Heno platform |
+| Avoid without rebrand decision | “HENO BackOffice Solutions” (live WordPress header) |
+
+## CTAs & routing
+
+- Primary: **Book a consultation** → GTM intake with UTMs (`utm_source=henoback-www`, `utm_campaign=henoback_office`)
+- Secondary: **Take the assessment** → `journeys/outsource` on GTM app
+- Use `NEXT_PUBLIC_GTM_APP_URL` for cross-app links (no hardcoded production URLs in components)
+
+## GTM attribution (separate apps)
+
+- This site = marketing + SEO + trust. GTM engine = forms, journeys, lead tracking.
+- All GTM outbound links go through `lib/gtm-links.ts` with `utm_source=henoback-www`, `utm_campaign=henoback_office`, and `utm_content` per page/CTA.
+- Campaigns use **this site’s URLs** in ads/email; CTAs hand off to GTM with consistent UTMs. See `docs/GTM-ATTRIBUTION.md`.
+
+## Content rules
+
+- **Word-for-word** copy from henobackoffice.com unless marketing approves a change. Store in `lib/content/*.ts`.
+- Elevate presentation (2027 glass UI) — do not paraphrase body copy during migration
+- Services (9): Bookkeeping, Full Service Accounting, Payroll Integration, Audit Support, Budgeting & Forecasting, Accounting Analysis, CFO Outsourcing, AP/AR, Expense Automation
+- Industries (9): Management Consulting, Project Accounting, Creative Agencies, Technology & IT, HR & Talent, Engineering/Architecture/Environmental, Government Contracting, Real Estate, Specialized Advisory
+- Contact: (702) 729-6682, info@HenoBackOffice.com
+- Jim French founder block: one strong section, used sparingly
+
+## Vercel
+
+- Project: `henoback-website`
+- Env: `NEXT_PUBLIC_GTM_APP_URL`, `NEXT_PUBLIC_SITE_URL`
+
+## Do not
+
+- Add GTM admin, Supabase, or campaign logic to this site
+- Shrink the offer (no “3 service cards” stubs)
+- Commit `.env` or secrets
+- Mix this UI context with GTM admin slate UI in the same prompt
