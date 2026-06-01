@@ -45,6 +45,12 @@ Campaign email/ad  →  henobackoffice.com/about-us?utm_medium=linkedin&utm_camp
 
 Implemented in `lib/gtm-links.ts` via `gtmAppUrl()`, `consultationIntakeUrl()`, `pageCtaUrl()`.
 
+## Campaign playbook (internal)
+
+- **Local:** `CAMPAIGN_PLAYBOOK_ENABLED=true` in `.env.local` → `http://localhost:3000/campaigns`
+- **Production:** `/campaigns` is **404** (server env gate; see `docs/SECURITY.md`)
+- Registry: `lib/landing-pages.ts` · Guide: `docs/LANDING-PAGES.md`
+
 ## Campaign URLs on this site
 
 Use **this site’s URLs** in ads and email (not GTM URLs directly):

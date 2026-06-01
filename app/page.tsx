@@ -6,12 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { HomeHero } from '@/components/marketing/HomeHero';
+import { HomeOpening } from '@/components/marketing/HomeOpening';
 import { ContentGrid } from '@/components/marketing/ContentGrid';
 import { AnimatedTrustStats } from '@/components/marketing/AnimatedTrustStats';
-import { PartnerStrip } from '@/components/marketing/PartnerStrip';
+import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Reveal, RevealStagger, RevealItem } from '@/components/motion/Reveal';
 import { GlassMesh } from '@/components/motion/GlassMesh';
+import { ScrollFlowBridge } from '@/components/motion/ScrollFlowBridge';
 import { services } from '@/lib/content/services';
 import { industries } from '@/lib/content/industries';
 import { caseStudies } from '@/lib/content/case-studies';
@@ -45,14 +47,16 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={webSiteJsonLd()} />
-      <HomeHero />
+      <HomeOpening>
+        <HomeHero />
+        <ScrollFlowBridge />
 
-      <Container>
-        <AnimatedTrustStats stats={trustSignals} />
-      </Container>
+        <Container className="relative pb-8 pt-2 sm:pb-10">
+          <AnimatedTrustStats stats={trustSignals} />
+        </Container>
 
-      <section className="relative overflow-hidden border-y border-neutral-100 bg-neutral-50/80 py-16 sm:py-20">
-        <GlassMesh className="opacity-60" />
+      <section className="relative overflow-hidden py-16 sm:py-20">
+        <GlassMesh className="opacity-40" />
         <Container className="relative grid items-center gap-10 lg:grid-cols-2">
           <Reveal>
             <h2 className="text-display-md font-semibold tracking-tight text-neutral-900">
@@ -82,20 +86,26 @@ export default function HomePage() {
           </Reveal>
         </Container>
       </section>
+      </HomeOpening>
 
       <Container>
         <ContentGrid
           heading="All the services that our company provides"
-          subheading="Nine offerings — same breadth as henobackoffice.com, elevated presentation."
+          subheading="Controller support, systems, and reporting — end to end."
           items={serviceCards}
           basePath="/services"
         />
-        <ContentGrid
-          heading="The industries we know best"
-          items={industryCards}
-          basePath="/industries"
-        />
       </Container>
+
+      <section className="bg-neutral-50/50">
+        <Container>
+          <ContentGrid
+            heading="The industries we know best"
+            items={industryCards}
+            basePath="/industries"
+          />
+        </Container>
+      </section>
 
       <section className="bg-white py-16 sm:py-20">
         <Container>
@@ -111,23 +121,28 @@ export default function HomePage() {
                 <Reveal>
                   <Link
                     href={`/case-studies/${study.slug}`}
-                    className={cn(glassPanelSubtle, 'group flex overflow-hidden p-0')}
+                    className={cn(
+                      glassPanelSubtle,
+                      'group flex overflow-hidden p-1.5 ring-1 ring-white/50 transition-shadow hover:shadow-[0_20px_48px_-16px_rgba(23,23,23,0.12)]',
+                    )}
                   >
-                    <div className="relative hidden w-2/5 shrink-0 sm:block">
+                    <div className="relative hidden min-h-[220px] w-[42%] shrink-0 overflow-hidden rounded-2xl sm:block">
                       <Image
                         src={study.heroImage}
-                        alt=""
+                        alt={study.clientName}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                        sizes="240px"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="280px"
                       />
                     </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      <h3 className="font-semibold text-neutral-900 group-hover:text-heno-orange-600">
+                    <div className="flex flex-1 flex-col justify-center p-6 sm:p-7">
+                      <h3 className="text-h3 font-semibold text-neutral-900 group-hover:text-heno-orange-600">
                         {study.clientName}
                       </h3>
-                      <p className="mt-2 flex-1 text-sm text-neutral-600">{study.excerpt}</p>
-                      <span className="mt-4 text-sm font-medium text-heno-orange-600">
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-600">
+                        {study.excerpt}
+                      </p>
+                      <span className="mt-5 text-sm font-medium text-heno-orange-600">
                         Read case study →
                       </span>
                     </div>
@@ -147,7 +162,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <PartnerStrip />
+      <PlatformMarquee />
 
       <section className="border-t border-neutral-100 bg-white py-16 sm:py-20">
         <Container>

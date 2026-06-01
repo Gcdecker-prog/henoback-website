@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        'heno-blue': henoback.blue,
         'heno-orange': henoback.orange,
         neutral: henoback.neutral,
       },

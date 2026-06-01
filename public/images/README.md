@@ -3,8 +3,8 @@
 | Folder | Maps to |
 |--------|---------|
 | `brand/henoback-office-logo.png` | Header & footer logo |
-| `services/full-service-accounting.png` | Homepage hero (contained — competence visual) |
-| `hero/home-hero.png` | Unused (legacy handshake — do not use as full-bleed) |
+| `hero/home-hero.png` | Homepage hero (professional accounting / charts — synced from full-service-accounting) |
+| `services/full-service-accounting.png` | Service card + detail hero |
 | `marketing/why-us.png` | Home “Why us” band |
 | `services/{slug}.png` | Each service card + detail hero (`lib/content/services.ts` slug) |
 | `industries/{slug}.png` | Each industry card + detail hero |

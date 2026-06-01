@@ -3,6 +3,14 @@
  */
 
 export const henoback = {
+  /** Live utility bar / deep brand navy */
+  blue: {
+    50: '#EEF4F8',
+    100: '#D6E6EF',
+    500: '#236082',
+    700: '#1B4A6E',
+    900: '#1B365D',
+  },
   orange: {
     50: '#FFF4ED',
     100: '#FFE4D4',

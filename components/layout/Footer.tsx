@@ -34,6 +34,11 @@ export function Footer() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Explore</p>
             <ul className="mt-4 space-y-2">
+              <li>
+                <Link href="/" className="text-sm text-neutral-700 hover:text-heno-orange-600">
+                  Home
+                </Link>
+              </li>
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -44,6 +49,14 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/case-studies"
+                  className="text-sm text-neutral-700 hover:text-heno-orange-600"
+                >
+                  Case Studies
+                </Link>
+              </li>
             </ul>
           </div>
 

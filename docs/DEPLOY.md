@@ -19,34 +19,56 @@ git add .
 git commit -m "HenoBack Office marketing site — Next.js 14, GTM UTMs, SEO"
 ```
 
-Create a repo (GitHub: `henoback-website` or monorepo `gtm-sales-engine` with root `sites/henoback-website`), then:
+1. On GitHub, create an **empty** repo named `henoback-website` (no README — you already have one locally).
+2. Copy your **real** repo URL from GitHub (green **Code** button). It looks like:
+   `https://github.com/ifi-professionals/henoback-website.git`  
+   (your org/user name goes where `ifi-professionals` is — **not** the text `YOUR_GITHUB_USERNAME_OR_ORG`).
+
+**Git Bash (MINGW64)** — you are already in the project if the prompt shows `heno-backoffice-website`:
 
 ```bash
-git remote add origin https://github.com/YOUR_ORG/henoback-website.git
-git branch -M main
+git remote remove origin
+git remote add origin https://github.com/<YOUR-REAL-ORG-OR-USER>/henoback-website.git
 git push -u origin main
 ```
+
+**PowerShell:**
+
+```powershell
+cd C:\dev\heno-backoffice-website
+git remote remove origin
+git remote add origin https://github.com/<YOUR-REAL-ORG-OR-USER>/henoback-website.git
+git push -u origin main
+```
+
+**Common errors**
+
+| Error | Fix |
+|-------|-----|
+| `src refspec main does not match any` | Run `git branch -M main` (local branch was `master`) |
+| `failed to push` to `YOUR_ORG` | Use your real GitHub URL, not the doc placeholder |
+| `remote origin already exists` | `git remote set-url origin https://github.com/...` |
 
 ---
 
 ## 2. Vercel project
 
-1. [vercel.com](https://vercel.com) → **Add New Project** → Import the Git repo.
+Repo: **`Gcdecker-prog/henoback-website`** · branch **`main`**
+
+Step-by-step for the import screen: **[VERCEL-FIRST-DEPLOY.md](./VERCEL-FIRST-DEPLOY.md)**
+
+1. [vercel.com](https://vercel.com) → **Add New Project** → Import `Gcdecker-prog/henoback-website`
 2. **Project name:** `henoback-website`
-3. **Framework:** Next.js (auto-detected)
-4. **Root directory:** `.` (or `sites/henoback-website` if inside monorepo)
-5. **Build command:** `npm run build`
-6. **Output:** default (Next.js)
+3. **Framework:** Next.js · **Root:** `./`
+4. Expand **Environment Variables** → add table below → **Deploy**
 
 ### Environment variables (Production + Preview)
 
-| Variable | Production example | Purpose |
-|----------|-------------------|---------|
-| `NEXT_PUBLIC_SITE_URL` | `https://henobackoffice.com` | Canonical URLs, sitemap, OG |
-| `NEXT_PUBLIC_GTM_APP_URL` | `https://gtm-sales-engine.vercel.app` | CTA links to intake |
-| `NEXT_PUBLIC_GTM_INTAKE_PATH` | `/intake` | Optional if GTM path differs |
-
-Preview deployments: set `NEXT_PUBLIC_SITE_URL` to `https://henoback-website.vercel.app` or use Vercel’s auto URL in project settings.
+| Variable | First deploy | After custom domain (Production only) |
+|----------|--------------|--------------------------------------|
+| `NEXT_PUBLIC_SITE_URL` | `https://henoback-website.vercel.app` | `https://henobackoffice.com` |
+| `NEXT_PUBLIC_GTM_APP_URL` | `https://gtm-sales-engine.vercel.app` | same |
+| `NEXT_PUBLIC_GTM_INTAKE_PATH` | `/intake` | same |
 
 ---
 
@@ -84,15 +106,19 @@ Confirm GTM admin reads these fields on lead create.
 
 ---
 
-## 6. Ongoing workflow
+## 6. Ongoing workflow (PowerShell ship)
 
-```bash
-git checkout -b feature/your-change
-# edit, npm run dev, npm run build
-git commit -am "Describe change"
-git push -u origin feature/your-change
+```powershell
+# Validate, build, commit, push main, production deploy
+.\scripts\ship.ps1 -CommitMessage "Describe change" -Production
+
+# Dry run (no commit/push/deploy)
+.\scripts\ship.ps1 -DryRun -Production
+
+# npm shortcuts
+npm run ship:prod -- -CommitMessage "Describe change"
 ```
 
-Open PR → Vercel preview URL → merge to `main` → production deploy.
+Feature branches: push and open PR → Vercel preview → merge to `main` → run ship on `main`.
 
-Do **not** commit `.env.local` or secrets.
+Do **not** commit `.env.local` or set `CAMPAIGN_PLAYBOOK_ENABLED` on Vercel Production. See [SECURITY.md](./SECURITY.md).

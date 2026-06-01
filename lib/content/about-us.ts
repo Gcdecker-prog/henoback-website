@@ -6,7 +6,6 @@
 export const aboutUsPage = {
   title: 'About Us',
   hero: {
-    eyebrow: 'About Us',
     headline: 'Outsource Your Back Office. Grow With Confidence.',
     paragraphs: [
       'Heno BackOffice Services is an outsourced services firm committed to the success of our Consulting Firm clients. We are US-based and only have employees based in the USA.',
@@ -15,13 +14,16 @@ export const aboutUsPage = {
     ],
   },
   stats: [
-    { value: '0+', label: 'Happy Customers' },
-    { value: '0+', label: 'Professional Services Segments Served' },
+    { value: '100+', label: 'Happy Customers', icon: 'customers' as const },
+    { value: '10+', label: 'Professional Services Segments Served', icon: 'segments' as const },
+    { value: '8+', label: 'Strategic & Technology Partners', icon: 'partners' as const },
   ],
   getToKnowUs: {
     eyebrow: 'Get To Know Us',
     headline: '20+ Years of Excellence in the Accounting Industry',
     ctaLabel: 'Get Started',
+    imageSrc: '/images/marketing/about-team-collaboration.jpg',
+    imageAlt: 'Heno BackOffice team collaborating on financial operations',
   },
   whyUs: {
     eyebrow: 'Why Us',
@@ -40,12 +42,12 @@ export const aboutUsPage = {
       {
         name: 'Kristina Costello',
         role: 'Principal',
-        imageSrc: '/images/team/kristina-costello.svg',
+        imageSrc: '/images/team/kristina-costello.png',
       },
       {
         name: 'Charity Hurt',
         role: 'Outsourced Accounting Manager',
-        imageSrc: '/images/team/charity-hurt.svg',
+        imageSrc: '/images/team/charity-hurt.png',
       },
     ],
   },

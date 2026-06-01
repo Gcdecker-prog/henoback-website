@@ -35,7 +35,7 @@ export function CaseStudyPageContent({ study }: CaseStudyPageProps) {
       <Container className="py-14 sm:py-20">
         <ul className="grid gap-4 sm:grid-cols-3">
           {study.metrics.map((m) => (
-            <li key={m.label} className={glassStat}>
+            <li key={m.label} className={cn(glassStat, 'px-6 py-8 text-center')}>
               <p className="text-2xl font-semibold text-heno-orange-600">{m.value}</p>
               <p className="mt-1 text-sm text-neutral-600">{m.label}</p>
             </li>

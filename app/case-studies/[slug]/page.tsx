@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CaseStudyPageContent } from '@/components/marketing/CaseStudyPage';
+import { MarketingPageShell } from '@/components/marketing/MarketingPageShell';
 import { getCaseStudy, caseStudies } from '@/lib/content/case-studies';
 import { siteConfig } from '@/lib/site-config';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -41,7 +42,9 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
           ]),
         ]}
       />
-      <CaseStudyPageContent study={study} />
+      <MarketingPageShell>
+        <CaseStudyPageContent study={study} />
+      </MarketingPageShell>
     </>
   );
 }

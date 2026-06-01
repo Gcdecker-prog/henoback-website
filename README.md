@@ -56,6 +56,7 @@ Start by auditing gaps vs live site, then build — see docs/CONTENT-IA.md
 ## Vercel + Git deploy
 
 Full checklist: **[docs/DEPLOY.md](docs/DEPLOY.md)**  
+**Vercel import screen:** **[docs/VERCEL-FIRST-DEPLOY.md](docs/VERCEL-FIRST-DEPLOY.md)**  
 GTM UTM funnel: **[docs/GTM-ATTRIBUTION.md](docs/GTM-ATTRIBUTION.md)**
 
 ### Vercel env (project `henoback-website`)

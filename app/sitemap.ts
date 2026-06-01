@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     '',
     '/about-us',
-    '/why-heno',
     '/services',
     '/industries',
     '/case-studies',

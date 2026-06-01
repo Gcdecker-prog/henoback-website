@@ -3,10 +3,12 @@ export type NavItem = {
   href: string;
 };
 
-/** Primary nav — mirrors live henobackoffice.com IA */
+/**
+ * Primary nav — aligned with henobackoffice.com
+ * “Why Heno” in the menu → /about-us (live uses the same pattern)
+ */
 export const navItems: NavItem[] = [
-  { label: 'About Us', href: '/about-us' },
-  { label: 'Why Heno', href: '/why-heno' },
+  { label: 'Why Heno', href: '/about-us' },
   { label: 'Services', href: '/services' },
   { label: 'Industries', href: '/industries' },
   { label: 'Case Studies', href: '/case-studies' },

@@ -64,6 +64,7 @@
     background: linear-gradient(to top, rgba(250, 250, 250, 1), transparent);
     mask-image: linear-gradient(to top, black, transparent);
   }
+
 }
 
 @keyframes glass-shimmer {
@@ -73,6 +74,30 @@
   }
   50% {
     transform: translateX(30%) translateY(30%) rotate(0deg);
+  }
+}
+
+@keyframes platform-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.platform-marquee-track {
+  animation: platform-marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.platform-marquee-mask:hover .platform-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-marquee-track {
+    animation: none;
   }
 }
 

@@ -3,9 +3,23 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/cn';
 
+type GlassMeshProps = {
+  className?: string;
+  /** Hero/opening — no orange blobs behind copy */
+  subtle?: boolean;
+};
+
 /** Animated ambient mesh — glass-era depth without heavy WebGL */
-export function GlassMesh({ className }: { className?: string }) {
+export function GlassMesh({ className, subtle }: GlassMeshProps) {
   const reduce = useReducedMotion();
+
+  if (subtle) {
+    return (
+      <div className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)} aria-hidden>
+        <div className="absolute inset-0 bg-[linear-gradient(165deg,#ffffff_0%,#fafafa_55%,#f5f5f5_100%)] opacity-100" />
+      </div>
+    );
+  }
 
   return (
     <div className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)} aria-hidden>

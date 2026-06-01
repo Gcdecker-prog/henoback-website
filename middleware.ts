@@ -28,7 +28,7 @@ export function middleware(request: NextRequest) {
   }
 
   const existingLanding = request.cookies.get(`${COOKIE_PREFIX()}landing_page`)?.value;
-  if (!existingLanding && pathname && pathname !== '/') {
+  if (!existingLanding && pathname) {
     response.cookies.set(`${COOKIE_PREFIX()}landing_page`, pathname, {
       maxAge: COOKIE_MAX_AGE,
       path: '/',
