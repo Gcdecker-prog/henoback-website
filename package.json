@@ -9,7 +9,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "ship": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/ship.ps1",
-    "ship:prod": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/ship.ps1 -Production"
+    "ship:prod": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/ship.ps1 -Production",
+    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/ship.ps1 -Production -AutoCommit"
   },
   "dependencies": {
     "clsx": "^2.1.1",

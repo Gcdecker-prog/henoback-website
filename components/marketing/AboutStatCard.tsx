@@ -65,7 +65,7 @@ export function AboutStatCard({ value, label, icon, index = 0 }: AboutStatCardPr
       ref={ref}
       className={cn(
         glassStat,
-        'group relative flex h-full min-h-[6.5rem] items-center gap-3.5 overflow-hidden px-4 py-4 text-left sm:gap-4 sm:px-5 sm:py-5',
+        'group relative flex flex-col gap-4 px-6 py-6 text-left sm:px-7 sm:py-7',
         'transition-[box-shadow,border-color] duration-500',
         'hover:border-heno-orange-500/25 hover:shadow-[0_24px_56px_-18px_rgba(242,120,48,0.16),inset_0_1px_0_0_rgba(255,255,255,1)]',
       )}
@@ -83,40 +83,22 @@ export function AboutStatCard({ value, label, icon, index = 0 }: AboutStatCardPr
       whileHover={reduce ? undefined : { y: -3, transition: { duration: 0.25, ease: motionEase } }}
     >
       <div
-        className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-[radial-gradient(circle,rgba(242,120,48,0.14),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[radial-gradient(circle,rgba(242,120,48,0.12),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         aria-hidden
       />
 
-      <motion.div
-        className="relative flex size-12 shrink-0 items-center justify-center rounded-xl border border-heno-orange-500/10 bg-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,1)] sm:size-14"
+      <div
+        className="flex size-14 items-center justify-center rounded-xl border border-heno-orange-500/10 bg-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,1)]"
         aria-hidden
-        animate={
-          reduce
-            ? undefined
-            : {
-                scale: [1, 1.04, 1],
-              }
-        }
-        transition={
-          reduce
-            ? undefined
-            : {
-                duration: 3.5,
-                delay: index * 0.4,
-                repeat: Infinity,
-                repeatType: 'mirror',
-                ease: 'easeInOut',
-              }
-        }
       >
-        <AboutStatGraphic type={icon} />
-      </motion.div>
+        <AboutStatGraphic type={icon} className="size-9" />
+      </div>
 
-      <div className="relative min-w-0 flex-1">
-        <p className="text-2xl font-semibold leading-none tracking-tight text-neutral-900 sm:text-[1.75rem]">
+      <div>
+        <p className="text-3xl font-semibold leading-none tracking-tight text-neutral-900 sm:text-[2rem]">
           <AnimatedStatValue value={value} />
         </p>
-        <p className="mt-1.5 text-pretty text-[13px] font-medium leading-snug text-heno-orange-600 sm:text-sm">
+        <p className="mt-3 text-pretty text-sm font-medium leading-relaxed text-heno-orange-600">
           {label}
         </p>
       </div>

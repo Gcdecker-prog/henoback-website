@@ -5,6 +5,9 @@
 .PARAMETER CommitMessage
   If set, stages and commits all changes before push.
 
+.PARAMETER AutoCommit
+  With -Production: commit all changes using deploy: yyyy-MM-dd HH:mm when -CommitMessage is omitted.
+
 .PARAMETER SkipBuild
   Skip lint, typecheck, and npm run build.
 
@@ -20,6 +23,7 @@
 [CmdletBinding()]
 param(
   [string] $CommitMessage,
+  [switch] $AutoCommit,
   [switch] $SkipBuild,
   [switch] $Production,
   [switch] $DryRun
@@ -90,6 +94,11 @@ if (-not $SkipBuild) {
 }
 
 $porcelain = git status --porcelain
+
+if ($AutoCommit -and -not $CommitMessage -and $porcelain) {
+  $CommitMessage = "deploy: $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+}
+
 if ($CommitMessage) {
   Write-Step 'Git commit'
   if (-not $porcelain) {
@@ -102,7 +111,7 @@ if ($CommitMessage) {
     git commit -m $CommitMessage
   }
 } elseif ($porcelain -and $Production) {
-  throw 'Uncommitted changes. Pass -CommitMessage or commit manually before production ship.'
+  throw 'Uncommitted changes. Run deploy.cmd, npm run deploy, or pass -AutoCommit / -CommitMessage.'
 }
 
 Write-Step 'Push origin'

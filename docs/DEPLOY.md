@@ -106,17 +106,22 @@ Confirm GTM admin reads these fields on lead create.
 
 ---
 
-## 6. Ongoing workflow (PowerShell ship)
+## 6. Deploy (one command)
+
+From the project folder:
 
 ```powershell
-# Validate, build, commit, push main, production deploy
-.\scripts\ship.ps1 -CommitMessage "Describe change" -Production
+npm run deploy
+```
 
-# Dry run (no commit/push/deploy)
-.\scripts\ship.ps1 -DryRun -Production
+Or double-click **`deploy.cmd`** in the repo root.
 
-# npm shortcuts
-npm run ship:prod -- -CommitMessage "Describe change"
+That runs lint, typecheck, build, auto-commit (`deploy: yyyy-MM-dd HH:mm`), push `main`, and Vercel production (GitHub integration or `vercel` CLI).
+
+Optional custom commit message:
+
+```powershell
+.\deploy.cmd "Fix About hero stats layout"
 ```
 
 Feature branches: push and open PR → Vercel preview → merge to `main` → run ship on `main`.
