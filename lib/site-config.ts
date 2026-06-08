@@ -21,7 +21,7 @@ export const siteConfig = {
     'Outsourced accounting, controller support, and automated financial operations for professional service firms.',
 
   description:
-    'HenoBack Office delivers bookkeeping, full-service accounting, CFO outsourcing, and back-office automation built for consulting and professional services firms.',
+    'Get the visibility your back office was built to deliver. Heno BackOffice runs accounting, controller work, and reporting for firms that bill on time and projects.',
 
   contact: {
     phone: '(702) 729-6682',
@@ -37,6 +37,10 @@ export const siteConfig = {
 
 export const primaryCta = {
   label: 'Book a consultation',
+} as const;
+
+export const headerCta = {
+  label: 'Get your back office assessment',
 } as const;
 
 export const secondaryCta = {

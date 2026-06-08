@@ -7,6 +7,7 @@ export const henoback = {
   blue: {
     50: '#EEF4F8',
     100: '#D6E6EF',
+    400: '#4A9EC4',
     500: '#236082',
     700: '#1B4A6E',
     900: '#1B365D',

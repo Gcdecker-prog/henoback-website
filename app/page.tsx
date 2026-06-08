@@ -8,26 +8,26 @@ import { Container } from '@/components/layout/Container';
 import { HomeHero } from '@/components/marketing/HomeHero';
 import { HomeOpening } from '@/components/marketing/HomeOpening';
 import { ContentGrid } from '@/components/marketing/ContentGrid';
-import { AnimatedTrustStats } from '@/components/marketing/AnimatedTrustStats';
+import { HomeTrustBand } from '@/components/marketing/HomeTrustBand';
 import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Reveal, RevealStagger, RevealItem } from '@/components/motion/Reveal';
 import { GlassMesh } from '@/components/motion/GlassMesh';
-import { ScrollFlowBridge } from '@/components/motion/ScrollFlowBridge';
 import { services } from '@/lib/content/services';
 import { industries } from '@/lib/content/industries';
 import { caseStudies } from '@/lib/content/case-studies';
 import { trustSignals, valueProps } from '@/lib/content/trust-signals';
 import { founderQuote } from '@/lib/content/team';
 import { media, getServiceImage, getIndustryImage } from '@/lib/content/media';
+import { homeMeta } from '@/lib/content/home';
 import { siteConfig, primaryCta } from '@/lib/site-config';
 import { pageCtaUrl } from '@/lib/gtm-links';
 import { glass, glassPanelSubtle } from '@/lib/ui/glass';
 import { cn } from '@/lib/cn';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Modern Accounting for Professional Service Firms',
-  description: siteConfig.description,
+  title: homeMeta.title,
+  description: homeMeta.description,
   path: '/',
 });
 
@@ -49,11 +49,9 @@ export default function HomePage() {
       <JsonLd data={webSiteJsonLd()} />
       <HomeOpening>
         <HomeHero />
-        <ScrollFlowBridge />
+      </HomeOpening>
 
-        <Container className="relative pb-8 pt-2 sm:pb-10">
-          <AnimatedTrustStats stats={trustSignals} />
-        </Container>
+      <HomeTrustBand stats={trustSignals} />
 
       <section className="relative overflow-hidden py-16 sm:py-20">
         <GlassMesh className="opacity-40" />
@@ -86,7 +84,6 @@ export default function HomePage() {
           </Reveal>
         </Container>
       </section>
-      </HomeOpening>
 
       <Container>
         <ContentGrid

@@ -1,18 +1,49 @@
-/** Homepage hero — aligned with henobackoffice.com, elevated for 2027 */
+/**
+ * Homepage — solutions-first hero for professional service firms.
+ */
+export const homeMeta = {
+  title: 'Outsourced Back Office for Professional Service Firms',
+  description:
+    'Get the visibility your back office was built to deliver. Most growing firms need reliable insight from their numbers—not more bookkeeping. Heno BackOffice brings structure, consistency, and clarity.',
+} as const;
+
+type HeadlineLine = {
+  readonly before: string;
+  readonly accent?: string;
+  readonly accentTone?: 'blue';
+};
+
+/** Intentional three-line lockup — accents are color only, not motion targets */
 export const homeHero = {
-  eyebrow: 'What we do',
-  /** Full H1 string for metadata / JSON-LD — keep in sync with headlineLines */
-  headline: 'Modern Accounting for Professional Service Firms',
-  /** Typographic flow around hero orb: line 1 clears above; 2–3 wrap the disc */
+  kicker: 'For professional service firms',
   headlineLines: [
-    { text: 'Modern Accounting' },
-    { text: 'for Professional' },
-    { text: 'Service Firms', accent: true as const },
-  ],
-  tagline: 'Outsourced accounting with the clarity and control of a modern back office.',
-  subheadline:
-    'Controller support, integrated systems, and US-based expertise for firms that bill on projects — not generic bookkeeping.',
-  primaryCta: 'Our Services',
-  secondaryCta: 'Book a consultation',
-  trustCues: ['US-based team', '20+ years in accounting', 'Built for professional services'] as const,
+    {
+      before: 'Get the\u00a0',
+      accent: 'visibility',
+      accentTone: 'blue',
+    },
+    {
+      before: 'your back office was',
+    },
+    {
+      before: 'built to deliver',
+    },
+  ] as const satisfies readonly HeadlineLine[],
+  /** Pain + reframe — one scan-friendly paragraph */
+  summary:
+    'Most growing firms don\u2019t struggle with accounting\u2014they struggle getting reliable insight from their numbers. We turn your back office into one reliable system\u2014not patched processes and reports.',
+  outcomes: [
+    'Consistent, reliable financial data',
+    'Clear visibility into profitability and performance',
+    'A back office that works the same way\u2014every time',
+  ] as const,
+  /** Differentiation pull-quote — after outcomes, before CTAs */
+  differentiation: {
+    lead: 'Most firms upgrade their system.',
+    follow: 'Very few fix how it works.',
+  },
+  heroTrust: 'Built for consulting, engineering, agencies, and government contractors.',
+  primaryCta: 'Explore how it works',
+  primaryCtaHref: '/services',
+  secondaryCta: 'See what your back office is missing',
 } as const;

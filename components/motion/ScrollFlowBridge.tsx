@@ -1,4 +1,4 @@
-/** Soft spacing between hero and stats — no graphics */
+/** Breathing room between hero proof band and trust stats */
 export function ScrollFlowBridge() {
-  return <div className="h-10 sm:h-12" aria-hidden />;
+  return <div className="h-6 sm:h-8" aria-hidden />;
 }

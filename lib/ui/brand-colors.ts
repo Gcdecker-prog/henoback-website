@@ -5,4 +5,5 @@ export const brandHex = {
   orange: henoback.orange[500],
   navy: henoback.blue[900],
   logoBlue: henoback.blue[500],
+  logoHeno: henoback.blue[400],
 } as const;

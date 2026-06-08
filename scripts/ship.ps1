@@ -30,7 +30,25 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$Root = Resolve-Path (Join-Path $PSScriptRoot '..')
+
+function Get-ScriptsRoot {
+  if (-not [string]::IsNullOrWhiteSpace($PSScriptRoot)) { return $PSScriptRoot }
+  $invoked = $MyInvocation.MyCommand.Path
+  if (-not [string]::IsNullOrWhiteSpace($invoked)) { return Split-Path -Parent $invoked }
+  $cwd = (Get-Location).Path
+  $fromRepo = Join-Path $cwd 'scripts'
+  if (Test-Path (Join-Path $fromRepo 'ship.ps1')) { return $fromRepo }
+  if (Test-Path (Join-Path $cwd 'ship.ps1')) { return $cwd }
+  throw @"
+Run ship.ps1 as a file — do not paste into PowerShell.
+
+  deploy.cmd ""Your commit message""
+  npm run deploy
+  .\scripts\ship.ps1 -Production -AutoCommit
+"@
+}
+
+$Root = Resolve-Path (Join-Path (Get-ScriptsRoot) '..')
 Set-Location $Root
 
 function Write-Step {

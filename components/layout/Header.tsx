@@ -6,8 +6,8 @@ import { Container } from '@/components/layout/Container';
 import { PrimaryNav } from '@/components/layout/PrimaryNav';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Logo } from '@/components/henoback/Logo';
-import { siteConfig, primaryCta } from '@/lib/site-config';
-import { consultationIntakeUrl } from '@/lib/gtm-links';
+import { siteConfig, headerCta } from '@/lib/site-config';
+import { assessmentUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
 
 export function Header() {
@@ -36,17 +36,18 @@ export function Header() {
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
           <a
             href={`tel:${siteConfig.contact.phoneE164}`}
-            className="hidden h-10 items-center gap-2 rounded-full border border-transparent px-3 text-[13px] font-medium text-neutral-600 transition-colors hover:border-neutral-200/80 hover:bg-neutral-50 hover:text-neutral-900 xl:inline-flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-transparent text-neutral-500 transition-colors hover:border-neutral-200/80 hover:bg-neutral-50 hover:text-neutral-800 lg:inline-flex"
+            aria-label={`Call ${siteConfig.contact.phone}`}
+            title={siteConfig.contact.phone}
           >
-            <Phone size={15} strokeWidth={1.75} aria-hidden />
-            {siteConfig.contact.phone}
+            <Phone size={16} strokeWidth={1.75} aria-hidden />
           </a>
           <GtmOutboundButton
-            href={consultationIntakeUrl({ content: 'header-cta' })}
+            href={assessmentUrl({ content: 'header-assessment' })}
             size="md"
             className="whitespace-nowrap shadow-[0_8px_24px_-8px_rgba(242,120,48,0.4)]"
           >
-            {primaryCta.label}
+            {headerCta.label}
           </GtmOutboundButton>
         </div>
       </Container>

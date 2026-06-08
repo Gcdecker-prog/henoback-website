@@ -1,8 +1,8 @@
-/** Proof points from live site — replace placeholder stats when marketing confirms numbers */
+/** Outcome proof points — what partners get, not credential walls */
 export const trustSignals = [
-  { value: '20+', label: 'Years of experience' },
-  { value: 'US-based', label: 'Team employed in the USA' },
-  { value: 'Professional services', label: 'Built for project-based firms' },
+  { value: 'Close-ready', label: 'Numbers you can sign off on' },
+  { value: 'Clear', label: 'Margins and performance, in view' },
+  { value: 'Steady', label: 'One process, every month-end' },
 ] as const;
 
 export const valueProps = [

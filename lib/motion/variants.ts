@@ -34,6 +34,33 @@ export const staggerItem: Variants = {
   },
 };
 
+/** Scroll-reveal cards — rise in, no blur or scale (2027 clean) */
+export const scrollSlideStagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.11, delayChildren: 0.04 },
+  },
+};
+
+export const scrollSlideItem: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: motionEase },
+  },
+};
+
+export const scrollSlideLabel: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: motionEase },
+  },
+};
+
+
 export const floatCard: Variants = {
   hidden: { opacity: 0, y: 32, scale: 0.96 },
   visible: {
