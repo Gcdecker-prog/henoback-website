@@ -102,12 +102,18 @@ if (-not $SkipBuild) {
   if ($DryRun) { Write-Host 'npm run typecheck' } else { npm run typecheck }
 
   Write-Step 'Production build'
+  $priorNodeEnv = $env:NODE_ENV
   $env:NODE_ENV = 'production'
   if ($DryRun) {
     Write-Host 'npm run build'
   } else {
     if (Test-Path '.next') { Remove-Item -Recurse -Force '.next' }
     npm run build
+  }
+  if ($null -eq $priorNodeEnv) {
+    Remove-Item Env:NODE_ENV -ErrorAction SilentlyContinue
+  } else {
+    $env:NODE_ENV = $priorNodeEnv
   }
 }
 

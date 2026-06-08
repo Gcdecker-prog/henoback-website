@@ -17,20 +17,10 @@ const HeroEntranceContext = createContext<HeroEntranceValue>({
 export function HeroEntranceProvider({ children }: { children: ReactNode }) {
   const reducePref = useReducedMotion();
   const reduce = !!reducePref;
-  const [ready, setReady] = useState(reduce);
+  const [ready, setReady] = useState(true);
 
   useEffect(() => {
-    if (reduce) {
-      setReady(true);
-      return;
-    }
-
-    // Defer until after first paint — prevents text flashing before choreography
-    const frame = requestAnimationFrame(() => {
-      requestAnimationFrame(() => setReady(true));
-    });
-
-    return () => cancelAnimationFrame(frame);
+    setReady(true);
   }, [reduce]);
 
   return (
@@ -40,11 +30,12 @@ export function HeroEntranceProvider({ children }: { children: ReactNode }) {
   );
 }
 
-/** Gate hero motion — nothing animates until `ready` */
+/** Hero loads at full strength — optional subtle rise only after paint */
 export function useHeroEntrance() {
   const { ready, reduce } = useContext(HeroEntranceContext);
-  const animate = ready || reduce ? ('visible' as const) : ('hidden' as const);
-  const initial = reduce ? (false as const) : ('hidden' as const);
+  const skipEntrance = reduce || ready;
+  const animate = skipEntrance ? ('visible' as const) : ('hidden' as const);
+  const initial = skipEntrance ? (false as const) : ('hidden' as const);
 
   return { ready, reduce, animate, initial };
 }

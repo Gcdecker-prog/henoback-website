@@ -11,6 +11,9 @@ import { useHomeHeroScroll } from '@/lib/motion/use-home-hero-scroll';
 import { HeroEntranceProvider, useHeroEntrance } from '@/lib/motion/use-hero-entrance';
 import { cn } from '@/lib/cn';
 
+/** Copy column — aligns with header Container (max-w-6xl / lg:px-8) */
+const heroCopyColumn = 'w-full max-w-[31rem] lg:max-w-[33rem]';
+
 function HeroPhotoEntrance({
   className,
   seamless,
@@ -36,7 +39,7 @@ function HeroPhotoEntrance({
   );
 }
 
-/** Homepage hero — type-led left column, ~50% photo right */
+/** Homepage hero — copy in container, photo pinned to viewport right */
 export function HomeHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const scroll = useHomeHeroScroll(sectionRef);
@@ -51,62 +54,51 @@ export function HomeHero() {
         )}
         aria-labelledby="home-hero-heading"
       >
+        {/* Photo — anchored to viewport right; starts past the copy block */}
         <motion.div
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 lg:block"
+          className={cn(
+            'pointer-events-none absolute z-0 hidden items-center lg:flex',
+            'right-0 top-0 bottom-0',
+            'left-[58%] xl:left-[56%] 2xl:left-[54%]',
+          )}
           style={
             scroll.motionEnabled
-              ? {
-                  y: scroll.photoY,
-                  scale: scroll.photoScale,
-                  opacity: scroll.photoOpacity,
-                }
+              ? { y: scroll.photoY, opacity: scroll.photoOpacity }
               : undefined
           }
         >
           <HeroPhotoEntrance
             seamless
-            photoClassName="h-full min-h-[calc(100dvh-5.75rem)] w-full"
+            className="h-full w-full"
+            photoClassName="h-[min(80vh,720px)] w-full"
           />
         </motion.div>
 
         <motion.div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-28 bg-gradient-to-t from-white via-white/50 to-transparent sm:h-36"
           style={scroll.motionEnabled ? { opacity: scroll.washOpacity } : undefined}
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
-          <div className="grid w-full items-center lg:grid-cols-2">
-            <motion.div
-              className="flex justify-center will-change-transform lg:justify-start"
-              style={
-                scroll.motionEnabled
-                  ? {
-                      y: scroll.contentY,
-                      scale: scroll.contentScale,
-                      opacity: scroll.contentOpacity,
-                      filter: scroll.contentFilter,
-                    }
-                  : undefined
-              }
-            >
-              <div className="w-full max-w-[36rem] text-center lg:max-w-none lg:text-left">
-                <HeroKicker className="lg:mx-0" />
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 items-center px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
+          <motion.div
+            className="flex w-full justify-center lg:max-w-[33rem] lg:justify-start"
+            style={scroll.motionEnabled ? { y: scroll.contentY } : undefined}
+          >
+            <div className={cn(heroCopyColumn, 'text-center lg:text-left')}>
+              <HeroKicker />
 
-                <div className="mt-4 space-y-4 sm:mt-5 sm:space-y-5">
-                  <HeroStatement />
-                  <HeroBodyCopy />
-                </div>
-
-                <HeroPhotoEntrance
-                  className="mt-8 lg:hidden"
-                  photoClassName="mx-auto aspect-[16/10] max-h-[260px] rounded-2xl"
-                />
+              <div className="mt-4 space-y-4 sm:mt-5 sm:space-y-5">
+                <HeroStatement />
+                <HeroBodyCopy />
               </div>
-            </motion.div>
 
-            <div className="hidden lg:block" aria-hidden />
-          </div>
+              <HeroPhotoEntrance
+                className="mt-8 lg:hidden"
+                photoClassName="mx-auto aspect-[16/10] max-h-[260px] rounded-2xl"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
     </HeroEntranceProvider>

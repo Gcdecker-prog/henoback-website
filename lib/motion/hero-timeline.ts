@@ -7,6 +7,7 @@ export const heroAt = {
   kicker: 0.1,
   orb: 0.18,
   headline: 0.3,
+  accent: 0.52,
   summary: 0.92,
   outcomes: 1.06,
   differentiation: 1.18,
@@ -16,14 +17,22 @@ export const heroAt = {
 
 export const heroRevealEase = motionEase;
 
-/** Glass morph — one motion language for the hero */
+/** Subtle rise — full opacity on load (enterprise read) */
 export const heroGlassFloat: Variants = {
-  hidden: { opacity: 0, y: 18, filter: 'blur(8px)' },
+  hidden: { opacity: 1, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: heroLeadDuration, ease: heroRevealEase },
+  },
+};
+
+/** Accent word — clipped slide from right, full opacity (enterprise highlight) */
+export const heroAccentReveal: Variants = {
+  hidden: { x: '108%' },
+  visible: {
+    x: 0,
+    transition: { duration: 0.58, ease: heroRevealEase },
   },
 };
 
@@ -46,11 +55,10 @@ export const heroGlassOrb: Variants = {
 };
 
 export const heroGlassPhoto: Variants = {
-  hidden: { opacity: 0, filter: 'blur(12px)' },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    filter: 'blur(0px)',
-    transition: { duration: 0.88, ease: heroRevealEase },
+    transition: { duration: 0.5, ease: heroRevealEase },
   },
 };
 

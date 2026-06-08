@@ -8,19 +8,17 @@ import { Container } from '@/components/layout/Container';
 import { HomeHero } from '@/components/marketing/HomeHero';
 import { HomeOpening } from '@/components/marketing/HomeOpening';
 import { ContentGrid } from '@/components/marketing/ContentGrid';
-import { HomeTrustBand } from '@/components/marketing/HomeTrustBand';
+import { HomeWhySection } from '@/components/marketing/HomeWhySection';
 import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
-import { Reveal, RevealStagger, RevealItem } from '@/components/motion/Reveal';
-import { GlassMesh } from '@/components/motion/GlassMesh';
+import { Reveal } from '@/components/motion/Reveal';
 import { services } from '@/lib/content/services';
 import { industries } from '@/lib/content/industries';
 import { caseStudies } from '@/lib/content/case-studies';
-import { trustSignals, valueProps } from '@/lib/content/trust-signals';
 import { founderQuote } from '@/lib/content/team';
 import { media, getServiceImage, getIndustryImage } from '@/lib/content/media';
 import { homeMeta } from '@/lib/content/home';
-import { siteConfig, primaryCta } from '@/lib/site-config';
+import { primaryCta } from '@/lib/site-config';
 import { pageCtaUrl } from '@/lib/gtm-links';
 import { glass, glassPanelSubtle } from '@/lib/ui/glass';
 import { cn } from '@/lib/cn';
@@ -51,39 +49,7 @@ export default function HomePage() {
         <HomeHero />
       </HomeOpening>
 
-      <HomeTrustBand stats={trustSignals} />
-
-      <section className="relative overflow-hidden py-16 sm:py-20">
-        <GlassMesh className="opacity-40" />
-        <Container className="relative grid items-center gap-10 lg:grid-cols-2">
-          <Reveal>
-            <h2 className="text-display-md font-semibold tracking-tight text-neutral-900">
-              We protect your back office so your business can thrive
-            </h2>
-            <RevealStagger className="mt-8 space-y-6" as="div">
-              {valueProps.map((item) => (
-                <RevealItem key={item.title}>
-                  <h3 className="text-h3 font-semibold text-neutral-900">{item.title}</h3>
-                  <p className="mt-2 text-sm text-neutral-600">{item.description}</p>
-                </RevealItem>
-              ))}
-            </RevealStagger>
-          </Reveal>
-          <Reveal>
-            <div className={cn(glassPanelSubtle, 'relative aspect-[4/3] overflow-hidden p-1')}>
-              <div className="relative h-full w-full overflow-hidden rounded-[1.25rem]">
-                <Image
-                  src={media.marketing.whyUs}
-                  alt="Professional financial team collaboration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
+      <HomeWhySection />
 
       <Container>
         <ContentGrid

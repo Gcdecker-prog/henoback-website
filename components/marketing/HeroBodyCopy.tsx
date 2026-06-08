@@ -10,24 +10,18 @@ import { heroAt, heroDelay, heroGlassFloat } from '@/lib/motion/hero-timeline';
 import { useHeroEntrance } from '@/lib/motion/use-hero-entrance';
 import { cn } from '@/lib/cn';
 
-const bodyWidth = 'mx-auto max-w-[30rem] lg:mx-0';
-
 export function HeroBodyCopy({ className }: { className?: string }) {
-  const { animate, initial, ready, reduce } = useHeroEntrance();
+  const { animate, initial } = useHeroEntrance();
 
   return (
     <div
       className={cn(
         'space-y-4 sm:space-y-[1.125rem]',
-        !ready && !reduce && 'opacity-0',
         className,
       )}
     >
       <motion.p
-        className={cn(
-          bodyWidth,
-          'text-[0.9375rem] leading-[1.65] text-neutral-600 will-change-[transform,filter] sm:text-[0.975rem]',
-        )}
+        className="text-[0.9375rem] leading-[1.65] text-neutral-600 will-change-[transform,filter] sm:text-[0.975rem]"
         initial={initial}
         animate={animate}
         variants={heroGlassFloat}
@@ -37,7 +31,7 @@ export function HeroBodyCopy({ className }: { className?: string }) {
       </motion.p>
 
       <motion.ul
-        className={cn(bodyWidth, 'space-y-1.5 will-change-[transform,filter]')}
+        className="space-y-1.5 will-change-[transform,filter]"
         initial={initial}
         animate={animate}
         variants={heroGlassFloat}
@@ -60,10 +54,7 @@ export function HeroBodyCopy({ className }: { className?: string }) {
       </motion.ul>
 
       <motion.blockquote
-        className={cn(
-          bodyWidth,
-          'border-l-2 border-heno-blue-400 bg-neutral-50/80 py-3 pl-4 pr-3 will-change-[transform,filter] sm:py-3.5 sm:pl-5',
-        )}
+        className="border-l-2 border-heno-blue-400 bg-neutral-50/80 py-3 pl-4 pr-3 will-change-[transform,filter] sm:py-3.5 sm:pl-5"
         initial={initial}
         animate={animate}
         variants={heroGlassFloat}
@@ -78,7 +69,7 @@ export function HeroBodyCopy({ className }: { className?: string }) {
       </motion.blockquote>
 
       <motion.div
-        className={cn(bodyWidth, 'space-y-3 pt-0.5 will-change-[transform,filter]')}
+        className="space-y-3 pt-0.5 will-change-[transform,filter]"
         initial={initial}
         animate={animate}
         variants={heroGlassFloat}
