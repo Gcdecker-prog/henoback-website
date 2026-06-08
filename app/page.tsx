@@ -7,16 +7,15 @@ import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { HomeHero } from '@/components/marketing/HomeHero';
 import { HomeOpening } from '@/components/marketing/HomeOpening';
-import { ContentGrid } from '@/components/marketing/ContentGrid';
+import { HomeAlignmentSection } from '@/components/marketing/HomeAlignmentSection';
+import { HomeIndustriesBand } from '@/components/marketing/HomeIndustriesBand';
 import { HomeWhySection } from '@/components/marketing/HomeWhySection';
 import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Reveal } from '@/components/motion/Reveal';
-import { services } from '@/lib/content/services';
-import { industries } from '@/lib/content/industries';
 import { caseStudies } from '@/lib/content/case-studies';
 import { founderQuote } from '@/lib/content/team';
-import { media, getServiceImage, getIndustryImage } from '@/lib/content/media';
+import { media } from '@/lib/content/media';
 import { homeMeta } from '@/lib/content/home';
 import { primaryCta } from '@/lib/site-config';
 import { pageCtaUrl } from '@/lib/gtm-links';
@@ -28,16 +27,6 @@ export const metadata: Metadata = createPageMetadata({
   description: homeMeta.description,
   path: '/',
 });
-
-const serviceCards = services.map((s) => ({
-  ...s,
-  imageSrc: getServiceImage(s.slug),
-}));
-
-const industryCards = industries.map((i) => ({
-  ...i,
-  imageSrc: getIndustryImage(i.slug),
-}));
 
 export default function HomePage() {
   const featuredStudies = caseStudies.filter((c) => c.published).slice(0, 2);
@@ -51,24 +40,9 @@ export default function HomePage() {
 
       <HomeWhySection />
 
-      <Container>
-        <ContentGrid
-          heading="All the services that our company provides"
-          subheading="Controller support, systems, and reporting — end to end."
-          items={serviceCards}
-          basePath="/services"
-        />
-      </Container>
+      <HomeAlignmentSection />
 
-      <section className="bg-neutral-50/50">
-        <Container>
-          <ContentGrid
-            heading="The industries we know best"
-            items={industryCards}
-            basePath="/industries"
-          />
-        </Container>
-      </section>
+      <HomeIndustriesBand />
 
       <section className="bg-white py-16 sm:py-20">
         <Container>

@@ -40,6 +40,8 @@ export const media = {
   marketing: {
     whyUs: '/images/marketing/why-us.png',
     servicesBackOffice: '/images/marketing/services-back-office.jpg',
+    homeAlignment: '/images/services/accounting-analysis.jpg',
+    homeIndustries: '/images/industries/management-consulting.jpg',
   },
   team: {
     jimFrench: '/images/team/jim-french.png',

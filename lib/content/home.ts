@@ -76,3 +76,50 @@ export const homeWhySection = {
   },
   imageAlt: 'Professional team reviewing financial operations together',
 } as const;
+
+/** Replaces services grid — alignment pillars (Heather) */
+export const homeAlignmentSection = {
+  headline: 'How Heno BackOffice Creates Alignment',
+  pillars: [
+    {
+      title: 'Financial Foundation',
+      body: 'Reliable accounting operations built around clean, usable financial data.',
+      linkLabel: 'Explore accounting alignment',
+      href: '/services/full-service-accounting',
+    },
+    {
+      title: 'Visibility & Reporting',
+      body: 'Reporting structured around how project-based firms operate.',
+      linkLabel: 'Explore reporting visibility',
+      href: '/services/accounting-analysis',
+    },
+    {
+      title: 'Back Office Operations',
+      body: 'Processes and workflows that reduce inconsistency and eliminate workarounds.',
+      linkLabel: 'Explore operational consistency',
+      href: '/services/expense-process-automation',
+    },
+    {
+      title: 'Strategic Financial Support',
+      body: 'Forecasting, planning, and financial insight designed to support decision-making.',
+      linkLabel: 'Explore strategic insight',
+      href: '/services/cfo-outsourcing',
+    },
+  ] as const,
+  imageAlt: 'Secure, integrated financial systems supporting back office alignment',
+} as const;
+
+/** Replaces industries grid — project-based firms band (Heather) */
+export const homeIndustriesBand = {
+  headline: 'Built for project-based firms',
+  intro:
+    'Heno BackOffice supports firms where revenue, delivery, and financial operations are tightly connected\u2014and where reliable insight matters.',
+  industries: [
+    'Consulting & Advisory',
+    'Engineering & Architecture',
+    'Creative & Marketing Agencies',
+    'Technology & IT Services',
+    'Government Contracting',
+  ] as const,
+  imageAlt: 'Professional working with project financials on a laptop',
+} as const;
