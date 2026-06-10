@@ -31,7 +31,10 @@ export const media = {
   brand: {
     logo: '/images/brand/henoback-office-logo.png',
     logoAlt: 'Heno BackOffice',
-    mark: '/images/brand/heno-mark.svg',
+    /** Transparent ring mark — source: scripts/process-heno-mark.mjs */
+    mark: '/images/brand/heno-o-logo.png',
+    markSm: '/images/brand/heno-o-logo-48.png',
+    markApple: '/images/brand/heno-o-logo-180.png',
   },
   hero: {
     homePortrait: '/images/hero/home-hero-professional.png',
@@ -39,7 +42,7 @@ export const media = {
       'Finance professionals reviewing reports, charts, and accounting data together',
   },
   marketing: {
-    whyUs: '/images/marketing/why-us.png',
+    whyUs: '/images/industries/project-accounting.jpg',
     servicesBackOffice: '/images/marketing/services-back-office.jpg',
     homeAlignment: '/images/marketing/about-team-collaboration.jpg',
     homeIndustries: '/images/industries/management-consulting.jpg',

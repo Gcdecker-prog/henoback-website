@@ -102,9 +102,9 @@ export function HomeWhySection({ className }: { className?: string }) {
                 src={media.marketing.whyUs}
                 alt={homeWhySection.imageAlt}
                 fill
-                className="object-cover"
+                className="object-cover object-[50%_42%]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={90}
+                quality={95}
               />
             </motion.div>
           </motion.div>

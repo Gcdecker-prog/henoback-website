@@ -9,18 +9,22 @@ type HenoMarkProps = {
 };
 
 /**
- * Heno ring mark — use where the full wordmark is too heavy:
- * list bullets, section accents, favicon-scale UI.
+ * Heno ring mark — transparent PNG, sized for retina clarity.
+ * Use sparingly (e.g. founder accent); full wordmark stays in the header.
  */
 export function HenoMark({ className, size = 16 }: HenoMarkProps) {
+  const asset = size <= 32 ? media.brand.markSm : media.brand.markApple;
+  const assetPx = size <= 32 ? 48 : 180;
+
   return (
     <Image
-      src={media.brand.mark}
+      src={asset}
       alt=""
-      width={size}
-      height={size}
+      width={assetPx}
+      height={assetPx}
       aria-hidden
-      className={cn('shrink-0 select-none', className)}
+      unoptimized
+      className={cn('shrink-0 select-none object-contain', className)}
       style={{ width: size, height: size }}
     />
   );

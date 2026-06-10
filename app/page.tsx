@@ -107,7 +107,7 @@ export default function HomePage() {
           <Reveal>
             <div className={cn(glass(), 'max-w-3xl p-8 sm:p-10')}>
               <div className="flex items-center gap-2.5">
-                <HenoMark size={22} className="opacity-90" />
+                <HenoMark size={24} />
                 <p className="text-sm font-medium text-heno-orange-600">From the founder</p>
               </div>
               <blockquote className="mt-4 text-body-lg text-neutral-700">

@@ -13,8 +13,9 @@ export function useEditorialBandScroll(sectionRef: RefObject<HTMLElement | null>
     offset: ['start end', 'end start'],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['6%', '-6%']);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.06, 1.1, 1.06]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ['4%', '-4%']);
+  /** Keep scale subtle — heavy scale on photos reads as blur when assets are <1200px wide */
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.02, 1.04, 1.02]);
   const copyY = useTransform(scrollYProgress, [0, 1], [20, -20]);
 
   if (reduce) {

@@ -53,7 +53,10 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
   },
   icons: {
-    icon: '/images/brand/heno-mark.svg',
+    icon: [
+      { url: '/images/brand/heno-o-logo-48.png', sizes: '48x48', type: 'image/png' },
+    ],
+    apple: { url: '/images/brand/heno-o-logo-180.png', sizes: '180x180', type: 'image/png' },
   },
 };
 
