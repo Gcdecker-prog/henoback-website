@@ -4,10 +4,11 @@ import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { Container } from '@/components/layout/Container';
+import { HomeProofStats } from '@/components/marketing/HomeProofStats';
 import { homeWhySection } from '@/lib/content/home';
 import { media } from '@/lib/content/media';
 import { useEditorialBandScroll } from '@/lib/motion/use-editorial-band-scroll';
-import { motionEase, scrollSlideItem, scrollSlideStagger } from '@/lib/motion/variants';
+import { motionEase } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
 export function HomeWhySection({ className }: { className?: string }) {
@@ -25,28 +26,7 @@ export function HomeWhySection({ className }: { className?: string }) {
       aria-labelledby="home-why-heading"
     >
       <Container>
-        <motion.ul
-          className="grid gap-4 sm:grid-cols-3"
-          initial={reduce ? false : 'hidden'}
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={scrollSlideStagger}
-        >
-          {homeWhySection.stats.map((stat) => (
-            <motion.li
-              key={stat.value}
-              variants={scrollSlideItem}
-              className="rounded-2xl border border-neutral-200/80 bg-white px-6 py-6 text-center shadow-[0_12px_40px_-24px_rgba(23,23,23,0.12)]"
-            >
-              <p className="text-lg font-semibold tracking-tight text-neutral-900 sm:text-xl">
-                {stat.value}
-              </p>
-              {'label' in stat && stat.label ? (
-                <p className="mt-1.5 text-sm leading-snug text-neutral-600">{stat.label}</p>
-              ) : null}
-            </motion.li>
-          ))}
-        </motion.ul>
+        <HomeProofStats stats={homeWhySection.stats} />
 
         <div className="mt-14 grid items-center gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-14">
           <motion.div
