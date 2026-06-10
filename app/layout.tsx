@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.url,
   },
+  icons: {
+    icon: '/images/brand/heno-mark.svg',
+  },
 };
 
 export const viewport: Viewport = {

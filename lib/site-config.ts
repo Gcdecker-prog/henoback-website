@@ -18,7 +18,10 @@ export const siteConfig = {
   gtmAppUrl: trimTrailingSlash(process.env.NEXT_PUBLIC_GTM_APP_URL ?? fallbackGtmAppUrl),
 
   positioning:
-    'Outsourced accounting, controller support, and automated financial operations for professional service firms.',
+    'Back office operations designed around visibility, consistency, and scalable financial reporting.',
+
+  footerGetStarted:
+    'Explore how structured accounting operations can improve visibility, consistency, and decision-making.',
 
   description:
     'Get the visibility your back office was built to deliver. Heno BackOffice runs accounting, controller work, and reporting for firms that bill on time and projects.',
@@ -36,7 +39,7 @@ export const siteConfig = {
 } as const;
 
 export const primaryCta = {
-  label: 'Book a consultation',
+  label: 'Get your back office assessment',
 } as const;
 
 export const headerCta = {

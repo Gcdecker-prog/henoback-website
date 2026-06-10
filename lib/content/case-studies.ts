@@ -46,7 +46,7 @@ export const caseStudies: CaseStudy[] = [
     industry:
       'Commercial real estate development, residential construction, and franchise operations',
     excerpt:
-      'From $50M to over $1B in assets — full accounting, technology, and CFO advisory across multiple entities without building an in-house finance team.',
+      'Scaled from $50M to over $1B in assets with aligned accounting operations, connected reporting, and CFO-level financial visibility—without building an in-house finance team.',
     coreMessage:
       'The company went through very large growth across various distinct businesses where both the systems and accounting was solely performed by our team to support their growth and individual financial reporting.',
     heroImage: media.caseStudies.twoCapital,
@@ -98,7 +98,7 @@ export const caseStudies: CaseStudy[] = [
     clientUrl: 'https://www.lineaenergy.com',
     industry: 'Renewables development',
     excerpt:
-      'Startup capital deployment with project-level financials, cost-code budgeting, and connected planning — built fast with Heno System Methodologies.',
+      'Project-level financial visibility and connected planning designed to support fast-moving capital deployment using Heno operational methodologies.',
     coreMessage:
       'Rapidly deployed completely connected financial and planning environments with experienced accounting that managed and cleaned books immediately with no ramp-up time.',
     heroImage: media.caseStudies.lineaEnergy,

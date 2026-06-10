@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
 import { Container } from '@/components/layout/Container';
-import { motionEase } from '@/lib/motion/variants';
+import { useEditorialBandScroll } from '@/lib/motion/use-editorial-band-scroll';
+import { motionEase, scrollSlideItem, scrollSlideStagger } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
 type EditorialPillar = {
@@ -29,14 +30,7 @@ type HomeEditorialBandProps = {
   imageObjectPosition?: string;
 };
 
-const imageFeather: CSSProperties = {
-  WebkitMaskImage:
-    'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 8%, rgba(0,0,0,0.9) 16%, #000 24%)',
-  maskImage:
-    'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 8%, rgba(0,0,0,0.9) 16%, #000 24%)',
-};
-
-/** Bordered split band — copy left, image right; no overlap */
+/** Bordered split band — copy left, scroll-linked image right */
 export function HomeEditorialBand({
   id,
   headline,
@@ -50,15 +44,17 @@ export function HomeEditorialBand({
   imageObjectPosition = '50% 42%',
 }: HomeEditorialBandProps) {
   const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const scroll = useEditorialBandScroll(sectionRef);
 
   return (
-    <section className={cn('py-14 sm:py-16 lg:py-20', sectionClassName)} aria-labelledby={id}>
+    <section
+      ref={sectionRef}
+      className={cn('py-14 sm:py-16 lg:py-20', sectionClassName)}
+      aria-labelledby={id}
+    >
       <Container>
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: motionEase }}
+        <div
           className={cn(
             'overflow-hidden border border-heno-blue-900/20 bg-white',
             'shadow-[0_1px_0_rgba(27,54,93,0.04)]',
@@ -66,7 +62,14 @@ export function HomeEditorialBand({
           )}
         >
           <div className="grid lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-stretch">
-            <div className="flex flex-col justify-center px-6 py-8 sm:px-9 sm:py-10 lg:px-10 lg:py-12 xl:px-12">
+            <motion.div
+              className="flex flex-col justify-center px-6 py-8 sm:px-9 sm:py-10 lg:px-10 lg:py-12 xl:px-12"
+              style={scroll.motionEnabled ? { y: scroll.copyY } : undefined}
+              initial={reduce ? false : { opacity: 0, x: -28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.85, ease: motionEase }}
+            >
               <h2
                 id={id}
                 className="max-w-xl text-[1.65rem] font-semibold leading-[1.18] tracking-[-0.02em] text-neutral-900 sm:text-display-md"
@@ -81,15 +84,15 @@ export function HomeEditorialBand({
               )}
 
               {pillars && (
-                <ul className="mt-7 space-y-6 sm:mt-8 sm:space-y-7">
-                  {pillars.map((pillar, i) => (
-                    <motion.li
-                      key={pillar.title}
-                      initial={reduce ? false : { opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{ duration: 0.55, delay: i * 0.06, ease: motionEase }}
-                    >
+                <motion.ul
+                  className="mt-7 space-y-6 sm:mt-8 sm:space-y-7"
+                  initial={reduce ? false : 'hidden'}
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.15 }}
+                  variants={scrollSlideStagger}
+                >
+                  {pillars.map((pillar) => (
+                    <motion.li key={pillar.title} variants={scrollSlideItem}>
                       <h3 className="text-[1.0625rem] font-semibold leading-snug text-heno-orange-500 sm:text-lg">
                         {pillar.title}
                       </h3>
@@ -108,11 +111,17 @@ export function HomeEditorialBand({
                       </Link>
                     </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               )}
 
               {industries && (
-                <div className="mt-6 sm:mt-7">
+                <motion.div
+                  className="mt-6 sm:mt-7"
+                  initial={reduce ? false : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.65, delay: 0.12, ease: motionEase }}
+                >
                   <p className="text-[0.9375rem] font-medium text-neutral-800">
                     Common industries include:
                   </p>
@@ -120,21 +129,35 @@ export function HomeEditorialBand({
                     {industries.map((item) => (
                       <li
                         key={item}
-                        className="flex items-baseline gap-2 text-[0.9375rem] leading-snug text-neutral-800"
+                        className="flex items-start gap-2.5 text-[0.9375rem] leading-snug text-neutral-800"
                       >
-                        <span className="font-medium text-heno-orange-500" aria-hidden>
-                          &gt;
-                        </span>
+                        <span
+                          className="mt-2 size-1 shrink-0 rounded-full bg-heno-orange-500"
+                          aria-hidden
+                        />
                         {item}
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
 
-            <div className="relative min-h-[220px] sm:min-h-[280px] lg:min-h-[32rem]">
-              <div className="absolute inset-0 lg:left-0" style={imageFeather}>
+            <motion.div
+              className="relative min-h-[220px] overflow-hidden bg-neutral-100 sm:min-h-[280px] lg:min-h-[32rem] lg:border-l lg:border-neutral-100"
+              initial={reduce ? false : { opacity: 0, x: 28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.85, delay: 0.06, ease: motionEase }}
+            >
+              <motion.div
+                className="absolute inset-0 will-change-transform"
+                style={
+                  scroll.motionEnabled
+                    ? { y: scroll.imageY, scale: scroll.imageScale }
+                    : undefined
+                }
+              >
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
@@ -142,11 +165,12 @@ export function HomeEditorialBand({
                   className="object-cover"
                   style={{ objectPosition: imageObjectPosition }}
                   sizes="(max-width: 1024px) 100vw, 44vw"
+                  quality={90}
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { Container } from '@/components/layout/Container';
 import { GtmOutboundLink } from '@/components/gtm/GtmOutboundLink';
 import { navItems } from '@/lib/nav';
-import { siteConfig } from '@/lib/site-config';
+import { primaryCta, siteConfig } from '@/lib/site-config';
 import { consultationIntakeUrl } from '@/lib/gtm-links';
 
 export function Footer() {
@@ -49,14 +49,6 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/case-studies"
-                  className="text-sm text-neutral-700 hover:text-heno-orange-600"
-                >
-                  Case Studies
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -64,16 +56,14 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
               Get started
             </p>
-            <p className="mt-4 text-sm text-neutral-600">
-              Book a consultation to walk through your financial processes, tools, and goals.
-            </p>
+            <p className="mt-4 text-sm text-neutral-600">{siteConfig.footerGetStarted}</p>
             <Suspense
               fallback={
                 <a
                   href={consultationIntakeUrl({ content: 'footer-link' })}
                   className="mt-4 inline-flex text-sm font-medium text-heno-orange-600"
                 >
-                  Book a consultation →
+                  {primaryCta.label} →
                 </a>
               }
             >
@@ -81,7 +71,7 @@ export function Footer() {
                 href={consultationIntakeUrl({ content: 'footer-link' })}
                 className="mt-4 inline-flex text-sm font-medium text-heno-orange-600 hover:text-heno-orange-700"
               >
-                Book a consultation →
+                {primaryCta.label} →
               </GtmOutboundLink>
             </Suspense>
           </div>

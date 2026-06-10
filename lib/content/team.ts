@@ -12,5 +12,5 @@ export const leadership: TeamMember[] = [
 export const founderQuote = {
   attribution: 'Jim French',
   title: 'Founder, President, and CFO',
-  body: 'Our clients rely on us for accounting systems and process expertise to run their back-office operations — increasing efficiency and visibility that supports their growth.',
+  body: "The real value isn't just in the accounting—it's in building a back office that produces reliable visibility across the business.",
 };

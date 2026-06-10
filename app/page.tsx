@@ -11,12 +11,13 @@ import { HomeAlignmentSection } from '@/components/marketing/HomeAlignmentSectio
 import { HomeIndustriesBand } from '@/components/marketing/HomeIndustriesBand';
 import { HomeWhySection } from '@/components/marketing/HomeWhySection';
 import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
+import { HenoMark } from '@/components/henoback/HenoMark';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Reveal } from '@/components/motion/Reveal';
 import { caseStudies } from '@/lib/content/case-studies';
 import { founderQuote } from '@/lib/content/team';
 import { media } from '@/lib/content/media';
-import { homeMeta } from '@/lib/content/home';
+import { homeClosingCta, homeMeta } from '@/lib/content/home';
 import { primaryCta } from '@/lib/site-config';
 import { pageCtaUrl } from '@/lib/gtm-links';
 import { glass, glassPanelSubtle } from '@/lib/ui/glass';
@@ -105,7 +106,10 @@ export default function HomePage() {
         <Container>
           <Reveal>
             <div className={cn(glass(), 'max-w-3xl p-8 sm:p-10')}>
-              <p className="text-sm font-medium text-heno-orange-600">From the founder</p>
+              <div className="flex items-center gap-2.5">
+                <HenoMark size={22} className="opacity-90" />
+                <p className="text-sm font-medium text-heno-orange-600">From the founder</p>
+              </div>
               <blockquote className="mt-4 text-body-lg text-neutral-700">
                 &ldquo;{founderQuote.body}&rdquo;
               </blockquote>
@@ -134,12 +138,9 @@ export default function HomePage() {
         <Container className="relative text-center">
           <Reveal>
             <h2 className="text-display-md font-semibold tracking-tight">
-              Start transforming your back office today
+              {homeClosingCta.headline}
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-neutral-300">
-              Walk through your financial processes, tools, and goals — and see what a modern back
-              office can look like.
-            </p>
+            <p className="mx-auto mt-4 max-w-xl text-neutral-300">{homeClosingCta.body}</p>
           <GtmOutboundButton
             href={pageCtaUrl('home', 'consultation', { content: 'footer-cta' })}
             size="lg"

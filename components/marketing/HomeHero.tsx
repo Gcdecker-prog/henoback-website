@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { HeroKicker } from '@/components/marketing/HeroKicker';
 import { HeroStatement } from '@/components/marketing/HeroStatement';
 import { HeroBodyCopy } from '@/components/marketing/HeroBodyCopy';
 import { HeroPhotoFade } from '@/components/marketing/HeroPhotoFade';
@@ -86,9 +85,7 @@ export function HomeHero() {
             style={scroll.motionEnabled ? { y: scroll.contentY } : undefined}
           >
             <div className={cn(heroCopyColumn, 'text-center lg:text-left')}>
-              <HeroKicker />
-
-              <div className="mt-4 space-y-4 sm:mt-5 sm:space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 <HeroStatement />
                 <HeroBodyCopy />
               </div>

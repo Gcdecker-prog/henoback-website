@@ -2,17 +2,22 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
 import { Container } from '@/components/layout/Container';
 import { homeWhySection } from '@/lib/content/home';
 import { media } from '@/lib/content/media';
+import { useEditorialBandScroll } from '@/lib/motion/use-editorial-band-scroll';
 import { motionEase, scrollSlideItem, scrollSlideStagger } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
 export function HomeWhySection({ className }: { className?: string }) {
   const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const scroll = useEditorialBandScroll(sectionRef);
 
   return (
     <section
+      ref={sectionRef}
       className={cn('border-t border-neutral-100 bg-neutral-50/40 py-16 sm:py-20 lg:py-24', className)}
       aria-labelledby="home-why-heading"
     >
@@ -33,17 +38,20 @@ export function HomeWhySection({ className }: { className?: string }) {
               <p className="text-lg font-semibold tracking-tight text-neutral-900 sm:text-xl">
                 {stat.value}
               </p>
-              <p className="mt-1.5 text-sm leading-snug text-neutral-600">{stat.label}</p>
+              {'label' in stat && stat.label ? (
+                <p className="mt-1.5 text-sm leading-snug text-neutral-600">{stat.label}</p>
+              ) : null}
             </motion.li>
           ))}
         </motion.ul>
 
         <div className="mt-14 grid items-center gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-14">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            style={scroll.motionEnabled ? { y: scroll.copyY } : undefined}
+            initial={reduce ? false : { opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.65, ease: motionEase }}
+            transition={{ duration: 0.8, ease: motionEase }}
           >
             <h2
               id="home-why-heading"
@@ -76,19 +84,29 @@ export function HomeWhySection({ className }: { className?: string }) {
           </motion.div>
 
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={reduce ? false : { opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.65, delay: 0.08, ease: motionEase }}
+            transition={{ duration: 0.8, delay: 0.06, ease: motionEase }}
             className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 shadow-[0_24px_64px_-28px_rgba(23,23,23,0.18)]"
           >
-            <Image
-              src={media.marketing.whyUs}
-              alt={homeWhySection.imageAlt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <motion.div
+              className="absolute inset-0 will-change-transform"
+              style={
+                scroll.motionEnabled
+                  ? { y: scroll.imageY, scale: scroll.imageScale }
+                  : undefined
+              }
+            >
+              <Image
+                src={media.marketing.whyUs}
+                alt={homeWhySection.imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={90}
+              />
+            </motion.div>
           </motion.div>
         </div>
       </Container>

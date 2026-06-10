@@ -15,7 +15,6 @@ type HeadlineLine = {
 
 /** Intentional three-line lockup — accents are color only, not motion targets */
 export const homeHero = {
-  kicker: 'For professional service firms',
   headlineLines: [
     {
       before: 'Get the\u00a0',
@@ -42,7 +41,6 @@ export const homeHero = {
     lead: 'Most firms upgrade their system.',
     follow: 'Very few fix the way it works.',
   },
-  heroTrust: 'Built for consulting, engineering, agencies, and government contractors.',
   primaryCta: 'Explore how it works',
   primaryCtaHref: '/services',
   secondaryCta: 'See what your back office is missing',
@@ -52,7 +50,7 @@ export const homeHero = {
 export const homeWhySection = {
   stats: [
     { value: '20+ years', label: 'Proven accounting experience' },
-    { value: 'US-based team', label: 'Employees based in the USA' },
+    { value: 'US-based team' },
     { value: 'Project-based firms', label: 'Built for how you bill and deliver' },
   ] as const,
   headline: 'Most back offices don\u2019t break\u2014they drift out of alignment',
@@ -62,7 +60,7 @@ export const homeWhySection = {
       body: 'When your financial data is inconsistent, everything built on top of it breaks. We make sure your numbers are structured, reliable, and usable.',
     },
     {
-      title: 'Designed for how project-based firms actually operate',
+      title: 'Designed for how project-based firms operate',
       body: 'Revenue, delivery, and accounting are connected\u2014so your reporting reflects how your business really runs.',
     },
     {
@@ -123,3 +121,11 @@ export const homeIndustriesBand = {
   ] as const,
   imageAlt: 'Professional working with project financials on a laptop',
 } as const;
+
+export const homeClosingCta = {
+  headline: 'Start transforming your back office today',
+  body: 'See where your back office is misaligned—and what it takes to create reliable financial visibility.',
+} as const;
+
+export const homePlatformBridge =
+  'Structured around the systems modern project-based firms rely on for accounting, planning, reporting, and operational visibility.';

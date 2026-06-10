@@ -91,10 +91,6 @@ export function HeroBodyCopy({ className }: { className?: string }) {
             {homeHero.secondaryCta}
           </GtmOutboundButton>
         </div>
-
-        <p className="text-center text-[0.75rem] leading-relaxed text-neutral-400 lg:text-left">
-          {homeHero.heroTrust}
-        </p>
       </motion.div>
     </div>
   );

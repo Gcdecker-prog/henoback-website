@@ -8,7 +8,7 @@ export const caseStudiesPage = {
     eyebrow: 'Your turn',
     headline: 'Ready to modernize your back office?',
     body: 'Walk through your processes and goals with our team — we’ll show you what a modern back office can look like.',
-    primaryLabel: 'Book a consultation',
+    primaryLabel: 'Get your back office assessment',
     secondaryLabel: 'Explore services',
   },
 } as const;

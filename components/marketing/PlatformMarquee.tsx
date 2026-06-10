@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
+import { homePlatformBridge } from '@/lib/content/home';
 import { platformPartners } from '@/lib/content/partners';
+import { Reveal } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
 
 function LogoTile({ partner }: { partner: (typeof platformPartners)[number] }) {
@@ -65,11 +67,17 @@ export function PlatformMarquee() {
           Platforms we implement and run
         </p>
 
-        <ul className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 sm:mt-12 sm:gap-6 lg:mt-14 lg:grid-cols-4 lg:gap-10">
+        <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6 lg:mt-14 lg:gap-10">
           {platformPartners.map((partner) => (
             <LogoTile key={partner.name} partner={partner} />
           ))}
         </ul>
+
+        <Reveal>
+          <p className="mx-auto mt-12 max-w-2xl text-center text-[0.9375rem] leading-relaxed text-neutral-600 sm:mt-14 sm:text-base">
+            {homePlatformBridge}
+          </p>
+        </Reveal>
       </Container>
     </section>
   );

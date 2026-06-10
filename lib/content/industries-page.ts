@@ -9,7 +9,7 @@ export const industriesPage = {
     eyebrow: 'Ready when you are',
     headline: 'See which back-office model fits your firm',
     body: 'We’ll map your billing, entities, and systems — then show you what outsourced accounting and controller support looks like for your industry.',
-    primaryLabel: 'Book a consultation',
+    primaryLabel: 'Get your back office assessment',
     secondaryLabel: 'Explore services',
   },
 } as const;

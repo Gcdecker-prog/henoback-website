@@ -31,6 +31,7 @@ export const media = {
   brand: {
     logo: '/images/brand/henoback-office-logo.png',
     logoAlt: 'Heno BackOffice',
+    mark: '/images/brand/heno-mark.svg',
   },
   hero: {
     homePortrait: '/images/hero/home-hero-professional.png',
@@ -40,7 +41,7 @@ export const media = {
   marketing: {
     whyUs: '/images/marketing/why-us.png',
     servicesBackOffice: '/images/marketing/services-back-office.jpg',
-    homeAlignment: '/images/services/accounting-analysis.jpg',
+    homeAlignment: '/images/marketing/about-team-collaboration.jpg',
     homeIndustries: '/images/industries/management-consulting.jpg',
   },
   team: {
