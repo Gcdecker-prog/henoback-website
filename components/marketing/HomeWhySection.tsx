@@ -18,7 +18,10 @@ export function HomeWhySection({ className }: { className?: string }) {
   return (
     <section
       ref={sectionRef}
-      className={cn('border-t border-neutral-100 bg-neutral-50/40 py-16 sm:py-20 lg:py-24', className)}
+      className={cn(
+        'border-t border-neutral-100 bg-neutral-50/40 pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14',
+        className,
+      )}
       aria-labelledby="home-why-heading"
     >
       <Container>

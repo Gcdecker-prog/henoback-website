@@ -11,16 +11,12 @@ import { HomeAlignmentSection } from '@/components/marketing/HomeAlignmentSectio
 import { HomeIndustriesBand } from '@/components/marketing/HomeIndustriesBand';
 import { HomeWhySection } from '@/components/marketing/HomeWhySection';
 import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
-import { HenoMark } from '@/components/henoback/HenoMark';
-import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
+import { FounderQuoteCard } from '@/components/marketing/FounderQuoteCard';
+import { ClosingCtaBand } from '@/components/marketing/ClosingCtaBand';
 import { Reveal } from '@/components/motion/Reveal';
 import { caseStudies } from '@/lib/content/case-studies';
-import { founderQuote } from '@/lib/content/team';
-import { media } from '@/lib/content/media';
-import { homeClosingCta, homeMeta } from '@/lib/content/home';
-import { primaryCta } from '@/lib/site-config';
-import { pageCtaUrl } from '@/lib/gtm-links';
-import { glass, glassPanelSubtle } from '@/lib/ui/glass';
+import { homeMeta } from '@/lib/content/home';
+import { glassPanelSubtle } from '@/lib/ui/glass';
 import { cn } from '@/lib/cn';
 
 export const metadata: Metadata = createPageMetadata({
@@ -104,53 +100,11 @@ export default function HomePage() {
 
       <section className="border-t border-neutral-100 bg-white py-16 sm:py-20">
         <Container>
-          <Reveal>
-            <div className={cn(glass(), 'max-w-3xl p-8 sm:p-10')}>
-              <div className="flex items-center gap-2.5">
-                <HenoMark size={24} />
-                <p className="text-sm font-medium text-heno-orange-600">From the founder</p>
-              </div>
-              <blockquote className="mt-4 text-body-lg text-neutral-700">
-                &ldquo;{founderQuote.body}&rdquo;
-              </blockquote>
-              <footer className="mt-6 flex items-center gap-4">
-                <Image
-                  src={media.team.jimFrench}
-                  alt={founderQuote.attribution}
-                  width={56}
-                  height={56}
-                  className="rounded-full object-cover"
-                />
-                <p className="text-sm font-semibold text-neutral-900">
-                  {founderQuote.attribution} · {founderQuote.title}
-                </p>
-              </footer>
-            </div>
-          </Reveal>
+          <FounderQuoteCard />
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-neutral-900 py-16 text-white sm:py-20">
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_120%,rgba(242,120,48,0.2),transparent)]"
-          aria-hidden
-        />
-        <Container className="relative text-center">
-          <Reveal>
-            <h2 className="text-display-md font-semibold tracking-tight">
-              {homeClosingCta.headline}
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-neutral-300">{homeClosingCta.body}</p>
-          <GtmOutboundButton
-            href={pageCtaUrl('home', 'consultation', { content: 'footer-cta' })}
-            size="lg"
-            className="mt-8"
-          >
-            {primaryCta.label}
-          </GtmOutboundButton>
-          </Reveal>
-        </Container>
-      </section>
+      <ClosingCtaBand />
     </>
   );
 }

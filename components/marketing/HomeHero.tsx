@@ -49,7 +49,7 @@ export function HomeHero() {
         ref={sectionRef}
         className={cn(
           'relative flex overflow-x-clip bg-white',
-          'min-h-[calc(100dvh-5.25rem)] sm:min-h-[calc(100dvh-5.75rem)]',
+          'min-h-[min(calc(100dvh-5.25rem),52rem)] sm:min-h-[min(calc(100dvh-5.75rem),56rem)]',
         )}
         aria-labelledby="home-hero-heading"
       >
@@ -79,7 +79,7 @@ export function HomeHero() {
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 items-center px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 items-start px-5 pb-8 pt-8 sm:px-6 sm:pb-10 sm:pt-10 lg:px-8 lg:pb-10 lg:pt-12 xl:pt-14">
           <motion.div
             className="flex w-full justify-center lg:max-w-[33rem] lg:justify-start"
             style={scroll.motionEnabled ? { y: scroll.contentY } : undefined}
