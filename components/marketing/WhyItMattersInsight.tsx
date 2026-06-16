@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { glassPanelSubtle } from '@/lib/ui/glass';
 import { editorialPanelBlock } from '@/lib/motion/variants';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { cn } from '@/lib/cn';
 
 type WhyItMattersInsightProps = {
@@ -31,7 +32,7 @@ export function WhyItMattersInsight({ lead, beats, className }: WhyItMattersInsi
         />
 
         <div className="relative pl-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-heno-blue-900/75">
+          <p className={brandUi.insightLabel}>
             Why it matters
           </p>
           <p className="mt-2 text-[0.9375rem] font-semibold leading-snug text-neutral-900 sm:text-base">
@@ -45,7 +46,7 @@ export function WhyItMattersInsight({ lead, beats, className }: WhyItMattersInsi
                 className="flex items-start gap-3 text-[0.875rem] leading-snug text-neutral-600 sm:text-[0.9375rem] sm:leading-snug"
               >
                 <span
-                  className="mt-[0.4rem] size-1.5 shrink-0 rounded-full bg-heno-orange-500/90"
+                  className={cn('mt-[0.4rem] size-1.5 shrink-0 rounded-full', brandUi.bulletSoft)}
                   aria-hidden
                 />
                 <span>{beat}</span>

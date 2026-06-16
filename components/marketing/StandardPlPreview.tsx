@@ -11,6 +11,7 @@ import {
   type PlReportRow,
   type PlRowKind,
 } from '@/lib/content/standard-pl-report';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { glassPanelSubtle } from '@/lib/ui/glass';
 import { cn } from '@/lib/cn';
 
@@ -26,15 +27,6 @@ function flattenVisibleRows(
     }
   }
   return result;
-}
-
-function collectDefaultExpanded(rows: readonly PlReportRow[]): string[] {
-  const ids: string[] = [];
-  for (const row of rows) {
-    if (row.defaultExpanded) ids.push(row.id);
-    if (row.children) ids.push(...collectDefaultExpanded(row.children));
-  }
-  return ids;
 }
 
 function rowSurface(kind: PlRowKind) {
@@ -125,10 +117,9 @@ function PlTableRow({
   );
 }
 
-/** P&L preview — screenshot structure, YTD-focused, fits column without horizontal scroll */
+/** P&L preview — YTD-focused, no internal scroll */
 export function StandardPlPreview({ className }: { className?: string }) {
-  const defaultExpanded = useMemo(() => new Set(collectDefaultExpanded(standardPlReportRows)), []);
-  const [expanded, setExpanded] = useState(defaultExpanded);
+  const [expanded, setExpanded] = useState<ReadonlySet<string>>(() => new Set());
   const visibleRows = useMemo(() => flattenVisibleRows(standardPlReportRows, expanded), [expanded]);
 
   const summary = useMemo(() => {
@@ -160,9 +151,9 @@ export function StandardPlPreview({ className }: { className?: string }) {
       aria-label={standardPlReportMeta.reportTitle}
     >
       <div className="border-b border-neutral-100 px-4 py-4 sm:px-5">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex min-h-[3.75rem] items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-heno-orange-600">
+            <p className={cn('text-[10px] font-semibold uppercase tracking-[0.22em]', brandUi.eyebrow)}>
               {standardPlReportMeta.packageTitle}
             </p>
             <h3 className="mt-1.5 text-sm font-semibold leading-snug tracking-tight text-neutral-900 sm:text-[0.9375rem]">
@@ -201,9 +192,9 @@ export function StandardPlPreview({ className }: { className?: string }) {
         ))}
       </div>
 
-      <div className="max-h-[19rem] overflow-y-auto overflow-x-hidden sm:max-h-[21rem]">
+      <div className="overflow-x-hidden">
         <table className="w-full table-fixed border-collapse">
-          <thead className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm">
+          <thead className="bg-white">
             <tr className="border-b border-neutral-200 text-neutral-400">
               <th className="px-4 py-2.5 text-left text-[9px] font-semibold uppercase tracking-[0.14em] sm:px-5">
                 Account
@@ -232,7 +223,7 @@ export function StandardPlPreview({ className }: { className?: string }) {
 
       <div className="border-t border-neutral-100 bg-neutral-50/60 px-4 py-2.5 sm:px-5">
         <p className="text-[10px] leading-relaxed text-neutral-500">
-          Structured P&amp;L · Monthly actuals roll into YTD · Expand to drill down
+          Structured P&amp;L · YTD actuals · Tap a row to drill down
         </p>
       </div>
     </div>

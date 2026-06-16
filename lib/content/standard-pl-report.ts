@@ -62,7 +62,7 @@ export const standardPlReportRows: readonly PlReportRow[] = [
     kind: 'section',
     depth: 0,
     values: v(null, null, null, null, null, null, null),
-    defaultExpanded: true,
+    defaultExpanded: false,
     children: [
       {
         id: 'recurring-revenues',
@@ -70,7 +70,7 @@ export const standardPlReportRows: readonly PlReportRow[] = [
         kind: 'section',
         depth: 1,
         values: v(null, null, null, null, null, null, null),
-        defaultExpanded: true,
+        defaultExpanded: false,
         children: [
           {
             id: 'recurring-cat-1',

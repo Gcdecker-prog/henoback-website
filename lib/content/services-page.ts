@@ -4,7 +4,7 @@
 
 export const servicesPage = {
   hero: {
-    pageLabel: 'Services',
+    pageLabel: 'How It Works',
     headline: 'How Heno BackOffice Works',
     subheadline:
       'Most outsourced accounting models focus on completing tasks. Heno focuses on how the entire back office operates.',

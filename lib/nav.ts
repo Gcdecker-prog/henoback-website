@@ -9,8 +9,7 @@ export type NavItem = {
  */
 export const navItems: NavItem[] = [
   { label: 'Why Heno', href: '/about-us' },
-  { label: 'Services', href: '/services' },
-  { label: 'Industries', href: '/industries' },
+  { label: 'How It Works', href: '/services' },
   { label: 'Case Studies', href: '/case-studies' },
   { label: 'Get Started', href: '/get-started' },
 ];

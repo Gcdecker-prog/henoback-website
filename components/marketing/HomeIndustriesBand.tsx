@@ -3,6 +3,7 @@
 import { HomeEditorialBand } from '@/components/marketing/HomeEditorialBand';
 import { homeIndustriesBand } from '@/lib/content/home';
 import { media } from '@/lib/content/media';
+import { brandUi } from '@/lib/ui/brand-ui';
 
 export function HomeIndustriesBand() {
   return (
@@ -14,7 +15,7 @@ export function HomeIndustriesBand() {
       imageSrc={media.marketing.homeIndustries}
       imageAlt={homeIndustriesBand.imageAlt}
       imageObjectPosition="58% 45%"
-      sectionClassName="bg-neutral-50/50"
+      sectionClassName={brandUi.sectionTint}
     />
   );
 }

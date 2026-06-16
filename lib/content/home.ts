@@ -107,7 +107,7 @@ export const homeAlignmentSection = {
   imageAlt: 'Secure, integrated financial systems supporting back office alignment',
 } as const;
 
-/** Replaces industries grid — project-based firms band (Heather) */
+/** Homepage — project-based firms + sector context (no dedicated industries hub) */
 export const homeIndustriesBand = {
   headline: 'Built for project-based firms',
   intro:

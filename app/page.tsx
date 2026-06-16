@@ -47,7 +47,9 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-heno-orange-600">
               Case studies
             </p>
-            <h2 className="mt-3 text-display-md font-semibold text-neutral-900">Client success</h2>
+            <h2 className="mt-3 text-display-md font-semibold text-neutral-900">
+              Back Office Transformations
+            </h2>
           </Reveal>
           <ul className="mt-10 grid gap-6 md:grid-cols-2">
             {featuredStudies.map((study) => (

@@ -1,18 +1,14 @@
-import { primaryCta, secondaryCta } from '@/lib/site-config';
+import { primaryCta } from '@/lib/site-config';
 
-/** Get Started hub — conversion paths (GTM intake + assessment) */
+/** Get Started hub — approved messaging refresh (June 2026). */
 export const getStartedPage = {
-  headline: "Let's modernize your back office",
+  headline: 'Start improving your back office today',
   subheadline:
-    "We'll walk through your financial processes, tools, and goals — and show you what a modern back office can look like for your firm.",
+    'See where your current setup is misaligned—and what it takes to create reliable financial visibility.',
   paths: {
     consultation: {
       title: primaryCta.label,
-      body: 'Speak with our team about your billing model, entities, and systems. We’ll outline what outsourced accounting and controller support looks like for you.',
-    },
-    assessment: {
-      title: secondaryCta.label,
-      body: 'A short readiness questionnaire to see where automation, reporting, and outsourced finance could have the biggest impact.',
+      body: 'Talk through your current setup and identify where structure, reporting, and processes can be improved.',
     },
   },
 } as const;

@@ -5,6 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { glassPanelSubtle } from '@/lib/ui/glass';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { scrollSlideItem, scrollSlideStagger } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
@@ -24,7 +25,7 @@ export function HowItWorksPillars({ pillars }: HowItWorksPillarsProps) {
 
   return (
     <section
-      className="border-t border-neutral-100/80 bg-neutral-50/30 pb-14 pt-6 sm:pb-16 sm:pt-8"
+      className={cn('border-t border-neutral-100/80 pb-14 pt-6 sm:pb-16 sm:pt-8', brandUi.sectionTint)}
       aria-label="How it works pillars"
     >
       <Container>
@@ -66,7 +67,7 @@ export function HowItWorksPillars({ pillars }: HowItWorksPillarsProps) {
                   {pillar.body}
                 </p>
 
-                <span className="relative mt-5 inline-flex items-center gap-1.5 text-[0.8125rem] font-semibold text-heno-blue-900 transition-colors group-hover:text-heno-blue-700">
+                <span className={cn('relative mt-5 inline-flex items-center gap-1.5 text-[0.8125rem] font-semibold', brandUi.link)}>
                   {pillar.linkLabel}
                 </span>
               </Link>

@@ -14,19 +14,6 @@ const serviceImages: Record<string, string> = {
   'expense-process-automation': '/images/services/expense-process-automation.jpg',
 };
 
-const industryImages: Record<string, string> = {
-  'management-consulting': '/images/industries/management-consulting.jpg',
-  'project-accounting': '/images/industries/project-accounting.jpg',
-  'creative-agencies': '/images/industries/creative-agencies.jpg',
-  'technology-it-services': '/images/industries/technology-it-services.jpg',
-  'human-resources-talent': '/images/industries/human-resources-talent.jpg',
-  'engineering-architecture-environmental':
-    '/images/industries/engineering-architecture-environmental.jpg',
-  'government-contracting': '/images/industries/government-contracting.jpg',
-  'real-estate': '/images/industries/real-estate.jpg',
-  'specialized-advisory-creative': '/images/industries/specialized-advisory-creative.jpg',
-};
-
 export const media = {
   brand: {
     logo: '/images/brand/henoback-office-logo.png',
@@ -60,13 +47,8 @@ export const media = {
     lineaEnergy: '/images/case-studies/linea-energy-hero.png',
   },
   serviceImage: (slug: string) => serviceImages[slug] ?? `/images/services/${slug}.jpg`,
-  industryImage: (slug: string) => industryImages[slug] ?? `/images/industries/${slug}.jpg`,
 } as const;
 
 export function getServiceImage(slug: string): string {
   return media.serviceImage(slug);
-}
-
-export function getIndustryImage(slug: string): string {
-  return media.industryImage(slug);
 }

@@ -24,16 +24,17 @@ export const workflowBrand = {
 } as const;
 
 export const workflowCanvas = {
-  width: 800,
-  height: 420,
-  laneRailWidth: 120,
-  nodeWidth: 140,
-  nodeHeight: 56,
-  headerHeight: 38,
-  edgeGap: 7,
+  width: 820,
+  height: 468,
+  laneRailWidth: 128,
+  nodeWidth: 168,
+  nodeHeight: 66,
+  headerHeight: 40,
+  edgeGap: 8,
+  paddingRight: 32,
 } as const;
 
-export type WorkflowStepKind = 'entry' | 'process' | 'automated' | 'posting';
+export type WorkflowStepKind = 'entry' | 'process' | 'automated';
 
 export type WorkflowStage = {
   id: string;
@@ -43,9 +44,8 @@ export type WorkflowStage = {
 
 export const workflowStages: readonly WorkflowStage[] = [
   { id: 'order', label: 'Order', x: 28 },
-  { id: 'invoice', label: 'Invoice', x: 196 },
-  { id: 'control', label: 'Control', x: 364 },
-  { id: 'post', label: 'Post', x: 532 },
+  { id: 'invoice', label: 'Invoice', x: 244 },
+  { id: 'control', label: 'Control', x: 460 },
 ];
 
 export type WorkflowLaneBand = {
@@ -61,22 +61,22 @@ export const workflowLaneBands: readonly WorkflowLaneBand[] = [
     id: 'contract-invoice',
     title: 'Contract invoice',
     subtitle: 'AR billing',
-    y: 52,
-    height: 100,
+    y: 54,
+    height: 116,
   },
   {
     id: 'recurring',
     title: 'Recurring',
     subtitle: 'Scheduled',
-    y: 162,
-    height: 100,
+    y: 180,
+    height: 116,
   },
   {
     id: 'revenue',
     title: 'Contract revenue',
     subtitle: 'Recognition',
-    y: 272,
-    height: 100,
+    y: 306,
+    height: 116,
   },
 ];
 
@@ -97,7 +97,7 @@ export const workflowNodes: readonly WorkflowNode[] = [
     label: 'Contract order',
     kind: 'entry',
     x: 28,
-    y: 69,
+    y: 80,
   },
   {
     id: 'invoice',
@@ -105,8 +105,8 @@ export const workflowNodes: readonly WorkflowNode[] = [
     label: 'Contract invoice',
     kind: 'process',
     detail: 'Posts to AR',
-    x: 196,
-    y: 69,
+    x: 244,
+    y: 80,
   },
   {
     id: 'credit',
@@ -114,8 +114,8 @@ export const workflowNodes: readonly WorkflowNode[] = [
     label: 'Credit memo',
     kind: 'process',
     detail: 'If adjusted',
-    x: 364,
-    y: 69,
+    x: 460,
+    y: 80,
   },
   {
     id: 'recurring-tx',
@@ -123,7 +123,7 @@ export const workflowNodes: readonly WorkflowNode[] = [
     label: 'Recurring transaction',
     kind: 'entry',
     x: 28,
-    y: 179,
+    y: 206,
   },
   {
     id: 'recurring-inv',
@@ -131,8 +131,8 @@ export const workflowNodes: readonly WorkflowNode[] = [
     label: 'Recurring invoice',
     kind: 'automated',
     detail: 'Posts to AR',
-    x: 196,
-    y: 179,
+    x: 244,
+    y: 206,
   },
   {
     id: 'rev-order',
@@ -140,24 +140,16 @@ export const workflowNodes: readonly WorkflowNode[] = [
     label: 'Revenue order',
     kind: 'automated',
     x: 28,
-    y: 289,
+    y: 332,
   },
   {
-    id: 'rev-control',
+    id: 'rev-revenue',
     laneId: 'revenue',
-    label: 'Revenue control',
-    kind: 'process',
-    x: 196,
-    y: 289,
-  },
-  {
-    id: 'rev-post',
-    laneId: 'revenue',
-    label: 'Recognized revenue',
-    kind: 'posting',
+    label: 'Revenue',
+    kind: 'automated',
     detail: 'Aligned to delivery',
-    x: 364,
-    y: 289,
+    x: 244,
+    y: 332,
   },
 ];
 
@@ -174,8 +166,7 @@ export const workflowEdges: readonly WorkflowEdge[] = [
   { id: 'e-order-invoice', from: 'order', to: 'invoice', kind: 'manual' },
   { id: 'e-invoice-credit', from: 'invoice', to: 'credit', kind: 'manual' },
   { id: 'e-recurring', from: 'recurring-tx', to: 'recurring-inv', kind: 'automated' },
-  { id: 'e-rev-1', from: 'rev-order', to: 'rev-control', kind: 'manual' },
-  { id: 'e-rev-2', from: 'rev-control', to: 'rev-post', kind: 'automated' },
+  { id: 'e-rev', from: 'rev-order', to: 'rev-revenue', kind: 'automated' },
   { id: 'e-order-rev', from: 'order', to: 'rev-order', kind: 'automated' },
 ];
 
@@ -183,22 +174,18 @@ export const workflowStepStyles: Record<WorkflowStepKind, string> = {
   entry: 'border-l-[3px] border-l-heno-orange-500 bg-white text-neutral-900',
   process: 'border-l-[3px] border-l-heno-blue-700 bg-white text-neutral-900',
   automated: 'border-l-[3px] border-l-heno-blue-400 bg-white text-neutral-800',
-  posting:
-    'border-l-[3px] border-l-heno-blue-900 bg-heno-blue-50/60 text-heno-blue-900',
 };
 
 export const workflowStepLabels: Record<WorkflowStepKind, string> = {
   entry: 'Manual entry',
-  process: 'Manual process',
+  process: 'Manual conversion',
   automated: 'Automated',
-  posting: 'Posts to ledger',
 };
 
 export const workflowKindAccent: Record<WorkflowStepKind, string> = {
   entry: workflowBrand.orange,
   process: workflowBrand.logoBlue,
   automated: workflowBrand.logoHeno,
-  posting: workflowBrand.navy,
 };
 
 /** @deprecated Use workflowNodes */

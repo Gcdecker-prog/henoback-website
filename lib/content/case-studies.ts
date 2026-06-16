@@ -74,7 +74,7 @@ export const caseStudies: CaseStudy[] = [
     metrics: [
       { value: '75%', label: 'Cut bookkeeping time' },
       { value: '40%', label: 'Reduced accounting costs' },
-      { value: 'First time', label: 'Accurate monthly reporting' },
+      { value: '100%', label: 'On-time, reliable reporting' },
     ],
     outcomes: {
       accuracy: 'Highly detailed blended financial and operations data.',
@@ -93,7 +93,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'linea-energy',
-    title: 'Case Studies: Linea Energy',
+    title: 'Case Study: Linea Energy',
     clientName: 'Linea Energy',
     clientUrl: 'https://www.lineaenergy.com',
     industry: 'Renewables development',

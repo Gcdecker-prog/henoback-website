@@ -1,12 +1,12 @@
 /**
- * Project Profitability Summary — structure from Project Accounting screenshot.
+ * Project Profitability Summary — example project-based firm data.
  */
 
 export const projectProfitabilityMeta = {
   packageTitle: 'Project Accounting',
   reportTitle: 'Project Profitability Summary',
   asOf: 'As of today',
-  filters: '1-Project Summary · All locations · All projects',
+  filters: 'Project summary · All locations · Active engagements',
 } as const;
 
 export type ProjectProfitRow = {
@@ -22,31 +22,40 @@ export type ProjectProfitRow = {
 
 export const projectProfitabilityRows: readonly ProjectProfitRow[] = [
   {
-    id: 'p00046',
-    name: 'MJS Test Project',
-    code: 'P00046-DEMO',
-    revenue: null,
-    grossProfit: -25,
-    margin: null,
-    netIncome: -25,
+    id: 'p2847',
+    name: 'Infrastructure Modernization Program',
+    code: 'P-2847',
+    revenue: 428000,
+    grossProfit: 118400,
+    margin: 27.7,
+    netIncome: 118400,
   },
   {
-    id: 'p00010',
+    id: 'p1042',
     name: 'Enterprise Application Development',
-    code: 'P00010',
+    code: 'P-1042',
     revenue: 16000,
     grossProfit: 4933.17,
     margin: 29.8,
     netIncome: 4933.17,
+  },
+  {
+    id: 'p3318',
+    name: 'Regulatory Compliance Advisory',
+    code: 'P-3318',
+    revenue: 215000,
+    grossProfit: 89200,
+    margin: 41.5,
+    netIncome: 89200,
   },
   {
     id: 'total',
     name: 'Total All Projects',
     code: 'All locations',
-    revenue: 16000,
-    grossProfit: 4933.17,
-    margin: 29.8,
-    netIncome: 4933.17,
+    revenue: 659000,
+    grossProfit: 212533.17,
+    margin: 32.3,
+    netIncome: 212533.17,
     isTotal: true,
   },
 ];

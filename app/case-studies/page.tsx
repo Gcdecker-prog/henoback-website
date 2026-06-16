@@ -1,20 +1,19 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { MarketingPageHero } from '@/components/marketing/MarketingPageHero';
 import { MarketingPageShell } from '@/components/marketing/MarketingPageShell';
 import { CaseStudiesGrid } from '@/components/marketing/CaseStudiesGrid';
-import { PageCtaBand } from '@/components/marketing/PageCtaBand';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { caseStudies } from '@/lib/content/case-studies';
 import { caseStudiesPage } from '@/lib/content/case-studies-page';
 import { pageCtaUrl } from '@/lib/gtm-links';
 import { createPageMetadata } from '@/lib/seo/metadata';
+import { Reveal } from '@/components/motion/Reveal';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Case Studies',
   description:
-    'Client success stories: TWO Capital commercial real estate growth and Linea Energy renewables development.',
+    'Back office transformations: real outcomes from structured accounting, connected reporting, and CFO-level visibility.',
   path: '/case-studies',
 });
 
@@ -39,17 +38,23 @@ export default function CaseStudiesIndexPage() {
         </Container>
       </section>
 
-      <PageCtaBand eyebrow={cta.eyebrow} headline={cta.headline} body={cta.body}>
-        <GtmOutboundButton href={CTA_HREF} size="lg">
-          {cta.primaryLabel}
-        </GtmOutboundButton>
-        <Link
-          href="/services"
-          className="inline-flex h-11 items-center justify-center rounded-full border border-heno-orange-500/35 bg-white px-7 text-sm font-semibold text-heno-orange-600 transition-colors hover:border-heno-orange-500/55 hover:bg-heno-orange-50/80"
-        >
-          {cta.secondaryLabel}
-        </Link>
-      </PageCtaBand>
+      <section className="relative overflow-hidden bg-neutral-950 py-16 sm:py-20">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(242,120,48,0.2),transparent)]"
+          aria-hidden
+        />
+        <Container className="relative text-center">
+          <Reveal className="mx-auto max-w-2xl">
+            <h2 className="text-display-md font-semibold tracking-tight text-white sm:text-display-lg">
+              {cta.headline}
+            </h2>
+            <p className="mt-4 text-neutral-300">{cta.body}</p>
+            <GtmOutboundButton href={CTA_HREF} size="lg" className="mt-8">
+              {cta.primaryLabel}
+            </GtmOutboundButton>
+          </Reveal>
+        </Container>
+      </section>
     </MarketingPageShell>
   );
 }

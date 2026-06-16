@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { MarketingPageHero } from '@/components/marketing/MarketingPageHero';
 import { MarketingPageShell } from '@/components/marketing/MarketingPageShell';
@@ -13,7 +12,8 @@ import { glass } from '@/lib/ui/glass';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Get Started',
-  description: 'Book a consultation or take the outsource readiness assessment.',
+  description:
+    'Start improving your back office today. Talk through your setup and identify where structure, reporting, and processes can be improved.',
   path: '/get-started',
 });
 
@@ -32,15 +32,10 @@ export default function GetStartedPage() {
 
       <section className="bg-neutral-50/50 py-12 sm:py-16 lg:py-20">
         <Container>
-          <GetStartedPaths consultation={paths.consultation} assessment={paths.assessment} />
+          <GetStartedPaths consultation={paths.consultation} />
 
           <Reveal>
-            <div
-              className={cn(
-                glass(),
-                'mt-10 flex flex-col items-start justify-between gap-4 px-6 py-5 sm:flex-row sm:items-center sm:px-8',
-              )}
-            >
+            <div className={cn(glass(), 'mx-auto mt-10 max-w-2xl px-6 py-5 text-center sm:px-8')}>
               <p className="text-sm text-neutral-600">
                 Prefer to talk first?{' '}
                 <a
@@ -57,12 +52,6 @@ export default function GetStartedPage() {
                   {email}
                 </a>
               </p>
-              <Link
-                href="/services"
-                className="text-sm font-semibold text-heno-orange-600 hover:text-heno-orange-700"
-              >
-                Explore services →
-              </Link>
             </div>
           </Reveal>
         </Container>

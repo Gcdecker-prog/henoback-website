@@ -23,7 +23,12 @@ export function CaseStudyPageContent({ study }: CaseStudyPageProps) {
         imageAlt={`${study.clientName} case study`}
       >
         <p className="text-sm text-neutral-300">
-          <a href={study.clientUrl} className="underline decoration-heno-orange-400 underline-offset-2" target="_blank" rel="noopener noreferrer">
+          <a
+            href={study.clientUrl}
+            className="underline decoration-heno-orange-400 underline-offset-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {study.clientName}
           </a>
           {study.clientSince ? ` · Client since ${study.clientSince}` : null}
@@ -43,7 +48,7 @@ export function CaseStudyPageContent({ study }: CaseStudyPageProps) {
         </ul>
 
         <section className="mt-14 max-w-3xl">
-          <h2 className="text-h1 font-semibold text-neutral-900">Brief client description</h2>
+          <h2 className="text-h1 font-semibold text-neutral-900">Client overview</h2>
           <p className="mt-4 text-body-lg text-neutral-600">{study.coreMessage}</p>
         </section>
 
@@ -54,14 +59,14 @@ export function CaseStudyPageContent({ study }: CaseStudyPageProps) {
             <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.challenge.businessImpact}</p>
           </div>
           <div className={cn(glass(), 'p-8')}>
-            <h2 className="text-h2 font-semibold text-neutral-900">Why they chose us</h2>
+            <h2 className="text-h2 font-semibold text-neutral-900">Why Heno worked</h2>
             <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.whyUs.vsInHouse}</p>
             <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.whyUs.strengths}</p>
           </div>
         </section>
 
         <section className="mt-12">
-          <h2 className="text-h1 font-semibold text-neutral-900">Key results</h2>
+          <h2 className="text-h1 font-semibold text-neutral-900">Operational outcomes</h2>
           <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               ['Accuracy', study.outcomes.accuracy],
@@ -79,22 +84,14 @@ export function CaseStudyPageContent({ study }: CaseStudyPageProps) {
           </ul>
         </section>
 
-        <div className="mt-10 flex flex-wrap gap-2">
-          {study.services.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-700"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-12 flex flex-wrap gap-3">
+        <div className="mt-12 flex flex-col items-start gap-4">
           <GtmOutboundButton href={pageCtaUrl(`case-study-${study.slug}`, 'consultation')} size="lg">
             {primaryCta.label}
           </GtmOutboundButton>
-          <Link href="/case-studies" className="inline-flex h-12 items-center text-sm font-medium text-heno-orange-600 hover:text-heno-orange-700">
+          <Link
+            href="/case-studies"
+            className="inline-flex h-12 items-center text-sm font-medium text-heno-orange-600 hover:text-heno-orange-700"
+          >
             ← All case studies
           </Link>
         </div>

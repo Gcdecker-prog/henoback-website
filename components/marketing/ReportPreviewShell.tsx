@@ -1,3 +1,4 @@
+import { brandUi } from '@/lib/ui/brand-ui';
 import { glassPanelSubtle } from '@/lib/ui/glass';
 import { cn } from '@/lib/cn';
 
@@ -42,7 +43,7 @@ export function ReportPreviewShell({
       <div className="border-b border-neutral-100 px-4 py-4 sm:px-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-heno-orange-600">
+            <p className={cn('text-[10px] font-semibold uppercase tracking-[0.22em]', brandUi.eyebrow)}>
               {packageTitle}
             </p>
             <h3 className="mt-1.5 text-sm font-semibold leading-snug tracking-tight text-neutral-900 sm:text-[0.9375rem]">
@@ -74,8 +75,8 @@ export function ReportPreviewShell({
               <p
                 className={cn(
                   'mt-1 text-sm font-semibold tabular-nums tracking-tight sm:text-base',
-                  item.tone === 'accent' && 'text-heno-orange-600',
-                  item.tone === 'positive' && 'text-heno-blue-900',
+                item.tone === 'accent' && brandUi.eyebrow,
+                item.tone === 'positive' && brandUi.outcomeText,
                   !item.tone || item.tone === 'default' ? 'text-neutral-900' : '',
                 )}
               >

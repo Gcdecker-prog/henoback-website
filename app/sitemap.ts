@@ -1,19 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/lib/site-config';
 import { services } from '@/lib/content/services';
-import { industries } from '@/lib/content/industries';
 import { caseStudies } from '@/lib/content/case-studies';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
-  const staticRoutes = [
-    '',
-    '/about-us',
-    '/services',
-    '/industries',
-    '/case-studies',
-    '/get-started',
-  ];
+  const staticRoutes = ['', '/about-us', '/services', '/case-studies', '/get-started'];
 
   return [
     ...staticRoutes.map((path) => ({
@@ -24,12 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...services.map((s) => ({
       url: `${base}/services/${s.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
-    ...industries.map((i) => ({
-      url: `${base}/industries/${i.slug}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,

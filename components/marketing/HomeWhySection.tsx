@@ -8,6 +8,7 @@ import { HomeProofStats } from '@/components/marketing/HomeProofStats';
 import { homeWhySection } from '@/lib/content/home';
 import { media } from '@/lib/content/media';
 import { useEditorialBandScroll } from '@/lib/motion/use-editorial-band-scroll';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { motionEase } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
@@ -20,7 +21,8 @@ export function HomeWhySection({ className }: { className?: string }) {
     <section
       ref={sectionRef}
       className={cn(
-        'border-t border-neutral-100 bg-neutral-50/40 pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14',
+        'border-t border-neutral-100 pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14',
+        brandUi.sectionTint,
         className,
       )}
       aria-labelledby="home-why-heading"
@@ -56,8 +58,8 @@ export function HomeWhySection({ className }: { className?: string }) {
               ))}
             </ul>
 
-            <blockquote className="mt-8 border-l-2 border-heno-blue-400 bg-white/80 py-3 pl-4 pr-3 sm:py-3.5 sm:pl-5">
-              <p className="text-[0.975rem] font-semibold leading-snug text-heno-blue-900 sm:text-[1rem]">
+            <blockquote className={cn('mt-8 bg-white/80 py-3 pl-4 pr-3 sm:py-3.5 sm:pl-5', brandUi.outcomeBar)}>
+              <p className={cn('text-[0.975rem] font-semibold leading-snug sm:text-[1rem]', brandUi.outcomeText)}>
                 {homeWhySection.closing.lead}
               </p>
               <p className="mt-1 text-[0.9375rem] font-medium leading-snug text-neutral-600">

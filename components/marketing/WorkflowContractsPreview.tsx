@@ -29,6 +29,7 @@ const {
   nodeHeight: NH,
   headerHeight: HH,
   edgeGap: GAP,
+  paddingRight: PAD_R,
 } = workflowCanvas;
 
 const WORKFLOW_VIEWPORT = { once: true, amount: 0.35, margin: '-24px' as const };
@@ -139,25 +140,25 @@ function WorkflowNodeCard({
   reduce: boolean;
 }) {
   return (
-    <foreignObject x={cx(node.x)} y={node.y} width={NW} height={NH}>
+    <foreignObject x={cx(node.x)} y={node.y} width={NW} height={NH + 4} className="overflow-visible">
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 3 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay, ease: motionEase }}
-        className={cn(
-          'h-full w-full overflow-hidden rounded-md border border-neutral-200/75 bg-white',
-          'shadow-[0_1px_2px_rgba(27,54,93,0.06)]',
-          workflowStepStyles[node.kind],
-        )}
+            className={cn(
+              'group relative h-full w-full overflow-hidden rounded-lg border border-neutral-200/80 bg-white',
+              'shadow-[0_1px_2px_rgba(27,54,93,0.06)]',
+              workflowStepStyles[node.kind],
+            )}
         style={{ WebkitFontSmoothing: 'antialiased' }}
       >
-        <div className="flex h-full flex-col justify-center px-3 py-2">
-          <p className="text-[10px] font-semibold leading-tight text-heno-blue-900">{node.label}</p>
-          <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+        <div className="flex h-full flex-col justify-center px-3.5 py-2.5">
+          <p className="text-[11px] font-semibold leading-tight text-heno-blue-900">{node.label}</p>
+          <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
             {workflowStepLabels[node.kind]}
           </p>
           {node.detail ? (
-            <p className="mt-0.5 truncate text-[8px] text-heno-blue-700/85">{node.detail}</p>
+            <p className="mt-1 truncate text-[9px] text-heno-blue-700/85">{node.detail}</p>
           ) : null}
         </div>
       </motion.div>
@@ -176,7 +177,7 @@ function WorkflowCanvas({ reduce }: { reduce: boolean }) {
   return (
     <motion.div
       variants={canvasReveal}
-      className="relative overflow-hidden"
+      className="relative overflow-visible"
       style={{ backgroundColor: workflowBrand.canvas }}
     >
       <div
@@ -193,6 +194,7 @@ function WorkflowCanvas({ reduce }: { reduce: boolean }) {
       <svg
         viewBox={`0 0 ${VW} ${VH}`}
         className="relative z-[1] block h-auto w-full [shape-rendering:geometricPrecision]"
+        preserveAspectRatio="xMidYMid meet"
         role="img"
         aria-label="Heno BackOffice order to cash contract workflow map"
       >
@@ -238,7 +240,7 @@ function WorkflowCanvas({ reduce }: { reduce: boolean }) {
               y={24}
               textAnchor="middle"
               fill={workflowBrand.navy}
-              fontSize="9"
+              fontSize="10"
               fontWeight="600"
               letterSpacing="0.14em"
               style={{ fontFamily: 'inherit', textTransform: 'uppercase' }}
@@ -253,7 +255,7 @@ function WorkflowCanvas({ reduce }: { reduce: boolean }) {
             <rect
               x={RAIL}
               y={lane.y - 5}
-              width={VW - RAIL}
+              width={VW - RAIL - PAD_R}
               height={lane.height}
               rx={8}
               fill={index % 2 === 0 ? '#FFFFFF' : '#F8FAFC'}
@@ -266,7 +268,7 @@ function WorkflowCanvas({ reduce }: { reduce: boolean }) {
               y={laneLabelY(lane, -4)}
               textAnchor="middle"
               fill="#FFFFFF"
-              fontSize="8.5"
+              fontSize="9"
               fontWeight="600"
               letterSpacing="0.1em"
               style={{ fontFamily: 'inherit', textTransform: 'uppercase' }}
@@ -279,7 +281,7 @@ function WorkflowCanvas({ reduce }: { reduce: boolean }) {
               textAnchor="middle"
               fill="#FFFFFF"
               fillOpacity={0.6}
-              fontSize="7.5"
+              fontSize="8"
               fontWeight="500"
               letterSpacing="0.08em"
               style={{ fontFamily: 'inherit', textTransform: 'uppercase' }}
@@ -349,7 +351,7 @@ export function WorkflowContractsPreview({ className }: { className?: string }) 
 
   return (
     <ReportPreviewShell
-      className={className}
+      className={cn('overflow-visible', className)}
       ariaLabel={workflowContractsMeta.reportTitle}
       packageTitle={workflowContractsMeta.packageTitle}
       reportTitle={workflowContractsMeta.reportTitle}
@@ -367,33 +369,19 @@ export function WorkflowContractsPreview({ className }: { className?: string }) 
 
         <motion.div
           variants={legendReveal}
-          className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-neutral-100 bg-[#FAFCFE] px-4 py-3 sm:px-5"
+          className="flex flex-wrap items-center gap-2 border-t border-neutral-100 bg-[#FAFCFE] px-4 py-3 sm:justify-end sm:px-5"
         >
-          <span className="flex items-center gap-1.5 text-[9px] font-medium text-neutral-500">
-            <span className="inline-block h-px w-5" style={{ backgroundColor: workflowBrand.manualEdge }} aria-hidden />
-            Manual
-          </span>
-          <span className="flex items-center gap-1.5 text-[9px] font-medium text-neutral-500">
+          {(['entry', 'process', 'automated'] as const).map((kind) => (
             <span
-              className="inline-block h-px w-5 border-t border-dashed"
-              style={{ borderColor: workflowBrand.autoEdge }}
-              aria-hidden
-            />
-            Automated
-          </span>
-          <div className="flex flex-wrap gap-1 sm:ml-auto">
-            {(['entry', 'process', 'automated', 'posting'] as const).map((kind) => (
-              <span
-                key={kind}
-                className={cn(
-                  'rounded px-2 py-0.5 text-[9px] font-medium text-neutral-600',
-                  workflowStepStyles[kind],
-                )}
-              >
-                {workflowStepLabels[kind]}
-              </span>
-            ))}
-          </div>
+              key={kind}
+              className={cn(
+                'rounded px-2.5 py-0.5 text-[9px] font-medium text-neutral-600',
+                workflowStepStyles[kind],
+              )}
+            >
+              {workflowStepLabels[kind]}
+            </span>
+          ))}
         </motion.div>
       </motion.div>
     </ReportPreviewShell>

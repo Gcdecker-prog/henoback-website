@@ -1,14 +1,12 @@
-/** Case studies hub */
+/** Case studies hub — approved messaging refresh (June 2026). */
 export const caseStudiesPage = {
   eyebrow: 'Case studies',
-  headline: 'Client success stories',
+  headline: 'Back Office Transformations',
   subheadline:
-    'Real outcomes from outsourced accounting, CFO advisory, and connected financial systems.',
+    'What happens when your back office is structured, aligned, and built to deliver real visibility.',
   cta: {
-    eyebrow: 'Your turn',
-    headline: 'Ready to modernize your back office?',
-    body: 'Walk through your processes and goals with our team — we’ll show you what a modern back office can look like.',
+    headline: 'Start improving your back office today',
+    body: 'See where your current setup is misaligned—and what it takes to create reliable financial visibility.',
     primaryLabel: 'Get your back office assessment',
-    secondaryLabel: 'Explore services',
   },
 } as const;

@@ -17,6 +17,7 @@ import {
   motionEase,
   scrollSlideLabel,
 } from '@/lib/motion/variants';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { cn } from '@/lib/cn';
 
 type DetailSection = {
@@ -74,7 +75,7 @@ function DetailListBlock({
 }) {
   return (
     <motion.div variants={editorialPanelBlock}>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
+      <p className={brandUi.sectionLabel}>
         {label.replace(/:$/, '')}
       </p>
       <ul className="mt-2.5 space-y-2">
@@ -89,7 +90,7 @@ function DetailListBlock({
             <span
               className={cn(
                 'mt-[0.4rem] size-1 shrink-0 rounded-full',
-                tone === 'emphasis' ? 'bg-heno-blue-400' : 'bg-neutral-300',
+                tone === 'emphasis' ? brandUi.bulletEmphasis : brandUi.bullet,
               )}
               aria-hidden
             />
@@ -104,22 +105,32 @@ function DetailListBlock({
 export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSectionProps) {
   const reduce = useReducedMotion();
   const isReversed = index % 2 === 1;
-  const copyEnterX = isReversed ? 40 : -40;
-  const visualEnterX = isReversed ? -40 : 40;
+  const isStackedVisual = section.visualComponent === 'workflow';
+  const copyEnterX = isReversed && !isStackedVisual ? 40 : -40;
+  const visualEnterX = isReversed && !isStackedVisual ? -40 : 40;
 
   return (
     <section
       id={section.id}
       className={cn(
         'scroll-mt-24 border-t border-neutral-100/80 py-14 sm:py-16 lg:py-20',
-        isReversed ? 'bg-neutral-50/60' : 'bg-white',
+        isReversed ? brandUi.sectionTintAlt : 'bg-white',
       )}
       aria-labelledby={`${section.id}-heading`}
     >
       <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+        <div
+          className={cn(
+            isStackedVisual
+              ? 'flex flex-col gap-10 lg:gap-12'
+              : 'grid items-start gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16',
+          )}
+        >
           <motion.div
-            className={cn('min-w-0', isReversed && 'lg:order-2')}
+            className={cn(
+              'min-w-0 self-start lg:sticky lg:top-28',
+              isReversed && !isStackedVisual && 'lg:order-2',
+            )}
             initial={reduce ? false : 'hidden'}
             whileInView="visible"
             viewport={VIEWPORT}
@@ -145,12 +156,12 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
 
               <motion.div
                 variants={editorialPanelBlock}
-                className="border-l-2 border-heno-blue-400/80 py-1 pl-4"
+                className={cn(brandUi.outcomeBar, 'py-1 pl-4')}
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
+                <p className={brandUi.sectionLabel}>
                   Outcome
                 </p>
-                <p className="mt-2 text-[0.9375rem] font-semibold leading-snug text-heno-blue-900 sm:text-base">
+                <p className={cn('mt-2 text-[0.9375rem] font-semibold leading-snug sm:text-base', brandUi.outcomeText)}>
                   {section.outcome}
                 </p>
               </motion.div>
@@ -158,7 +169,11 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
           </motion.div>
 
           <motion.div
-            className={cn('relative min-w-0', isReversed && 'lg:order-1')}
+            className={cn(
+              'relative min-w-0 w-full self-start',
+              isStackedVisual && 'lg:max-w-none',
+              isReversed && !isStackedVisual && 'lg:order-1',
+            )}
             initial={reduce ? false : 'hidden'}
             whileInView="visible"
             viewport={VIEWPORT}
@@ -169,7 +184,7 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
             ) : section.visualComponent === 'project-profitability' ? (
               <ProjectProfitabilityPreview />
             ) : section.visualComponent === 'workflow' ? (
-              <WorkflowContractsPreview />
+              <WorkflowContractsPreview className="w-full" />
             ) : section.visualComponent === 'planning' ? (
               <PlanningForecastPreview />
             ) : section.visualImageSrc ? (

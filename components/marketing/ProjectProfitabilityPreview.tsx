@@ -6,6 +6,7 @@ import {
   projectProfitabilityMeta,
   projectProfitabilityRows,
 } from '@/lib/content/project-profitability-report';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { ReportPreviewShell } from '@/components/marketing/ReportPreviewShell';
 import { cn } from '@/lib/cn';
 
@@ -44,7 +45,7 @@ export function ProjectProfitabilityPreview({ className }: { className?: string 
         { label: 'Margin', value: formatProjectMargin(total?.margin ?? null), tone: 'accent' },
       ]}
     >
-      <div className="max-h-[17rem] overflow-y-auto overflow-x-hidden sm:max-h-[19rem]">
+      <div className="overflow-x-hidden">
         <table className="w-full table-fixed border-collapse">
           <thead className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm">
             <tr className="border-b border-neutral-200 text-neutral-400">
@@ -85,7 +86,7 @@ export function ProjectProfitabilityPreview({ className }: { className?: string 
                   <span
                     className={cn(
                       'text-[11px] sm:text-xs',
-                      row.netIncome !== null && row.netIncome < 0 && !row.isTotal && 'text-amber-800',
+                      row.netIncome !== null && row.netIncome < 0 && !row.isTotal && brandUi.negative,
                     )}
                   >
                     {formatProjectCurrency(row.netIncome)}

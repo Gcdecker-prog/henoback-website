@@ -6,6 +6,7 @@ import {
   planningPeriods,
   planningScenarios,
 } from '@/lib/content/planning-forecast';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { ReportPreviewShell } from '@/components/marketing/ReportPreviewShell';
 import { cn } from '@/lib/cn';
 
@@ -46,7 +47,7 @@ function ForecastBar({
           <span
             className={cn(
               'w-12 shrink-0 text-right text-[10px] font-medium tabular-nums',
-              Number(variance) >= 0 ? 'text-emerald-700' : 'text-amber-800',
+              Number(variance) >= 0 ? brandUi.positive : brandUi.negative,
             )}
           >
             {Number(variance) >= 0 ? '+' : ''}

@@ -6,13 +6,15 @@ import { consultationIntakeUrl, assessmentUrl } from '@/lib/gtm-links';
 export const landingPages = [
   { path: '/', label: 'Home', slug: 'home' },
   { path: '/about-us', label: 'About / Why Heno', slug: 'about-us' },
-  { path: '/services', label: 'Services hub', slug: 'services' },
-  { path: '/industries', label: 'Industries hub', slug: 'industries' },
+  { path: '/services', label: 'How It Works hub', slug: 'services' },
   { path: '/case-studies', label: 'Case studies', slug: 'case-studies' },
   { path: '/get-started', label: 'Get started', slug: 'get-started' },
   { path: '/services/bookkeeping', label: 'Service — Bookkeeping', slug: 'service-bookkeeping' },
-  { path: '/services/full-service-accounting', label: 'Service — Full service accounting', slug: 'service-fsa' },
-  { path: '/industries/management-consulting', label: 'Industry — Management consulting', slug: 'industry-mc' },
+  {
+    path: '/services/full-service-accounting',
+    label: 'Service — Full service accounting',
+    slug: 'service-fsa',
+  },
 ] as const;
 
 export type CampaignLinkParams = {

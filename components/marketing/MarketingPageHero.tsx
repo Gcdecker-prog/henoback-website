@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { brandHex } from '@/lib/ui/brand-colors';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
@@ -69,7 +70,7 @@ export function MarketingPageHero({
           {eyebrow ? (
             <motion.p
               variants={staggerItem}
-              className="text-[11px] font-semibold uppercase tracking-[0.28em] text-heno-orange-600"
+              className={cn('text-[11px] font-semibold uppercase tracking-[0.28em]', brandUi.eyebrow)}
             >
               {eyebrow}
             </motion.p>
