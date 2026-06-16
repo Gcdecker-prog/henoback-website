@@ -108,22 +108,24 @@ Confirm GTM admin reads these fields on lead create.
 
 ## 6. Deploy (one command)
 
-From the project folder:
+Vercel project **`henoback-website`** deploys automatically when you push **`main`** to GitHub.
 
 ```powershell
 npm run deploy
 ```
 
-Or double-click **`deploy.cmd`** in the repo root.
-
-That runs lint, typecheck, build, auto-commit (`deploy: yyyy-MM-dd HH:mm`), push `main`, and Vercel production (GitHub integration or `vercel` CLI).
-
-Optional custom commit message:
+Or:
 
 ```powershell
-.\deploy.cmd "Fix About hero stats layout"
+.\deploy.cmd
 ```
 
-Feature branches: push and open PR → Vercel preview → merge to `main` → run `npm run deploy` on `main`.
+Runs lint, typecheck, build, then `git push origin main`.
 
-Do **not** commit `.env.local` or set `CAMPAIGN_PLAYBOOK_ENABLED` on Vercel Production. See [SECURITY.md](./SECURITY.md).
+**Uncommitted changes** — commit and push in one step:
+
+```powershell
+.\deploy.cmd "Your commit message"
+```
+
+Do **not** commit `.env.local`. See [SECURITY.md](./SECURITY.md).

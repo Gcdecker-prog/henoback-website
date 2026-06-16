@@ -10,8 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "process:heno-mark": "node scripts/process-heno-mark.mjs",
-    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/ship.ps1 -Production -AutoCommit",
-    "deploy:dry": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/ship.ps1 -Production -AutoCommit -DryRun"
+    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy.ps1"
   },
   "dependencies": {
     "clsx": "^2.1.1",

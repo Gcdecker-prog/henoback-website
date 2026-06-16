@@ -25,7 +25,7 @@ Write-Host '  HenoBack Office — dev clean' -ForegroundColor White
 Write-Host ('  Repo: ' + $Root) -ForegroundColor DarkGray
 Write-Host ''
 
-# ship.ps1 can leave NODE_ENV=production in this shell — breaks next dev middleware
+# deploy.ps1 can leave NODE_ENV=production in this shell — breaks next dev middleware
 if ($env:NODE_ENV -and $env:NODE_ENV -ne 'development') {
   Write-Host "  Clearing NODE_ENV=$($env:NODE_ENV) (use development for local dev)" -ForegroundColor Yellow
 }
