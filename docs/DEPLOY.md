@@ -124,6 +124,6 @@ Optional custom commit message:
 .\deploy.cmd "Fix About hero stats layout"
 ```
 
-Feature branches: push and open PR → Vercel preview → merge to `main` → run ship on `main`.
+Feature branches: push and open PR → Vercel preview → merge to `main` → run `npm run deploy` on `main`.
 
 Do **not** commit `.env.local` or set `CAMPAIGN_PLAYBOOK_ENABLED` on Vercel Production. See [SECURITY.md](./SECURITY.md).

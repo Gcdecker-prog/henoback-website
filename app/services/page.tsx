@@ -1,38 +1,26 @@
 import type { Metadata } from 'next';
 import { Container } from '@/components/layout/Container';
-import { Button } from '@/components/ui/Button';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { MarketingPageHero } from '@/components/marketing/MarketingPageHero';
 import { MarketingPageShell } from '@/components/marketing/MarketingPageShell';
-import { ServicesShowcase } from '@/components/marketing/ServicesShowcase';
-import { ServicesBackOfficeBand } from '@/components/marketing/ServicesBackOfficeBand';
-import { TeamCard } from '@/components/marketing/TeamCard';
-import { services } from '@/lib/content/services';
+import { HowItWorksPillars } from '@/components/marketing/HowItWorksPillars';
+import { HowItWorksDetailSection } from '@/components/marketing/HowItWorksDetailSection';
 import { servicesPage } from '@/lib/content/services-page';
-import { aboutUsPage } from '@/lib/content/about-us';
-import { getServiceImage } from '@/lib/content/media';
 import { pageCtaUrl } from '@/lib/gtm-links';
 import { createPageMetadata } from '@/lib/seo/metadata';
-import { Reveal, RevealStagger, RevealItem } from '@/components/motion/Reveal';
-import { glass } from '@/lib/ui/glass';
-import { cn } from '@/lib/cn';
+import { Reveal } from '@/components/motion/Reveal';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Our Services',
+  title: 'How Heno BackOffice Works',
   description:
-    'Bookkeeping, full-service accounting, CFO outsourcing, payroll integration, audit support, and expense automation for professional service firms.',
+    'Most outsourced accounting models focus on completing tasks. Heno focuses on how the entire back office operates.',
   path: '/services',
 });
 
-const CTA_HREF = pageCtaUrl('services', 'consultation', { content: 'services-free-estimate' });
+const CTA_HREF = pageCtaUrl('services', 'consultation', { content: 'services-assessment-cta' });
 
 export default function ServicesPage() {
-  const { hero, cta, closing } = servicesPage;
-  const { team } = aboutUsPage;
-  const serviceItems = services.map((service) => ({
-    ...service,
-    imageSrc: getServiceImage(service.slug),
-  }));
+  const { hero, pillars, detailSections, cta } = servicesPage;
 
   return (
     <MarketingPageShell>
@@ -40,15 +28,14 @@ export default function ServicesPage() {
         pageLabel={hero.pageLabel}
         headline={hero.headline}
         subheadline={hero.subheadline}
+        className="border-b-0 pb-8 sm:pb-10"
       />
 
-      <section className="border-t border-neutral-100/80 bg-white pb-16 sm:pb-20">
-        <Container className="pt-4 sm:pt-6">
-          <ServicesShowcase items={serviceItems} />
-        </Container>
-      </section>
+      <HowItWorksPillars pillars={pillars} />
 
-      <ServicesBackOfficeBand />
+      {detailSections.map((section, index) => (
+        <HowItWorksDetailSection key={section.id} section={section} index={index} />
+      ))}
 
       <section className="relative overflow-hidden bg-neutral-950 py-16 sm:py-20">
         <div
@@ -57,63 +44,13 @@ export default function ServicesPage() {
         />
         <Container className="relative text-center">
           <Reveal className="mx-auto max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-heno-orange-400">
-              {cta.eyebrow}
-            </p>
-            <h2 className="mt-4 text-display-md font-semibold tracking-tight text-white sm:text-display-lg">
+            <h2 className="text-display-md font-semibold tracking-tight text-white sm:text-display-lg">
               {cta.headline}
             </h2>
+            <p className="mt-4 text-neutral-300">{cta.body}</p>
             <GtmOutboundButton href={CTA_HREF} size="lg" className="mt-8">
               {cta.primaryLabel}
             </GtmOutboundButton>
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="border-t border-neutral-100/80 bg-white py-16 sm:py-20">
-        <Container>
-          <Reveal className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-heno-orange-600">
-              {team.eyebrow}
-            </p>
-            <h2 className="mt-4 text-display-md font-semibold tracking-tight text-neutral-900">
-              {team.headline}
-            </h2>
-          </Reveal>
-          <RevealStagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" as="div">
-            {team.members.map((member) => (
-              <RevealItem key={member.name}>
-                <TeamCard name={member.name} role={member.role} imageSrc={member.imageSrc} />
-              </RevealItem>
-            ))}
-          </RevealStagger>
-        </Container>
-      </section>
-
-      <section className="bg-neutral-50/80 py-16 sm:py-20">
-        <Container className="text-center">
-          <Reveal>
-            <div className={cn(glass(), 'mx-auto max-w-2xl px-8 py-12 sm:px-12')}>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-heno-orange-600">
-                {closing.eyebrow}
-              </p>
-              <h2 className="mt-4 text-display-md font-semibold tracking-tight text-neutral-900">
-                {closing.headline}
-              </h2>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Button href="/services" size="lg">
-                  {closing.primaryCta}
-                </Button>
-                <GtmOutboundButton
-                  href={CTA_HREF}
-                  variant="secondary"
-                  size="lg"
-                  className="border-heno-orange-500/35 text-heno-orange-600 hover:border-heno-orange-500/55 hover:bg-heno-orange-50/80"
-                >
-                  {closing.secondaryCta}
-                </GtmOutboundButton>
-              </div>
-            </div>
           </Reveal>
         </Container>
       </section>

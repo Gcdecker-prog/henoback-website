@@ -2,80 +2,128 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
-import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { floatCard, motionEase } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
 type AboutExcellenceBandProps = {
-  getToKnowUs: {
-    eyebrow: string;
+  whyDifferent: {
+    leftStatements: readonly string[];
     headline: string;
-    ctaLabel: string;
+    comparison: {
+      manages: { label: string; items: readonly string[] };
+      untouched: { label: string; items: readonly string[] };
+    };
+    closing: string;
   };
-  whyUs: {
-    eyebrow: string;
-    headline: string;
-    body: string;
-  };
-  ctaHref: string;
 };
 
-export function AboutExcellenceBand({ getToKnowUs, whyUs, ctaHref }: AboutExcellenceBandProps) {
+const VIEWPORT = { once: true, margin: '-60px' as const };
+
+export function AboutExcellenceBand({ whyDifferent }: AboutExcellenceBandProps) {
   const reduce = useReducedMotion();
+  const [leadStatement, ...supportStatements] = whyDifferent.leftStatements;
 
   return (
-    <section className="relative overflow-hidden bg-neutral-950 py-20 sm:py-24 lg:py-28">
+    <section className="relative overflow-hidden bg-neutral-950 py-16 sm:py-20 lg:py-24">
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[linear-gradient(125deg,#0a0f1a_0%,#121826_45%,#0d1117_100%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-[linear-gradient(to_top,rgba(255,255,255,0.04),transparent)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/92 via-neutral-950/85 to-neutral-950/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_18%_50%,rgba(242,120,48,0.18),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_70%_at_12%_40%,rgba(242,120,48,0.14),transparent_60%)]" />
       </div>
 
       <Container className="relative">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 xl:gap-10">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-x-14 xl:gap-x-16">
           <motion.div
-            initial={reduce ? false : { opacity: 0, x: -24 }}
+            initial={reduce ? false : { opacity: 0, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: motionEase }}
-            className="max-w-lg text-white"
+            viewport={VIEWPORT}
+            transition={{ duration: 0.75, ease: motionEase }}
+            className="min-w-0"
           >
-            <span className="inline-block rounded-sm bg-heno-orange-500 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white">
-              {getToKnowUs.eyebrow}
-            </span>
-            <h2 className="mt-6 text-display-md font-semibold leading-[1.15] tracking-tight sm:text-display-lg">
-              {getToKnowUs.headline}
+            <h2 className="text-display-md font-semibold leading-[1.15] tracking-tight text-white sm:text-display-lg">
+              {whyDifferent.headline}
             </h2>
-            <GtmOutboundButton href={ctaHref} size="lg" className="mt-8">
-              {getToKnowUs.ctaLabel}
-            </GtmOutboundButton>
+
+            <div className="mt-8 flex gap-4 sm:mt-10">
+              <span
+                className="w-1 shrink-0 self-stretch rounded-full bg-heno-orange-500"
+                aria-hidden
+              />
+              <div className="min-w-0 space-y-5 sm:space-y-6">
+                {leadStatement ? (
+                  <p className="text-lg font-semibold leading-snug tracking-tight text-white sm:text-xl sm:leading-snug">
+                    {leadStatement}
+                  </p>
+                ) : null}
+                {supportStatements.map((statement) => (
+                  <p
+                    key={statement.slice(0, 32)}
+                    className="text-base leading-relaxed text-neutral-300 sm:text-lg sm:leading-relaxed"
+                  >
+                    {statement}
+                  </p>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
-            className="relative lg:-mr-4 lg:translate-x-2 xl:mr-0 xl:translate-x-6"
+            className="min-w-0"
             initial={reduce ? false : 'hidden'}
             whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={VIEWPORT}
             variants={floatCard}
           >
             <div
               className={cn(
-                'rounded-2xl border border-neutral-200/80 bg-white p-8 shadow-[0_32px_80px_-24px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12',
+                'rounded-2xl border border-neutral-200/80 bg-white p-7 shadow-[0_32px_80px_-24px_rgba(0,0,0,0.45)] sm:p-9 lg:p-10',
               )}
             >
-              <div className="flex gap-3">
-                <span className="mt-1 w-1 shrink-0 rounded-full bg-heno-orange-500" aria-hidden />
+              <div className="space-y-6">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-heno-orange-600">
-                    {whyUs.eyebrow}
+                  <p className="text-sm font-semibold leading-snug text-neutral-900">
+                    {whyDifferent.comparison.manages.label}
                   </p>
-                  <h3 className="mt-4 text-h1 font-semibold tracking-tight text-neutral-900 sm:text-display-md">
-                    {whyUs.headline}
-                  </h3>
-                  <p className="mt-5 text-body-lg leading-relaxed text-neutral-600">{whyUs.body}</p>
+                  <ul className="mt-3 space-y-2">
+                    {whyDifferent.comparison.manages.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-sm leading-relaxed text-neutral-600"
+                      >
+                        <span
+                          className="mt-[0.45rem] size-1 shrink-0 rounded-full bg-neutral-400"
+                          aria-hidden
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="rounded-xl bg-heno-orange-50/70 px-5 py-5 sm:px-6 sm:py-6">
+                  <p className="text-sm font-semibold leading-snug text-neutral-900">
+                    {whyDifferent.comparison.untouched.label}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {whyDifferent.comparison.untouched.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-sm leading-relaxed text-neutral-700"
+                      >
+                        <span
+                          className="mt-[0.45rem] size-1.5 shrink-0 rounded-full bg-heno-orange-500"
+                          aria-hidden
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
+
+              <p className="mt-7 border-t border-neutral-100 pt-6 text-sm leading-relaxed text-neutral-600 sm:mt-8 sm:text-[0.9375rem]">
+                {whyDifferent.closing}
+              </p>
             </div>
           </motion.div>
         </div>

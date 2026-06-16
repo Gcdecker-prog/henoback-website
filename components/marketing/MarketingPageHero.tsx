@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { brandHex } from '@/lib/ui/brand-colors';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
+import { cn } from '@/lib/cn';
 
 export type MarketingPageHeroProps = {
   pageLabel: string;
@@ -12,6 +13,7 @@ export type MarketingPageHeroProps = {
   subheadline?: string;
   /** Small caps line above the H1 — proof line, section label, etc. */
   eyebrow?: string;
+  className?: string;
 };
 
 export function MarketingPageHero({
@@ -19,11 +21,17 @@ export function MarketingPageHero({
   headline,
   subheadline,
   eyebrow,
+  className,
 }: MarketingPageHeroProps) {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden border-b border-neutral-100/80 bg-white pb-12 pt-8 sm:pb-16 sm:pt-10">
+    <section
+      className={cn(
+        'relative overflow-hidden border-b border-neutral-100/80 bg-white pb-12 pt-8 sm:pb-16 sm:pt-10',
+        className,
+      )}
+    >
       <div
         className="pointer-events-none absolute -left-32 top-0 h-80 w-80 rounded-full blur-3xl"
         style={{ background: `radial-gradient(circle, ${brandHex.orange}1a, transparent 70%)` }}

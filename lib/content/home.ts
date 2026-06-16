@@ -83,25 +83,25 @@ export const homeAlignmentSection = {
       title: 'Financial Foundation',
       body: 'Reliable accounting operations built around clean, usable financial data.',
       linkLabel: 'Explore accounting alignment',
-      href: '/services/full-service-accounting',
+      href: '/services#accounting-alignment',
     },
     {
       title: 'Visibility & Reporting',
       body: 'Reporting structured around how project-based firms operate.',
       linkLabel: 'Explore reporting visibility',
-      href: '/services/accounting-analysis',
+      href: '/services#reporting-visibility',
     },
     {
       title: 'Back Office Operations',
       body: 'Processes and workflows that reduce inconsistency and eliminate workarounds.',
       linkLabel: 'Explore operational consistency',
-      href: '/services/expense-process-automation',
+      href: '/services#operational-consistency',
     },
     {
       title: 'Strategic Financial Support',
       body: 'Forecasting, planning, and financial insight designed to support decision-making.',
       linkLabel: 'Explore strategic insight',
-      href: '/services/cfo-outsourcing',
+      href: '/services#strategic-insight',
     },
   ] as const,
   imageAlt: 'Secure, integrated financial systems supporting back office alignment',
@@ -123,8 +123,8 @@ export const homeIndustriesBand = {
 } as const;
 
 export const homeClosingCta = {
-  headline: 'Start transforming your back office today',
-  body: 'See where your back office is misaligned—and what it takes to create reliable financial visibility.',
+  headline: 'Start improving your back office today',
+  body: 'See where your current setup is misaligned—and what it takes to create reliable financial visibility.',
 } as const;
 
 export const homePlatformBridge =

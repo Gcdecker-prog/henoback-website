@@ -47,6 +47,9 @@ export const media = {
     homeAlignment: '/images/marketing/about-team-collaboration.jpg',
     homeIndustries: '/images/industries/management-consulting.jpg',
   },
+  dashboards: {
+    standardPl: '/images/dashboards/standard-pl.png',
+  },
   team: {
     jimFrench: '/images/team/jim-french.png',
     kristinaCostello: '/images/team/kristina-costello.png',

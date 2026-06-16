@@ -17,10 +17,12 @@
 - [ ] Confirm `/campaigns` returns 404 on live domain
 - [ ] Confirm `robots.txt` disallows `/campaigns`
 
-## Ship script
+## Deploy
 
 ```powershell
-.\scripts\ship.ps1 -CommitMessage "Your message" -Production
+npm run deploy
+# or with a custom message:
+.\deploy.cmd "Your message"
 ```
 
-Builds with playbook disabled, pushes `main`, triggers Vercel production.
+Runs lint, typecheck, build (playbook disabled), commits, pushes `main`, and triggers Vercel production.

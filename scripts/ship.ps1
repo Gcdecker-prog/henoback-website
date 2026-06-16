@@ -135,7 +135,7 @@ if ($CommitMessage) {
     git commit -m $CommitMessage
   }
 } elseif ($porcelain -and $Production) {
-  throw 'Uncommitted changes. Run deploy.cmd, npm run deploy, or pass -AutoCommit / -CommitMessage.'
+  throw 'Uncommitted changes. Run: npm run deploy  or  .\deploy.cmd "Your message"'
 }
 
 Write-Step 'Push origin'
