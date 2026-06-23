@@ -9,6 +9,7 @@ export const landingPages = [
   { path: '/services', label: 'How It Works hub', slug: 'services' },
   { path: '/case-studies', label: 'Case studies', slug: 'case-studies' },
   { path: '/get-started', label: 'Get started', slug: 'get-started' },
+  { path: '/industries/consulting-advisory', label: 'Industry — Consulting', slug: 'industry-consulting' },
   { path: '/services/bookkeeping', label: 'Service — Bookkeeping', slug: 'service-bookkeeping' },
   {
     path: '/services/full-service-accounting',

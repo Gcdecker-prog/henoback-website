@@ -18,17 +18,25 @@ type EditorialPillar = {
   href: string;
 };
 
+type IndustryLink = {
+  name: string;
+  href: string;
+  slug: string;
+};
+
 type HomeEditorialBandProps = {
   id: string;
   headline: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
   className?: string;
   sectionClassName?: string;
   pillars?: readonly EditorialPillar[];
   intro?: string;
   industries?: readonly string[];
+  industryLinks?: readonly IndustryLink[];
   imageObjectPosition?: string;
+  visual?: React.ReactNode;
 };
 
 /** Split band — copy left, scroll-linked image right (no outer chrome) */
@@ -42,7 +50,9 @@ export function HomeEditorialBand({
   pillars,
   intro,
   industries,
+  industryLinks,
   imageObjectPosition = '50% 42%',
+  visual,
 }: HomeEditorialBandProps) {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
@@ -113,7 +123,38 @@ export function HomeEditorialBand({
                 </motion.ul>
               )}
 
-              {industries && (
+              {industryLinks && (
+                <motion.div
+                  className="mt-6 sm:mt-7"
+                  initial={reduce ? false : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.65, delay: 0.12, ease: motionEase }}
+                >
+                  <p className="text-[0.9375rem] font-medium text-neutral-800">
+                    Choose your sector:
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {industryLinks.map((item) => (
+                      <li key={item.slug}>
+                        <Link
+                          href={item.href}
+                          data-industry={item.slug}
+                          className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200/80 bg-white/80 px-4 py-3 text-[0.9375rem] font-medium text-neutral-800 transition-[border-color,box-shadow] hover:border-heno-orange-500/25 hover:shadow-[0_8px_24px_-12px_rgba(242,120,48,0.1)]"
+                        >
+                          <span>{item.name}</span>
+                          <ArrowRight
+                            className="size-3.5 shrink-0 text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-heno-orange-500"
+                            aria-hidden
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+
+              {industries && !industryLinks && (
                 <motion.div
                   className="mt-6 sm:mt-7"
                   initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -156,24 +197,30 @@ export function HomeEditorialBand({
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.85, delay: 0.06, ease: motionEase }}
             >
-              <motion.div
-                className="absolute inset-0 will-change-transform"
-                style={
-                  scroll.motionEnabled
-                    ? { y: scroll.imageY, scale: scroll.imageScale }
-                    : undefined
-                }
-              >
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: imageObjectPosition }}
-                  sizes="(max-width: 1024px) 100vw, 44vw"
-                  quality={90}
-                />
-              </motion.div>
+              {visual ? (
+                <div className="flex h-full min-h-[280px] items-center p-4 sm:p-6 lg:min-h-[32rem]">
+                  {visual}
+                </div>
+              ) : imageSrc && imageAlt ? (
+                <motion.div
+                  className="absolute inset-0 will-change-transform"
+                  style={
+                    scroll.motionEnabled
+                      ? { y: scroll.imageY, scale: scroll.imageScale }
+                      : undefined
+                  }
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt}
+                    fill
+                    className="object-cover"
+                    style={{ objectPosition: imageObjectPosition }}
+                    sizes="(max-width: 1024px) 100vw, 44vw"
+                    quality={90}
+                  />
+                </motion.div>
+              ) : null}
             </motion.div>
         </div>
       </Container>

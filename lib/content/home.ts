@@ -41,33 +41,42 @@ export const homeHero = {
     lead: 'Most firms upgrade their system.',
     follow: 'Very few fix the way it works.',
   },
-  primaryCta: 'Explore how it works',
-  primaryCtaHref: '/services',
-  secondaryCta: 'See what your back office is missing',
+  primaryCta: 'See Your Maturity',
+  secondaryCta: 'Explore how it works',
+  secondaryCtaHref: '/services',
 } as const;
 
-/** Below hero — credentials + alignment story (Heather / Why Heno) */
+/** Skimmable solution cards — link to services anchors for heatmap tracking */
+export const homeSolutionCards = [
+  {
+    id: 'clean-data',
+    title: 'It starts with clean, consistent data',
+    body: 'When your financial data is inconsistent, everything built on top of it breaks. We make sure your numbers are structured, reliable, and usable.',
+    href: '/services?utm_content=home-solution-clean-data#accounting-alignment',
+  },
+  {
+    id: 'project-firms',
+    title: 'Designed for how project-based firms operate',
+    body: 'Revenue, delivery, and accounting are connected\u2014so your reporting reflects how your business really runs.',
+    href: '/services?utm_content=home-solution-project-firms#reporting-visibility',
+  },
+  {
+    id: 'reliable-system',
+    title: 'A back office that works the same way\u2014every time',
+    body: 'No more workarounds, inconsistent processes, or one-off solutions. Just a system you can rely on.',
+    href: '/services?utm_content=home-solution-reliable-system#operational-consistency',
+  },
+] as const;
+
+/** Below hero — alignment story (Heather / Why Heno) */
 export const homeWhySection = {
-  stats: [
-    { value: '20+ years', label: 'Proven accounting experience' },
-    { value: 'US-based team' },
-    { value: 'Project-based firms', label: 'Built for how you bill and deliver' },
+  credentials: [
+    'US-based team',
+    '20+ years',
+    'Project-based firms',
   ] as const,
   headline: 'Most back offices don\u2019t break\u2014they drift out of alignment',
-  pillars: [
-    {
-      title: 'It starts with clean, consistent data',
-      body: 'When your financial data is inconsistent, everything built on top of it breaks. We make sure your numbers are structured, reliable, and usable.',
-    },
-    {
-      title: 'Designed for how project-based firms operate',
-      body: 'Revenue, delivery, and accounting are connected\u2014so your reporting reflects how your business really runs.',
-    },
-    {
-      title: 'A back office that works the same way\u2014every time',
-      body: 'No more workarounds, inconsistent processes, or one-off solutions. Just a system you can rely on.',
-    },
-  ] as const,
+  eyebrow: 'Why it matters',
   closing: {
     lead: 'Most companies try to fix this by adding people.',
     follow: 'The real fix is how the system works.',
@@ -107,19 +116,101 @@ export const homeAlignmentSection = {
   imageAlt: 'Secure, integrated financial systems supporting back office alignment',
 } as const;
 
-/** Homepage — project-based firms + sector context (no dedicated industries hub) */
+/** Clickable alignment cards — synced to AlignmentSystemVisual */
+export const homeAlignmentCards = [
+  {
+    id: 'financial-foundation',
+    title: 'Financial Foundation',
+    body: 'Reliable accounting operations built around clean, usable financial data.',
+    href: '/services?utm_content=home-alignment-foundation#accounting-alignment',
+  },
+  {
+    id: 'visibility-reporting',
+    title: 'Visibility & Reporting',
+    body: 'Reporting structured around how project-based firms operate.',
+    href: '/services?utm_content=home-alignment-reporting#reporting-visibility',
+  },
+  {
+    id: 'back-office-ops',
+    title: 'Back Office Operations',
+    body: 'Processes and workflows that reduce inconsistency and eliminate workarounds.',
+    href: '/services?utm_content=home-alignment-operations#operational-consistency',
+  },
+  {
+    id: 'strategic-support',
+    title: 'Strategic Financial Support',
+    body: 'Forecasting, planning, and financial insight designed to support decision-making.',
+    href: '/services?utm_content=home-alignment-strategic#strategic-insight',
+  },
+] as const;
+
+export const homeAlignmentVisual = {
+  eyebrow: 'What you get',
+  title: 'The outcome at each layer',
+  summary: 'Hover a layer on the left to see what changes when that part of your back office is aligned.',
+} as const;
+
+export type AlignmentOutcome = {
+  id: string;
+  headline: string;
+  subline: string;
+  metrics: readonly { label: string; value: string }[];
+  visual: 'foundation' | 'visibility' | 'operations' | 'strategic';
+};
+
+export const homeAlignmentOutcomes: readonly AlignmentOutcome[] = [
+  {
+    id: 'financial-foundation',
+    headline: 'Books you can close with confidence',
+    subline: 'Structured data that holds up under scrutiny — not spreadsheets patched at month-end.',
+    metrics: [
+      { label: 'Close accuracy', value: '99%+' },
+      { label: 'Reconciliation', value: 'Automated' },
+      { label: 'Data drift', value: 'None' },
+    ],
+    visual: 'foundation',
+  },
+  {
+    id: 'visibility-reporting',
+    headline: 'Margin by project — not just at month-end',
+    subline: 'Reporting that reflects how you bill, deliver, and recognize revenue.',
+    metrics: [
+      { label: 'Project margin', value: 'In view' },
+      { label: 'WIP visibility', value: 'Live' },
+      { label: 'Report lag', value: 'Same day' },
+    ],
+    visual: 'visibility',
+  },
+  {
+    id: 'back-office-ops',
+    headline: 'The same workflow — every close',
+    subline: 'No more one-off fixes. Processes that run the same way across teams and entities.',
+    metrics: [
+      { label: 'Process variance', value: 'Low' },
+      { label: 'Workarounds', value: 'Gone' },
+      { label: 'Handoffs', value: 'Standard' },
+    ],
+    visual: 'operations',
+  },
+  {
+    id: 'strategic-support',
+    headline: 'Forecast and actuals on the same page',
+    subline: 'Planning built on numbers you trust — so growth decisions aren\u2019t guesswork.',
+    metrics: [
+      { label: 'Forecast tie-out', value: 'Tight' },
+      { label: 'Planning cycle', value: 'Rolling' },
+      { label: 'Board-ready', value: 'Yes' },
+    ],
+    visual: 'strategic',
+  },
+] as const;
+
+/** Homepage — project-based firms routed to industry landing pages */
 export const homeIndustriesBand = {
   headline: 'Built for project-based firms',
   intro:
-    'Heno BackOffice supports firms where revenue, delivery, and financial operations are tightly connected\u2014and where reliable insight matters.',
-  industries: [
-    'Consulting & Advisory',
-    'Engineering & Architecture',
-    'Creative & Marketing Agencies',
-    'Technology & IT Services',
-    'Government Contracting',
-  ] as const,
-  imageAlt: 'Professional working with project financials on a laptop',
+    'Heno BackOffice supports firms where revenue, delivery, and financial operations are tightly connected\u2014and where reliable insight matters. Choose your sector to see how we align the back office for your industry.',
+  imageAlt: 'Project-based firm financial visibility',
 } as const;
 
 export const homeClosingCta = {

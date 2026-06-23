@@ -106,8 +106,8 @@ export const servicesPage = {
         items: ['standardizes workflows', 'automates processes', 'ensures repeatability'],
       },
       outcome: 'A back office that works the same way every time',
-      visualLabel: 'Workflow automation',
-      visualComponent: 'workflow' as const,
+      visualLabel: 'Monthly close runbook',
+      visualComponent: 'operations' as const,
     },
     {
       id: 'strategic-insight',

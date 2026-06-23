@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
-import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
-import { DetailHero } from '@/components/marketing/DetailHero';
+import { CaseStudyHeroDashboard } from '@/components/marketing/CaseStudyHeroDashboard';
+import { CaseStudyStoryDashboard } from '@/components/marketing/CaseStudyStoryDashboard';
+import { CaseStudyTestimonial } from '@/components/marketing/CaseStudyTestimonial';
 import type { CaseStudy } from '@/lib/content/case-studies';
-import { primaryCta } from '@/lib/site-config';
-import { pageCtaUrl } from '@/lib/gtm-links';
-import { glass, glassStat } from '@/lib/ui/glass';
+import { brandUi } from '@/lib/ui/brand-ui';
 import { cn } from '@/lib/cn';
 
 type CaseStudyPageProps = {
@@ -15,87 +14,40 @@ type CaseStudyPageProps = {
 export function CaseStudyPageContent({ study }: CaseStudyPageProps) {
   return (
     <>
-      <DetailHero
-        eyebrow="Case Studies"
-        title={study.title}
-        summary={study.excerpt}
-        imageSrc={study.heroImage}
-        imageAlt={`${study.clientName} case study`}
-      >
-        <p className="text-sm text-neutral-300">
-          <a
-            href={study.clientUrl}
-            className="underline decoration-heno-orange-400 underline-offset-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {study.clientName}
-          </a>
-          {study.clientSince ? ` · Client since ${study.clientSince}` : null}
-          {' · '}
-          {study.industry}
-        </p>
-      </DetailHero>
+      <section className={cn('border-b border-neutral-100 py-14 sm:py-20', brandUi.sectionTint)}>
+        <Container>
+          <CaseStudyHeroDashboard study={study} />
+        </Container>
+      </section>
 
-      <Container className="py-14 sm:py-20">
-        <ul className="grid gap-4 sm:grid-cols-3">
-          {study.metrics.map((m) => (
-            <li key={m.label} className={cn(glassStat, 'px-6 py-8 text-center')}>
-              <p className="text-2xl font-semibold text-heno-orange-600">{m.value}</p>
-              <p className="mt-1 text-sm text-neutral-600">{m.label}</p>
-            </li>
-          ))}
-        </ul>
-
-        <section className="mt-14 max-w-3xl">
-          <h2 className="text-h1 font-semibold text-neutral-900">Client overview</h2>
-          <p className="mt-4 text-body-lg text-neutral-600">{study.coreMessage}</p>
-        </section>
-
-        <section className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div className={cn(glass(), 'p-8')}>
-            <h2 className="text-h2 font-semibold text-neutral-900">The challenge</h2>
-            <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.challenge.financial}</p>
-            <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.challenge.businessImpact}</p>
+      <section className="bg-white py-14 sm:py-20">
+        <Container>
+          <div className="mx-auto mb-12 max-w-4xl">
+            <p className={cn('text-xs font-semibold uppercase tracking-[0.2em]', brandUi.eyebrow)}>
+              The story
+            </p>
+            <h2 className="mt-3 text-display-md font-semibold tracking-tight text-neutral-900">
+              {study.storyHeadline}
+            </h2>
+            <p className="mt-4 max-w-2xl text-body text-neutral-600">{study.storyIntro}</p>
           </div>
-          <div className={cn(glass(), 'p-8')}>
-            <h2 className="text-h2 font-semibold text-neutral-900">Why Heno worked</h2>
-            <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.whyUs.vsInHouse}</p>
-            <p className="mt-4 text-sm leading-relaxed text-neutral-600">{study.whyUs.strengths}</p>
+
+          <CaseStudyStoryDashboard study={study} />
+
+          <div className="mx-auto mt-16 max-w-4xl sm:mt-20">
+            <CaseStudyTestimonial study={study} />
           </div>
-        </section>
 
-        <section className="mt-12">
-          <h2 className="text-h1 font-semibold text-neutral-900">Operational outcomes</h2>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-            {[
-              ['Accuracy', study.outcomes.accuracy],
-              ['Time saved', study.outcomes.timeSaved],
-              ['Cost savings', study.outcomes.costSavings],
-              ['Better decisions', study.outcomes.decisions],
-              ['Scaled without headcount', study.outcomes.scaled],
-              ['Peace of mind', study.outcomes.peaceOfMind],
-            ].map(([label, body]) => (
-              <li key={label} className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
-                <h3 className="font-semibold text-neutral-900">{label}</h3>
-                <p className="mt-2 text-sm text-neutral-600">{body}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <div className="mt-12 flex flex-col items-start gap-4">
-          <GtmOutboundButton href={pageCtaUrl(`case-study-${study.slug}`, 'consultation')} size="lg">
-            {primaryCta.label}
-          </GtmOutboundButton>
-          <Link
-            href="/case-studies"
-            className="inline-flex h-12 items-center text-sm font-medium text-heno-orange-600 hover:text-heno-orange-700"
-          >
-            ← All case studies
-          </Link>
-        </div>
-      </Container>
+          <div className="mx-auto mt-14 max-w-4xl border-t border-neutral-100 pt-10">
+            <Link
+              href="/case-studies"
+              className="inline-flex h-12 items-center text-sm font-medium text-heno-orange-600 hover:text-heno-orange-700"
+            >
+              ← All case studies
+            </Link>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

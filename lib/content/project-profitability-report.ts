@@ -3,7 +3,9 @@
  */
 
 export const projectProfitabilityMeta = {
-  packageTitle: 'Project Accounting',
+  eyebrow: 'Visibility & reporting',
+  title: 'Margin by project',
+  subtitle: 'Inception-to-date actuals · Active engagements',
   reportTitle: 'Project Profitability Summary',
   asOf: 'As of today',
   filters: 'Project summary · All locations · Active engagements',

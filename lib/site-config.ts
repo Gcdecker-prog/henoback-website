@@ -43,7 +43,7 @@ export const primaryCta = {
 } as const;
 
 export const headerCta = {
-  label: 'Get your back office assessment',
+  label: 'See Your Maturity',
 } as const;
 
 export const secondaryCta = {

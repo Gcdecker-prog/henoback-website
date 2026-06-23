@@ -7,10 +7,10 @@ import {
   DashboardSnapshotFrame,
   DashboardSnapshotPlaceholder,
 } from '@/components/marketing/DashboardSnapshotFrame';
+import { OperationsConsistencyPreview } from '@/components/marketing/OperationsConsistencyPreview';
 import { PlanningForecastPreview } from '@/components/marketing/PlanningForecastPreview';
 import { ProjectProfitabilityPreview } from '@/components/marketing/ProjectProfitabilityPreview';
 import { StandardPlPreview } from '@/components/marketing/StandardPlPreview';
-import { WorkflowContractsPreview } from '@/components/marketing/WorkflowContractsPreview';
 import {
   editorialPanelBlock,
   editorialPanelStagger,
@@ -28,7 +28,7 @@ type DetailSection = {
   whatHenoDoes: { label: string; items: readonly string[] };
   outcome: string;
   visualLabel: string;
-  visualComponent?: 'standard-pl' | 'project-profitability' | 'workflow' | 'planning';
+  visualComponent?: 'standard-pl' | 'project-profitability' | 'operations' | 'planning';
   visualCaption?: string;
   visualImageSrc?: string;
   visualImageAlt?: string;
@@ -105,9 +105,8 @@ function DetailListBlock({
 export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSectionProps) {
   const reduce = useReducedMotion();
   const isReversed = index % 2 === 1;
-  const isStackedVisual = section.visualComponent === 'workflow';
-  const copyEnterX = isReversed && !isStackedVisual ? 40 : -40;
-  const visualEnterX = isReversed && !isStackedVisual ? -40 : 40;
+  const copyEnterX = isReversed ? 40 : -40;
+  const visualEnterX = isReversed ? -40 : 40;
 
   return (
     <section
@@ -119,17 +118,11 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
       aria-labelledby={`${section.id}-heading`}
     >
       <Container>
-        <div
-          className={cn(
-            isStackedVisual
-              ? 'flex flex-col gap-10 lg:gap-12'
-              : 'grid items-start gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16',
-          )}
-        >
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
           <motion.div
             className={cn(
               'min-w-0 self-start lg:sticky lg:top-28',
-              isReversed && !isStackedVisual && 'lg:order-2',
+              isReversed && 'lg:order-2',
             )}
             initial={reduce ? false : 'hidden'}
             whileInView="visible"
@@ -171,8 +164,7 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
           <motion.div
             className={cn(
               'relative min-w-0 w-full self-start',
-              isStackedVisual && 'lg:max-w-none',
-              isReversed && !isStackedVisual && 'lg:order-1',
+              isReversed && 'lg:order-1',
             )}
             initial={reduce ? false : 'hidden'}
             whileInView="visible"
@@ -183,8 +175,8 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
               <StandardPlPreview />
             ) : section.visualComponent === 'project-profitability' ? (
               <ProjectProfitabilityPreview />
-            ) : section.visualComponent === 'workflow' ? (
-              <WorkflowContractsPreview className="w-full" />
+            ) : section.visualComponent === 'operations' ? (
+              <OperationsConsistencyPreview />
             ) : section.visualComponent === 'planning' ? (
               <PlanningForecastPreview />
             ) : section.visualImageSrc ? (

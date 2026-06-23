@@ -5,7 +5,9 @@
  */
 
 export const standardPlReportMeta = {
-  packageTitle: 'Monthly Reporting Package',
+  eyebrow: 'Financial foundation',
+  title: 'P&L at a glance',
+  subtitle: 'YTD actuals · All locations · All projects',
   reportTitle: 'Profit and Loss-Summary YTD by Month',
   asOf: '12/31/2041',
   locationFilter: '1-Location Summary',

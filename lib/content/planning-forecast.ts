@@ -3,7 +3,9 @@
  */
 
 export const planningForecastMeta = {
-  packageTitle: 'Strategic Planning',
+  eyebrow: 'Strategic insight',
+  title: 'Forecast vs. actual',
+  subtitle: 'Rolling plan · Revenue, labor, and delivery',
   reportTitle: 'Forecast vs. Actual · Connected Plan',
   asOf: 'Rolling 12 months',
   filters: 'Revenue · Labor · Delivery · Capital deployment',

@@ -76,20 +76,19 @@ export function HeroBodyCopy({ className }: { className?: string }) {
         transition={heroDelay(heroAt.ctas)}
       >
         <div className="flex flex-col items-center gap-2.5 sm:flex-row sm:flex-wrap sm:justify-center lg:items-start lg:justify-start">
-          <Link
-            href={homeHero.primaryCtaHref}
-            className="inline-flex h-11 w-full items-center justify-center rounded-full bg-heno-blue-900 px-7 text-sm font-semibold text-white shadow-[0_10px_28px_-10px_rgba(27,54,93,0.35)] transition-colors hover:bg-heno-blue-700 sm:w-auto"
+          <GtmOutboundButton
+            href={assessmentUrl({ content: 'hero-see-maturity' })}
+            size="lg"
+            className="h-11 w-full rounded-full px-7 text-sm font-semibold sm:w-auto"
           >
             {homeHero.primaryCta}
-          </Link>
-          <GtmOutboundButton
-            href={assessmentUrl({ content: 'hero-gap-assessment' })}
-            variant="secondary"
-            size="lg"
-            className="h-11 w-full rounded-full border-neutral-200/90 bg-white px-7 text-sm font-medium text-neutral-600 hover:border-heno-orange-500/30 hover:text-neutral-800 sm:w-auto"
+          </GtmOutboundButton>
+          <Link
+            href={homeHero.secondaryCtaHref}
+            className="inline-flex h-11 w-full items-center justify-center rounded-full border border-neutral-200/90 bg-white px-7 text-sm font-medium text-neutral-600 transition-colors hover:border-heno-orange-500/30 hover:text-neutral-800 sm:w-auto"
           >
             {homeHero.secondaryCta}
-          </GtmOutboundButton>
+          </Link>
         </div>
       </motion.div>
     </div>
