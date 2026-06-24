@@ -64,12 +64,10 @@ export function consultationIntakeUrl(utm?: GtmUtmParams, ctx?: AttributionConte
   );
 }
 
+const GTM_ASSESSMENT_PATH = process.env.NEXT_PUBLIC_GTM_ASSESSMENT_PATH ?? '/';
+
 export function assessmentUrl(utm?: GtmUtmParams, ctx?: AttributionContext): string {
-  return buildUrl(
-    '/journeys/outsource',
-    { content: 'assessment', ...utm },
-    ctx,
-  );
+  return buildUrl(GTM_ASSESSMENT_PATH, { content: 'assessment', ...utm }, ctx);
 }
 
 export function pageCtaUrl(

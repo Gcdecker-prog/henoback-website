@@ -22,7 +22,7 @@ export function ClosingCtaBand() {
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-neutral-300">{homeClosingCta.body}</p>
           <GtmOutboundButton
-            href={pageCtaUrl('home', 'consultation', { content: 'footer-cta' })}
+            href={pageCtaUrl('home', 'assessment', { content: 'footer-cta' })}
             size="lg"
             className="mt-8"
           >

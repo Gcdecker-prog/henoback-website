@@ -1,8 +1,32 @@
 # HenoBack Office: validate, optional commit, push main -> Vercel (GitHub integration).
+# Run from repo root:  .\deploy.cmd "Your commit message"
+# Do NOT paste this file into a PowerShell prompt — $PSScriptRoot will be empty.
 param([string] $Message)
 
 $ErrorActionPreference = 'Stop'
-Set-Location (Resolve-Path (Join-Path $PSScriptRoot '..'))
+
+function Get-RepoRoot {
+  if ($PSScriptRoot) {
+    return (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+  }
+  if ($MyInvocation.MyCommand.Path) {
+    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    return (Resolve-Path (Join-Path $scriptDir '..')).Path
+  }
+  $gitRoot = git rev-parse --show-toplevel 2>$null
+  if ($gitRoot) {
+    return (Resolve-Path $gitRoot).Path
+  }
+  throw @'
+Run deploy via the wrapper (not by pasting this script into PowerShell):
+
+  .\deploy.cmd "Your commit message"
+
+From repo root, with uncommitted changes.
+'@
+}
+
+Set-Location (Get-RepoRoot)
 
 $branch = git branch --show-current
 if ($branch -ne 'main') {

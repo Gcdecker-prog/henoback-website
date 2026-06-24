@@ -32,7 +32,7 @@ export default function GetStartedPage() {
 
       <section className="bg-neutral-50/50 py-12 sm:py-16 lg:py-20">
         <Container>
-          <GetStartedPaths consultation={paths.consultation} />
+          <GetStartedPaths assessment={paths.assessment} consultation={paths.consultation} />
 
           <Reveal>
             <div className={cn(glass(), 'mx-auto mt-10 max-w-2xl px-6 py-5 text-center sm:px-8')}>

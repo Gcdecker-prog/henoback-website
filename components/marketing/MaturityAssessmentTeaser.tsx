@@ -4,12 +4,12 @@ import { Suspense, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MaturityResponseDashboard } from '@/components/marketing/MaturityResponseDashboard';
-import {
-  maturityAssessmentTeaser,
-  maturityResponses,
-} from '@/lib/content/maturity-assessment';
+import { maturityResponses } from '@/lib/content/maturity-assessment';
 import { heroAt, heroDelay, heroGlassPhoto } from '@/lib/motion/hero-timeline';
 import { useHeroEntrance } from '@/lib/motion/use-hero-entrance';
+import { GtmOutboundLink } from '@/components/gtm/GtmOutboundLink';
+import { maturityAssessmentTeaser } from '@/lib/content/maturity-assessment';
+import { assessmentUrl } from '@/lib/gtm-links';
 import { brandUi } from '@/lib/ui/brand-ui';
 import { cn } from '@/lib/cn';
 
@@ -134,7 +134,12 @@ export function MaturityAssessmentTeaser({ className }: MaturityAssessmentTeaser
           </Suspense>
 
           {step === 0 ? (
-            <p className="mt-4 text-center text-[11px] leading-relaxed text-neutral-400">{footer}</p>
+            <GtmOutboundLink
+              href={assessmentUrl({ content: 'hero-teaser-footer' })}
+              className="mt-4 block text-center text-[11px] font-medium leading-relaxed text-neutral-400 transition-colors hover:text-heno-orange-600"
+            >
+              {footer} →
+            </GtmOutboundLink>
           ) : null}
         </div>
       </div>

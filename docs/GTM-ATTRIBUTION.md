@@ -43,7 +43,9 @@ Campaign email/ad  →  henobackoffice.com/about-us?utm_medium=linkedin&utm_camp
 | `utm_campaign` | `q1_consulting_push` | Override default for a specific initiative |
 | `utm_term` | `cfo-outsourcing` | Paid keyword (if needed) |
 
-Implemented in `lib/gtm-links.ts` via `gtmAppUrl()`, `consultationIntakeUrl()`, `pageCtaUrl()`.
+Implemented in `lib/gtm-links.ts` via `gtmAppUrl()`, `assessmentUrl()`, `consultationIntakeUrl()`, `pageCtaUrl()`.
+
+GTM-side implementation prompt: `docs/GTM-ENGINE-CURSOR-PROMPT.md`.
 
 ## Campaign playbook (internal)
 
@@ -64,8 +66,22 @@ Add **your own** `utm_*` on inbound links if the channel requires it (e.g. `?utm
 ## Env
 
 ```
-NEXT_PUBLIC_GTM_APP_URL=https://<production-gtm-host>
+NEXT_PUBLIC_GTM_APP_URL=https://go.ifiprofessionals.com
+NEXT_PUBLIC_GTM_ASSESSMENT_PATH=/
+NEXT_PUBLIC_GTM_INTAKE_PATH=/intake
 ```
+
+### Custom domain for GTM (`go.ifiprofessionals.com`)
+
+You do **not** buy a new domain. If you already own `ifiprofessionals.com` (e.g. via GoDaddy):
+
+1. In **Vercel** → GTM Sales Engine project → **Settings → Domains** → add `go.ifiprofessionals.com`.
+2. In **GoDaddy** (or wherever DNS is hosted) → add a **CNAME** record: `go` → `cname.vercel-dns.com` (Vercel shows the exact target).
+3. Set `NEXT_PUBLIC_GTM_APP_URL` on **both** this marketing site and production env to `https://go.ifiprofessionals.com` (no trailing slash).
+
+Keep `gtm-sales-engine.vercel.app` for staging; use the branded subdomain in production links and ads.
+
+**Assessment vs intake:** All forms and the maturity tool live on GTM only. This site never submits leads — it only links out via `GtmOutboundLink` / `GtmOutboundButton` with UTMs.
 
 ## Do not
 

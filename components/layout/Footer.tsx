@@ -4,7 +4,7 @@ import { Container } from '@/components/layout/Container';
 import { GtmOutboundLink } from '@/components/gtm/GtmOutboundLink';
 import { navItems } from '@/lib/nav';
 import { primaryCta, siteConfig } from '@/lib/site-config';
-import { consultationIntakeUrl } from '@/lib/gtm-links';
+import { assessmentUrl } from '@/lib/gtm-links';
 
 export function Footer() {
   return (
@@ -60,7 +60,7 @@ export function Footer() {
             <Suspense
               fallback={
                 <a
-                  href={consultationIntakeUrl({ content: 'footer-link' })}
+                  href={assessmentUrl({ content: 'footer-link' })}
                   className="mt-4 inline-flex text-sm font-medium text-heno-orange-600"
                 >
                   {primaryCta.label} →
@@ -68,7 +68,7 @@ export function Footer() {
               }
             >
               <GtmOutboundLink
-                href={consultationIntakeUrl({ content: 'footer-link' })}
+                href={assessmentUrl({ content: 'footer-link' })}
                 className="mt-4 inline-flex text-sm font-medium text-heno-orange-600 hover:text-heno-orange-700"
               >
                 {primaryCta.label} →
