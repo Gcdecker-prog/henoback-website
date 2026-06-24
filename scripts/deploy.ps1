@@ -43,8 +43,11 @@ if (git status --porcelain) {
 
 Write-Host "`n==> lint + typecheck + build" -ForegroundColor Cyan
 npm run lint
+if ($LASTEXITCODE -ne 0) { throw "Lint failed (exit $LASTEXITCODE)" }
 npm run typecheck
+if ($LASTEXITCODE -ne 0) { throw "Typecheck failed (exit $LASTEXITCODE)" }
 npm run build
+if ($LASTEXITCODE -ne 0) { throw "Build failed (exit $LASTEXITCODE)" }
 
 Write-Host "`n==> push origin main" -ForegroundColor Cyan
 git push origin main

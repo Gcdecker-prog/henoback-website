@@ -134,12 +134,25 @@ export function MaturityAssessmentTeaser({ className }: MaturityAssessmentTeaser
           </Suspense>
 
           {step === 0 ? (
-            <GtmOutboundLink
-              href={assessmentUrl({ content: 'hero-teaser-footer' })}
-              className="mt-4 block text-center text-[11px] font-medium leading-relaxed text-neutral-400 transition-colors hover:text-heno-orange-600"
+            <Suspense
+              fallback={
+                <a
+                  href={assessmentUrl({ content: 'hero-teaser-footer' })}
+                  className="mt-4 block text-center text-[11px] font-medium leading-relaxed text-neutral-400"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {footer} →
+                </a>
+              }
             >
-              {footer} →
-            </GtmOutboundLink>
+              <GtmOutboundLink
+                href={assessmentUrl({ content: 'hero-teaser-footer' })}
+                className="mt-4 block text-center text-[11px] font-medium leading-relaxed text-neutral-400 transition-colors hover:text-heno-orange-600"
+              >
+                {footer} →
+              </GtmOutboundLink>
+            </Suspense>
           ) : null}
         </div>
       </div>
