@@ -17,7 +17,7 @@ export const metadata: Metadata = createPageMetadata({
   path: '/services',
 });
 
-const CTA_HREF = pageCtaUrl('services', 'consultation', { content: 'services-assessment-cta' });
+const CTA_HREF = pageCtaUrl('services', 'assessment', { content: 'services-assessment-cta' });
 
 export default function ServicesPage() {
   const { hero, pillars, detailSections, cta } = servicesPage;

@@ -17,7 +17,7 @@ export const metadata: Metadata = createPageMetadata({
   path: '/case-studies',
 });
 
-const CTA_HREF = pageCtaUrl('case-studies', 'consultation', { content: 'case-studies-cta' });
+const CTA_HREF = pageCtaUrl('case-studies', 'assessment', { content: 'case-studies-cta' });
 
 export default function CaseStudiesIndexPage() {
   const published = caseStudies.filter((c) => c.published);
