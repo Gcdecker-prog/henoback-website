@@ -29,6 +29,7 @@ export function glass(className?: string) {
   return cn(glassPanel, className);
 }
 
+/** Default ambient orbs for pages that do not use MarketingPageShell */
 export function ambientPageGlow() {
   return cn(
     'pointer-events-none fixed inset-0 -z-10 overflow-hidden',

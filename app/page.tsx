@@ -12,7 +12,9 @@ import { HomeIndustriesBand } from '@/components/marketing/HomeIndustriesBand';
 import { HomeWhySection } from '@/components/marketing/HomeWhySection';
 import { PlatformMarquee } from '@/components/marketing/PlatformMarquee';
 import { FounderQuoteCard } from '@/components/marketing/FounderQuoteCard';
-import { ClosingCtaBand } from '@/components/marketing/ClosingCtaBand';
+import { VisibilityModelBand } from '@/components/marketing/VisibilityModelBand';
+import { MarketingPageShell } from '@/components/marketing/MarketingPageShell';
+import { FlowBand } from '@/components/marketing/FlowBand';
 import { Reveal } from '@/components/motion/Reveal';
 import { caseStudies } from '@/lib/content/case-studies';
 import { homeMeta } from '@/lib/content/home';
@@ -29,19 +31,28 @@ export default function HomePage() {
   const featuredStudies = caseStudies.filter((c) => c.published).slice(0, 2);
 
   return (
-    <>
+    <MarketingPageShell theme="home">
       <JsonLd data={webSiteJsonLd()} />
-      <HomeOpening>
-        <HomeHero />
-      </HomeOpening>
 
-      <HomeWhySection />
+      <FlowBand stage={0} as="div" className="bg-white">
+        <HomeOpening>
+          <HomeHero />
+        </HomeOpening>
+      </FlowBand>
 
-      <HomeAlignmentSection />
+      <FlowBand stage={1} as="div">
+        <HomeWhySection />
+      </FlowBand>
 
-      <HomeIndustriesBand />
+      <FlowBand stage={2} as="div">
+        <HomeAlignmentSection />
+      </FlowBand>
 
-      <section className="bg-white py-16 sm:py-20">
+      <FlowBand stage={3} as="div">
+        <HomeIndustriesBand />
+      </FlowBand>
+
+      <FlowBand stage={4} className="py-16 sm:py-20">
         <Container>
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-heno-orange-600">
@@ -96,17 +107,19 @@ export default function HomePage() {
             </Link>
           </Reveal>
         </Container>
-      </section>
+      </FlowBand>
 
-      <PlatformMarquee />
+      <FlowBand stage={5} as="div">
+        <PlatformMarquee />
+      </FlowBand>
 
-      <section className="border-t border-neutral-100 bg-white py-16 sm:py-20">
+      <FlowBand stage={0} className="border-t border-neutral-100 py-16 sm:py-20">
         <Container>
           <FounderQuoteCard />
         </Container>
-      </section>
+      </FlowBand>
 
-      <ClosingCtaBand />
-    </>
+      <VisibilityModelBand />
+    </MarketingPageShell>
   );
 }

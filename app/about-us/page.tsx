@@ -4,6 +4,7 @@ import { AboutPageHero } from '@/components/marketing/AboutPageHero';
 import { AboutExcellenceBand } from '@/components/marketing/AboutExcellenceBand';
 import { aboutUsPage } from '@/lib/content/about-us';
 import { MarketingPageShell } from '@/components/marketing/MarketingPageShell';
+import { FlowBand } from '@/components/marketing/FlowBand';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'About Us',
@@ -16,16 +17,20 @@ export default function AboutUsPage() {
   const { hero, stats, whyDifferent, heroImage } = aboutUsPage;
 
   return (
-    <MarketingPageShell>
-      <AboutPageHero
-        headline={hero.headline}
-        paragraphs={hero.paragraphs}
-        imageSrc={heroImage.imageSrc}
-        imageAlt={heroImage.imageAlt}
-        stats={stats}
-      />
+    <MarketingPageShell theme="about">
+      <FlowBand stage={0} as="div">
+        <AboutPageHero
+          headline={hero.headline}
+          paragraphs={hero.paragraphs}
+          imageSrc={heroImage.imageSrc}
+          imageAlt={heroImage.imageAlt}
+          stats={stats}
+        />
+      </FlowBand>
 
-      <AboutExcellenceBand whyDifferent={whyDifferent} />
+      <FlowBand stage={1} as="div">
+        <AboutExcellenceBand whyDifferent={whyDifferent} />
+      </FlowBand>
     </MarketingPageShell>
   );
 }

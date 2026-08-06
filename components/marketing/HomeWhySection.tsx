@@ -16,8 +16,7 @@ export function HomeWhySection({ className }: { className?: string }) {
   return (
     <section
       className={cn(
-        'border-t border-neutral-100 pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14',
-        brandUi.sectionTint,
+        'border-t border-neutral-100 bg-transparent pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14',
         className,
       )}
       aria-labelledby="home-why-heading"

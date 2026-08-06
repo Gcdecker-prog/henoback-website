@@ -111,10 +111,7 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
   return (
     <section
       id={section.id}
-      className={cn(
-        'scroll-mt-24 border-t border-neutral-100/80 py-14 sm:py-16 lg:py-20',
-        isReversed ? brandUi.sectionTintAlt : 'bg-white',
-      )}
+      className="scroll-mt-24 border-t border-heno-blue-100/70 bg-transparent py-14 sm:py-16 lg:py-20"
       aria-labelledby={`${section.id}-heading`}
     >
       <Container>

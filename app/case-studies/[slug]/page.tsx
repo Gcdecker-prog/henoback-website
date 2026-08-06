@@ -42,7 +42,7 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
           ]),
         ]}
       />
-      <MarketingPageShell>
+      <MarketingPageShell theme="caseStudies">
         <CaseStudyPageContent study={study} />
       </MarketingPageShell>
     </>

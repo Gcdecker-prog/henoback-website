@@ -28,7 +28,7 @@ export function AboutExcellenceBand({ whyDifferent }: AboutExcellenceBandProps) 
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[linear-gradient(125deg,#0a0f1a_0%,#121826_45%,#0d1117_100%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-[linear-gradient(to_top,rgba(255,255,255,0.04),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_70%_at_12%_40%,rgba(242,120,48,0.14),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_70%_at_12%_40%,rgba(74,158,196,0.16),transparent_60%)]" />
       </div>
 
       <Container className="relative">
@@ -46,7 +46,7 @@ export function AboutExcellenceBand({ whyDifferent }: AboutExcellenceBandProps) 
 
             <div className="mt-8 flex gap-4 sm:mt-10">
               <span
-                className="w-1 shrink-0 self-stretch rounded-full bg-heno-orange-500"
+                className="w-1 shrink-0 self-stretch rounded-full bg-heno-blue-400"
                 aria-hidden
               />
               <div className="min-w-0 space-y-5 sm:space-y-6">

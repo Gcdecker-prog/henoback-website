@@ -1,11 +1,26 @@
-import { ambientPageGlow } from '@/lib/ui/glass';
+'use client';
 
-/** Ambient depth behind every inner marketing page — pair with MarketingPageHero */
-export function MarketingPageShell({ children }: { children: React.ReactNode }) {
+import { PageFlowProvider } from '@/components/marketing/PageFlowContext';
+import { PageFlowAtmosphere } from '@/components/marketing/PageFlowAtmosphere';
+import type { PageThemeId } from '@/lib/ui/page-themes';
+
+type MarketingPageShellProps = {
+  children: React.ReactNode;
+  /** Soft ambient identity + scroll rhythm for this route */
+  theme?: PageThemeId;
+};
+
+/**
+ * Per-page scroll shell — spectrum progress, drifting ambient, stage context.
+ * Pair with FlowBand / MarketingPageHero for a refined route identity.
+ */
+export function MarketingPageShell({ children, theme = 'home' }: MarketingPageShellProps) {
   return (
-    <>
-      <div className={ambientPageGlow()} aria-hidden />
-      {children}
-    </>
+    <PageFlowProvider themeId={theme}>
+      <div className="relative" data-page-flow={theme}>
+        <PageFlowAtmosphere />
+        {children}
+      </div>
+    </PageFlowProvider>
   );
 }

@@ -7,6 +7,8 @@ import { Container } from '@/components/layout/Container';
 import { AboutStatCard } from '@/components/marketing/AboutStatCard';
 import type { AboutStatIconType } from '@/components/marketing/AboutStatGraphic';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
+import { pageThemes } from '@/lib/ui/page-themes';
+import { cn } from '@/lib/cn';
 
 type AboutPageHeroProps = {
   headline: string;
@@ -24,11 +26,18 @@ export function AboutPageHero({
   stats,
 }: AboutPageHeroProps) {
   const reduce = useReducedMotion();
+  const theme = pageThemes.about;
 
   return (
-    <section className="relative overflow-hidden bg-white pb-16 pt-8 sm:pb-20 sm:pt-10">
+    <section className="relative overflow-hidden bg-transparent pb-16 pt-8 sm:pb-20 sm:pt-10">
       <div
-        className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(242,120,48,0.12),transparent_70%)] blur-3xl"
+        className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full blur-3xl"
+        style={{ background: `radial-gradient(circle, ${theme.glowAccent}, transparent 70%)` }}
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -left-20 top-1/3 h-64 w-64 rounded-full blur-3xl"
+        style={{ background: `radial-gradient(circle, ${theme.glowWash}, transparent 70%)` }}
         aria-hidden
       />
 
@@ -40,7 +49,7 @@ export function AboutPageHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: motionEase }}
         >
-          <Link href="/" className="hover:text-heno-orange-600">
+          <Link href="/" className={cn('transition-colors', theme.linkHoverClass)}>
             Home
           </Link>
           <span className="mx-2 text-neutral-300" aria-hidden>
@@ -59,7 +68,7 @@ export function AboutPageHero({
             <motion.div variants={staggerItem} className="min-w-0">
               <div className="flex gap-3 sm:gap-4">
                 <span
-                  className="mt-2 w-1 shrink-0 rounded-full bg-heno-orange-500"
+                  className={cn('mt-2 w-1 shrink-0 rounded-full', theme.railClass)}
                   aria-hidden
                 />
                 <div>

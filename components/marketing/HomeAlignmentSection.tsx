@@ -14,7 +14,7 @@ export function HomeAlignmentSection() {
 
   return (
     <section
-      className="bg-white py-14 sm:py-16 lg:py-20"
+      className="bg-transparent py-14 sm:py-16 lg:py-20"
       aria-labelledby="home-alignment-heading"
     >
       <Container>

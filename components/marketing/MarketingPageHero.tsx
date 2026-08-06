@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
-import { brandHex } from '@/lib/ui/brand-colors';
-import { brandUi } from '@/lib/ui/brand-ui';
+import { pageThemes, type PageThemeId } from '@/lib/ui/page-themes';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
@@ -14,6 +13,8 @@ export type MarketingPageHeroProps = {
   subheadline?: string;
   /** Small caps line above the H1 — proof line, section label, etc. */
   eyebrow?: string;
+  /** Soft page identity for washes + accent eyebrow */
+  theme?: PageThemeId;
   className?: string;
 };
 
@@ -22,25 +23,27 @@ export function MarketingPageHero({
   headline,
   subheadline,
   eyebrow,
+  theme = 'home',
   className,
 }: MarketingPageHeroProps) {
   const reduce = useReducedMotion();
+  const t = pageThemes[theme];
 
   return (
     <section
       className={cn(
-        'relative overflow-hidden border-b border-neutral-100/80 bg-white pb-12 pt-8 sm:pb-16 sm:pt-10',
+        'relative overflow-hidden border-b border-neutral-100/80 bg-transparent pb-12 pt-8 sm:pb-16 sm:pt-10',
         className,
       )}
     >
       <div
         className="pointer-events-none absolute -left-32 top-0 h-80 w-80 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${brandHex.orange}1a, transparent 70%)` }}
+        style={{ background: `radial-gradient(circle, ${t.glowAccent}, transparent 70%)` }}
         aria-hidden
       />
       <div
         className="pointer-events-none absolute -right-16 top-1/4 h-64 w-64 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${brandHex.navy}12, transparent 70%)` }}
+        style={{ background: `radial-gradient(circle, ${t.glowWash}, transparent 70%)` }}
         aria-hidden
       />
 
@@ -52,7 +55,7 @@ export function MarketingPageHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: motionEase }}
         >
-          <Link href="/" className="hover:text-heno-orange-600">
+          <Link href="/" className={cn('transition-colors', t.linkHoverClass)}>
             Home
           </Link>
           <span className="mx-2 text-neutral-300" aria-hidden>
@@ -70,15 +73,12 @@ export function MarketingPageHero({
           {eyebrow ? (
             <motion.p
               variants={staggerItem}
-              className={cn('text-[11px] font-semibold uppercase tracking-[0.28em]', brandUi.eyebrow)}
+              className={cn('text-[11px] font-semibold uppercase tracking-[0.28em]', t.eyebrowClass)}
             >
               {eyebrow}
             </motion.p>
           ) : null}
-          <motion.h1
-            variants={staggerItem}
-            className={cnHeadline(!!eyebrow)}
-          >
+          <motion.h1 variants={staggerItem} className={cnHeadline(!!eyebrow)}>
             {headline}
           </motion.h1>
           {subheadline ? (

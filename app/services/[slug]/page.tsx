@@ -33,7 +33,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
   if (!service) notFound();
 
   return (
-    <MarketingPageShell>
+    <MarketingPageShell theme="services">
       <DetailHero
         eyebrow="Our Services"
         title={service.title}

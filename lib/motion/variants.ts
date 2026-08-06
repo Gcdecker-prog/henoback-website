@@ -2,13 +2,13 @@ import type { Variants } from 'framer-motion';
 
 export const motionEase = [0.22, 1, 0.36, 1] as const;
 
+/** Clean text slide-up — light rise, no blur (2027, non-invasive) */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.65, ease: motionEase },
+    transition: { duration: 0.55, ease: motionEase },
   },
 };
 
@@ -25,12 +25,11 @@ export const staggerContainer: Variants = {
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.55, ease: motionEase },
+    transition: { duration: 0.5, ease: motionEase },
   },
 };
 
