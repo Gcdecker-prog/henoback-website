@@ -40,3 +40,9 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# Private offline HTML exports (do not commit / do not host publicly)
+/exports/
+
+# Source/raw marketing image extracts (optimized copies live outside _raw/)
+/public/images/marketing/intacct/_raw/

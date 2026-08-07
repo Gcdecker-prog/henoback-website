@@ -1,0 +1,371 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { Check } from 'lucide-react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { Container } from '@/components/layout/Container';
+import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
+import { intacctHero, intacctHeroTabs } from '@/lib/content/home-intacct';
+import { assessmentUrl } from '@/lib/gtm-links';
+import { cn } from '@/lib/cn';
+import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
+
+type Tab = (typeof intacctHeroTabs)[number];
+
+const BAR_TONES = {
+  orange: 'bg-heno-orange-500',
+  navy: 'bg-heno-blue-900',
+  blue: 'bg-heno-blue-500',
+  sky: 'bg-heno-blue-400',
+} as const;
+
+function HorizontalBars({
+  series,
+  reduce,
+}: {
+  series: Extract<Tab, { chart: 'horizontal' }>['series'];
+  reduce: boolean | null;
+}) {
+  return (
+    <ul className="flex h-full flex-col justify-center space-y-3.5 sm:space-y-4">
+      {series.map((bar) => (
+        <li key={bar.name} className="grid grid-cols-[5.25rem_1fr_2.75rem] items-center gap-3 sm:grid-cols-[5.75rem_1fr_3rem] sm:gap-4">
+          <span className="truncate text-[0.8rem] font-medium text-heno-blue-900/80 sm:text-[0.85rem]">
+            {bar.name}
+          </span>
+          <div className="h-4 overflow-hidden rounded-full bg-heno-blue-100/70 sm:h-[1.15rem]">
+            <motion.div
+              className={cn('h-full rounded-full', BAR_TONES[bar.tone])}
+              initial={reduce ? { width: `${bar.value}%` } : { width: 0 }}
+              animate={{ width: `${bar.value}%` }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </div>
+          <span className="text-right text-[0.8rem] font-semibold tabular-nums text-heno-blue-900 sm:text-[0.85rem]">
+            {bar.value}%
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function VerticalBars({
+  series,
+  reduce,
+  withLine,
+  withCurve,
+}: {
+  series: readonly { name: string; value: number; accent?: boolean }[];
+  reduce: boolean | null;
+  withLine?: boolean;
+  withCurve?: boolean;
+}) {
+  const max = Math.max(...series.map((s) => s.value));
+  const coords = series.map((s, i) => {
+    const x = ((i + 0.5) / series.length) * 100;
+    const y = 100 - (s.value / max) * 88;
+    return { x, y };
+  });
+  const linePoints = coords.map((c) => `${c.x},${c.y}`).join(' ');
+  const smoothPath = coords
+    .map((c, i, arr) => {
+      if (i === 0) return `M ${c.x} ${c.y}`;
+      const prev = arr[i - 1];
+      const c1x = prev.x + (c.x - prev.x) * 0.4;
+      const c2x = prev.x + (c.x - prev.x) * 0.6;
+      return `C ${c1x} ${prev.y} ${c2x} ${c.y} ${c.x} ${c.y}`;
+    })
+    .join(' ');
+
+  return (
+    <div className="flex h-full flex-col justify-center rounded-2xl bg-heno-blue-50/50 px-3 pb-3 pt-4 sm:px-4 sm:pb-4 sm:pt-5">
+      <div className="relative min-h-0 flex-1">
+        <div className="absolute inset-0 z-0 flex items-end">
+          {series.map((bar) => (
+            <div key={bar.name} className="flex h-full flex-1 items-end justify-center px-1 sm:px-1.5">
+              <motion.div
+                className={cn(
+                  'w-full max-w-[2.85rem] rounded-t-xl sm:max-w-[3.35rem]',
+                  bar.accent ? 'bg-heno-orange-500' : withCurve ? 'bg-heno-blue-900' : 'bg-heno-blue-400/85',
+                )}
+                initial={reduce ? { height: `${(bar.value / max) * 100}%` } : { height: 0 }}
+                animate={{ height: `${(bar.value / max) * 100}%` }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </div>
+          ))}
+        </div>
+
+        {(withLine || withCurve) && (
+          <svg
+            className="pointer-events-none absolute inset-0 z-[1] h-full w-full overflow-visible"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            {withLine ? (
+              <>
+                <polyline
+                  fill="none"
+                  stroke="#F27830"
+                  strokeWidth="2.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                  points={linePoints}
+                />
+                {coords.map((c) => (
+                  <circle
+                    key={`${c.x}-${c.y}`}
+                    cx={c.x}
+                    cy={c.y}
+                    r="1.65"
+                    fill="#F27830"
+                    stroke="#fff"
+                    strokeWidth="0.65"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
+              </>
+            ) : null}
+            {withCurve ? (
+              <path
+                d={smoothPath}
+                fill="none"
+                stroke="#4A9EC4"
+                strokeWidth="2.25"
+                strokeDasharray="5 5"
+                strokeLinecap="round"
+                vectorEffect="non-scaling-stroke"
+              />
+            ) : null}
+          </svg>
+        )}
+      </div>
+
+      <div className="mt-2 flex shrink-0">
+        {series.map((bar) => (
+          <span
+            key={`${bar.name}-label`}
+            className="flex-1 px-1 text-center text-[0.7rem] font-medium text-neutral-500 sm:px-1.5 sm:text-[0.75rem]"
+          >
+            {bar.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AreaChart({
+  series,
+  reduce,
+}: {
+  series: Extract<Tab, { chart: 'area' }>['series'];
+  reduce: boolean | null;
+}) {
+  const max = Math.max(...series.map((s) => s.value));
+  const coords = series.map((s, i) => {
+    const x = (i / (series.length - 1)) * 100;
+    const y = 88 - (s.value / max) * 70;
+    return { x, y };
+  });
+  const line = coords.map((c, i) => `${i === 0 ? 'M' : 'L'} ${c.x} ${c.y}`).join(' ');
+  const area = `${line} L 100 100 L 0 100 Z`;
+
+  return (
+    <div className="flex h-full flex-col justify-center overflow-hidden rounded-2xl bg-heno-blue-50/50 px-3 py-4 sm:px-4 sm:py-5">
+      <svg viewBox="0 0 100 100" className="h-full w-full min-h-0" preserveAspectRatio="none" aria-hidden>
+        <motion.path
+          d={area}
+          fill="url(#netIncomeFill)"
+          initial={reduce ? undefined : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        />
+        <motion.path
+          d={line}
+          fill="none"
+          stroke="#F27830"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          initial={reduce ? undefined : { pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        />
+        <defs>
+          <linearGradient id="netIncomeFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#F27830" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#F27830" stopOpacity="0.02" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function DashboardChart({ tab, reduce }: { tab: Tab; reduce: boolean | null }) {
+  if (tab.chart === 'horizontal') return <HorizontalBars series={tab.series} reduce={reduce} />;
+  if (tab.chart === 'bars-line') return <VerticalBars series={tab.series} reduce={reduce} withLine />;
+  if (tab.chart === 'bars-accent') return <VerticalBars series={tab.series} reduce={reduce} />;
+  if (tab.chart === 'bars-curve') return <VerticalBars series={tab.series} reduce={reduce} withCurve />;
+  return <AreaChart series={tab.series} reduce={reduce} />;
+}
+
+/** Intacct homepage hero — revision dashboard box with site fonts + larger bars. */
+export function IntacctHomeHero() {
+  const reduce = useReducedMotion();
+  const [activeId, setActiveId] = useState<Tab['id']>(intacctHeroTabs[0].id);
+  const active = intacctHeroTabs.find((t) => t.id === activeId) ?? intacctHeroTabs[0];
+
+  return (
+    <section
+      className="relative bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
+      aria-labelledby="intacct-hero-heading"
+    >
+      <svg
+        className="pointer-events-none absolute inset-0 h-full w-full overflow-hidden text-heno-blue-100"
+        viewBox="0 0 1440 760"
+        fill="none"
+        aria-hidden
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <path
+          d="M-40 140C220 40 420 210 700 160C980 110 1180 40 1480 120"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          opacity="0.7"
+        />
+        <path
+          d="M-40 280C260 180 480 360 760 290C1040 220 1240 150 1480 240"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          opacity="0.55"
+        />
+        <path
+          d="M-40 440C240 360 520 520 820 450C1120 380 1300 320 1480 400"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          opacity="0.45"
+        />
+      </svg>
+
+      <Container className="relative">
+        <motion.h1
+          id="intacct-hero-heading"
+          className="max-w-4xl text-[1.75rem] leading-[1.28] tracking-[-0.015em] sm:text-[2.25rem] sm:leading-[1.28] lg:max-w-5xl lg:text-[2.65rem] lg:leading-[1.24]"
+          initial={reduce ? false : { opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: motionEase }}
+        >
+          <span className="block font-medium text-heno-blue-500">{intacctHero.line1}</span>
+          <span className="mt-2.5 block text-balance font-semibold text-heno-blue-900 sm:mt-3">
+            {intacctHero.line2}
+          </span>
+        </motion.h1>
+
+        <div className="mt-10 grid items-start gap-10 lg:mt-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-12 xl:gap-14">
+          <motion.div
+            className="max-w-xl"
+            initial={reduce ? false : 'hidden'}
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.p
+              className="text-body leading-[1.7] text-neutral-600 sm:text-body-lg"
+              variants={staggerItem}
+            >
+              {intacctHero.summary}
+            </motion.p>
+            <motion.ul className="mt-7 space-y-3.5" variants={staggerItem}>
+              {intacctHero.outcomes.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-neutral-700 sm:text-[0.95rem]">
+                  <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-heno-orange-500 text-white">
+                    <Check className="size-3.5 stroke-[3]" aria-hidden />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
+            <motion.div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" variants={staggerItem}>
+              <GtmOutboundButton href={assessmentUrl({ content: 'intacct-hero-primary' })} size="lg">
+                {intacctHero.primaryCta} →
+              </GtmOutboundButton>
+              <Link
+                href={intacctHero.secondaryCtaHref}
+                className="inline-flex h-12 items-center justify-center rounded-full border border-heno-blue-400/50 bg-white px-6 text-sm font-medium text-heno-blue-900 transition-colors hover:border-heno-blue-500 hover:bg-heno-blue-50/60"
+              >
+                {intacctHero.secondaryCta}
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="w-full min-w-0"
+            initial={reduce ? false : { opacity: 0, x: 36 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: motionEase, delay: 0.12 }}
+          >
+            <div
+              className={cn(
+                'rounded-[1.5rem] bg-[#F3F6F9] p-4 shadow-[0_28px_70px_-30px_rgba(27,54,93,0.35)] sm:p-5',
+                'ring-1 ring-heno-blue-900/[0.04]',
+              )}
+            >
+              <div className="grid grid-cols-5 gap-1" role="tablist" aria-label="Dashboard views">
+                {intacctHeroTabs.map((tab) => {
+                  const isActive = tab.id === activeId;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      onClick={() => setActiveId(tab.id)}
+                      className={cn(
+                        'min-w-0 rounded-full px-1 py-2 text-center text-[0.58rem] font-semibold leading-tight tracking-tight transition-colors sm:px-1.5 sm:text-[0.68rem] md:text-[0.72rem]',
+                        isActive
+                          ? 'bg-heno-blue-900 text-white shadow-[0_8px_18px_-10px_rgba(27,54,93,0.65)]'
+                          : 'text-heno-blue-500 hover:bg-white/70 hover:text-heno-blue-900',
+                      )}
+                    >
+                      <span className="block truncate sm:whitespace-normal sm:break-words">
+                        {tab.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 rounded-[1.15rem] bg-white p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:mt-5 sm:p-5">
+                <div className="relative h-[15.5rem] sm:h-[16.75rem]">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={active.id}
+                      className="absolute inset-0 flex flex-col"
+                      initial={reduce ? false : { opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={reduce ? undefined : { opacity: 0, y: -4 }}
+                      transition={{ duration: 0.22, ease: motionEase }}
+                    >
+                      <p className="shrink-0 text-[0.9rem] font-medium leading-snug text-heno-blue-900/80 sm:text-[0.95rem]">
+                        {active.caption}
+                      </p>
+                      <div className="mt-3 min-h-0 flex-1">
+                        <DashboardChart tab={active} reduce={reduce} />
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </Container>
+    </section>
+  );
+}

@@ -67,17 +67,17 @@ export function HomeEditorialBand({
       <Container>
         <div
           className={cn(
-            'grid items-center gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12 xl:gap-16',
+            'grid items-stretch gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12 xl:gap-16',
             className,
           )}
         >
           <motion.div
-            className="flex flex-col justify-center lg:py-2"
+            className="flex h-full flex-col lg:py-1"
             style={scroll.motionEnabled ? { y: scroll.copyY } : undefined}
-            initial={reduce ? false : { opacity: 0, x: -28 }}
+            initial={reduce ? false : { opacity: 0, x: -32 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.85, ease: motionEase }}
+            viewport={{ once: true, margin: '0px 0px -8% 0px', amount: 0.18 }}
+            transition={{ duration: 0.75, ease: motionEase }}
           >
               <h2
                 id={id}
@@ -125,7 +125,7 @@ export function HomeEditorialBand({
 
               {industryLinks && (
                 <motion.div
-                  className="mt-6 sm:mt-7"
+                  className="mt-6 flex flex-1 flex-col sm:mt-7"
                   initial={reduce ? false : { opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -134,13 +134,13 @@ export function HomeEditorialBand({
                   <p className="text-[0.9375rem] font-medium text-neutral-800">
                     Choose your sector:
                   </p>
-                  <ul className="mt-3 space-y-2">
+                  <ul className="mt-3 flex flex-1 flex-col justify-between gap-2.5 lg:gap-3">
                     {industryLinks.map((item) => (
-                      <li key={item.slug}>
+                      <li key={item.slug} className="min-h-0">
                         <Link
                           href={item.href}
                           data-industry={item.slug}
-                          className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200/80 bg-white/80 px-4 py-3 text-[0.9375rem] font-medium text-neutral-800 transition-[border-color,box-shadow] hover:border-heno-orange-500/25 hover:shadow-[0_8px_24px_-12px_rgba(242,120,48,0.1)]"
+                          className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200/80 bg-white/90 px-4 py-3.5 text-[0.9375rem] font-medium text-neutral-800 transition-[border-color,box-shadow,transform] hover:-translate-y-px hover:border-heno-orange-500/25 hover:shadow-[0_8px_24px_-12px_rgba(242,120,48,0.1)] lg:py-4"
                         >
                           <span>{item.name}</span>
                           <ArrowRight
@@ -191,14 +191,14 @@ export function HomeEditorialBand({
             </motion.div>
 
             <motion.div
-              className="relative min-h-[220px] overflow-hidden rounded-2xl bg-neutral-100 sm:min-h-[280px] lg:min-h-[32rem]"
-              initial={reduce ? false : { opacity: 0, x: 28 }}
+              className="relative min-h-[22rem] overflow-hidden rounded-2xl bg-neutral-100 sm:min-h-[26rem] lg:min-h-[34rem] lg:self-stretch"
+              initial={reduce ? false : { opacity: 0, x: 36 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.85, delay: 0.06, ease: motionEase }}
+              viewport={{ once: true, margin: '0px 0px -8% 0px', amount: 0.18 }}
+              transition={{ duration: 0.75, delay: 0.08, ease: motionEase }}
             >
               {visual ? (
-                <div className="flex h-full min-h-[280px] items-center p-4 sm:p-6 lg:min-h-[32rem]">
+                <div className="flex h-full min-h-[22rem] items-center p-4 sm:min-h-[26rem] sm:p-6 lg:min-h-full">
                   {visual}
                 </div>
               ) : imageSrc && imageAlt ? (

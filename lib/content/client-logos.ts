@@ -11,7 +11,7 @@ export type ClientLogo = {
 
 export const homeTrustBand = {
   stat: '$50M to over $1B',
-  label: 'The range of firms we\u2019ve scaled the back office for.',
+  label: 'The range of firms we\u2019ve helped scale with stronger back office operations.',
   clientsLabel: 'Case study partners',
 } as const;
 

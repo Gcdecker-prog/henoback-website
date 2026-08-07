@@ -1,15 +1,50 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { fadeUp, staggerContainer, staggerItem } from '@/lib/motion/variants';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import {
+  motionEase,
+  revealVariants,
+  staggerContainer,
+  staggerItem,
+  type RevealDirection,
+} from '@/lib/motion/variants';
 
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
   as?: 'div' | 'section' | 'article' | 'ul';
+  /** Slide direction — defaults to a clean upward rise */
+  direction?: RevealDirection;
+  /** Extra delay (seconds) for staggered paired columns */
+  delay?: number;
 };
 
-export function Reveal({ children, className, as = 'div' }: RevealProps) {
+const DEFAULT_VIEWPORT = { once: true, margin: '0px 0px -8% 0px', amount: 0.18 } as const;
+
+function withDelay(base: Variants, delay: number): Variants {
+  if (!delay) return base;
+  const visible = base.visible;
+  const baseTransition =
+    typeof visible === 'object' && visible && 'transition' in visible
+      ? (visible.transition as object)
+      : {};
+
+  return {
+    hidden: base.hidden,
+    visible: {
+      ...(typeof visible === 'object' && visible ? visible : {}),
+      transition: { duration: 0.7, ease: motionEase, ...baseTransition, delay },
+    },
+  };
+}
+
+export function Reveal({
+  children,
+  className,
+  as = 'div',
+  direction = 'up',
+  delay = 0,
+}: RevealProps) {
   const reduce = useReducedMotion();
   const Tag = as;
 
@@ -24,8 +59,8 @@ export function Reveal({ children, className, as = 'div' }: RevealProps) {
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-40px', amount: 0.2 }}
-      variants={fadeUp}
+      viewport={DEFAULT_VIEWPORT}
+      variants={withDelay(revealVariants(direction), delay)}
     >
       {children}
     </MotionTag>
@@ -72,7 +107,7 @@ export function RevealStagger({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-40px', amount: 0.2 }}
+      viewport={DEFAULT_VIEWPORT}
       variants={staggerContainer}
     >
       {children}

@@ -170,10 +170,10 @@ export const visibilityLevels: readonly VisibilityLevel[] = [
 export const visibilityModelCopy = {
   title: 'The 7-Level Data Visibility Model',
   intro:
-    'From disconnected systems at Level 1 to real-time monitoring and a continual close at Level 7.',
+    'From disconnected systems at Level 1 to real-time monitoring and a continuous close at Level 7.',
   legendLabel: 'The eight areas we assess',
   interactionHint: 'Hover or tap a level to explore each area.',
-  footerLead: 'Most firms land at Level 2 or 3.',
-  footerBody: 'Heno moves you up the model—so visibility becomes an advantage, not a blind spot.',
-  ctaLabel: 'See your visibility gap →',
+  footerLead: 'Most firms sit at Level 2 or 3.',
+  footerBody: 'Here\u2019s how you move up the model—so visibility becomes a strategic operating advantage.',
+  ctaLabel: 'See where you stand →',
 } as const;

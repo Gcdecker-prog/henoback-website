@@ -7,8 +7,9 @@ import { CampaignPlaybook } from '@/components/marketing/CampaignPlaybook';
 import { isCampaignPlaybookEnabled } from '@/lib/campaign-playbook';
 import { createPageMetadata } from '@/lib/seo/metadata';
 
-/** Never statically cache — gate is server env only */
-export const dynamic = 'force-dynamic';
+/** Never statically cache in normal deploys — gate is server env only.
+ * Private static export sets HENOS_PRIVATE_EXPORT=1 and needs a static page. */
+export const dynamic = process.env.HENOS_PRIVATE_EXPORT === '1' ? 'force-static' : 'force-dynamic';
 
 export const metadata: Metadata = {
   ...createPageMetadata({

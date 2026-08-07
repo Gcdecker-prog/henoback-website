@@ -2,108 +2,55 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
-import { HenoMark } from '@/components/henoback/HenoMark';
 import { founderQuote } from '@/lib/content/team';
 import { media } from '@/lib/content/media';
-import { motionEase, staggerContainer } from '@/lib/motion/variants';
+import { motionEase } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
-import { glass } from '@/lib/ui/glass';
 
-const markSlide = {
-  hidden: { opacity: 0, x: -18, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: motionEase },
-  },
-};
-
-const labelSlide = {
-  hidden: { opacity: 0, x: -10 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, delay: 0.14, ease: motionEase },
-  },
-};
-
-const bodyFade = {
-  hidden: { opacity: 0, y: 14 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, delay: 0.22, ease: motionEase },
-  },
-};
-
-/** Founder quote — mark slides in on scroll; quote follows. */
+/** Founder quote — centered split portrait + quote (no logo-like rings). */
 export function FounderQuoteCard({ className }: { className?: string }) {
   const reduce = useReducedMotion();
 
-  if (reduce) {
-    return (
-      <div className={cn(glass(), 'max-w-3xl p-8 sm:p-10', className)}>
-        <div className="flex items-center gap-2.5">
-          <HenoMark size={24} />
-          <p className="text-sm font-medium text-heno-orange-600">From the founder</p>
-        </div>
-        <blockquote className="mt-4 text-body-lg text-neutral-700">
-          &ldquo;{founderQuote.body}&rdquo;
-        </blockquote>
-        <footer className="mt-6 flex items-center gap-4">
+  return (
+    <motion.figure
+      className={cn(
+        'relative mx-auto grid w-full max-w-4xl items-center gap-8 sm:gap-10',
+        'md:grid-cols-[auto_minmax(0,1fr)] md:gap-12',
+        className,
+      )}
+      initial={reduce ? false : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.55, ease: motionEase }}
+    >
+      <div className="relative mx-auto shrink-0 md:mx-0">
+        <div className="relative size-24 overflow-hidden rounded-full shadow-[0_16px_36px_-18px_rgba(27,54,93,0.4)] ring-3 ring-white sm:size-28 lg:size-32">
           <Image
             src={media.team.jimFrench}
             alt={founderQuote.attribution}
-            width={56}
-            height={56}
-            className="rounded-full object-cover"
+            fill
+            className="object-cover object-top"
+            sizes="128px"
           />
-          <p className="text-sm font-semibold text-neutral-900">
-            {founderQuote.attribution} · {founderQuote.title}
-          </p>
-        </footer>
+        </div>
       </div>
-    );
-  }
 
-  return (
-    <motion.div
-      className={cn(glass(), 'max-w-3xl p-8 sm:p-10', className)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.35 }}
-      variants={staggerContainer}
-    >
-      <div className="flex items-center gap-2.5">
-        <motion.div variants={markSlide}>
-          <HenoMark size={24} />
-        </motion.div>
-        <motion.p
-          variants={labelSlide}
-          className="text-sm font-medium text-heno-orange-600"
+      <blockquote className="relative text-center md:text-left">
+        <span
+          className="block text-5xl font-semibold leading-none text-heno-orange-500 sm:text-6xl"
+          aria-hidden
         >
-          From the founder
-        </motion.p>
-      </div>
-      <motion.blockquote variants={bodyFade} className="mt-4 text-body-lg text-neutral-700">
-        &ldquo;{founderQuote.body}&rdquo;
-      </motion.blockquote>
-      <motion.footer
-        variants={bodyFade}
-        className="mt-6 flex items-center gap-4"
-      >
-        <Image
-          src={media.team.jimFrench}
-          alt={founderQuote.attribution}
-          width={56}
-          height={56}
-          className="rounded-full object-cover"
-        />
-        <p className="text-sm font-semibold text-neutral-900">
-          {founderQuote.attribution} · {founderQuote.title}
+          &ldquo;
+        </span>
+        <p className="mt-2 text-xl font-semibold leading-snug tracking-tight text-heno-blue-900 sm:text-2xl sm:leading-snug">
+          {founderQuote.body}
         </p>
-      </motion.footer>
-    </motion.div>
+        <figcaption className="mt-5 text-sm text-neutral-500 sm:text-[0.95rem]">
+          <span className="font-semibold text-neutral-700">{founderQuote.attribution}</span>
+          <span className="mx-1.5 text-neutral-300">•</span>
+          <span>{founderQuote.title}</span>
+        </figcaption>
+      </blockquote>
+    </motion.figure>
   );
 }

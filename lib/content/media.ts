@@ -33,6 +33,11 @@ export const media = {
     servicesBackOffice: '/images/marketing/services-back-office.jpg',
     homeAlignment: '/images/marketing/about-team-collaboration.jpg',
     homeIndustries: '/images/industries/management-consulting.jpg',
+    intacct: {
+      monthEndStress: '/images/marketing/intacct/month-end-stress.jpg',
+      teamAtWork: '/images/marketing/intacct/team-at-work.jpg',
+      financeReporting: '/images/marketing/intacct/finance-reporting.jpg',
+    },
   },
   dashboards: {
     standardPl: '/images/dashboards/standard-pl.png',

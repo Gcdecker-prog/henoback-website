@@ -91,12 +91,20 @@
   will-change: transform;
 }
 
-.platform-marquee-mask:hover .platform-marquee-track {
+/* Slightly slower — testimonials need reading time */
+.testimonial-marquee-track {
+  animation: platform-marquee 64s linear infinite;
+  will-change: transform;
+}
+
+.platform-marquee-mask:hover .platform-marquee-track,
+.platform-marquee-mask:hover .testimonial-marquee-track {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .platform-marquee-track {
+  .platform-marquee-track,
+  .testimonial-marquee-track {
     animation: none;
   }
 }

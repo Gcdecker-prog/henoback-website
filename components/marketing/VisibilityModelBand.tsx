@@ -15,7 +15,7 @@ import { pageCtaUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
 import { glassPanel } from '@/lib/ui/glass';
 
-const BAR_HEIGHTS = [28, 40, 52, 64, 76, 88, 100] as const;
+const BAR_HEIGHTS = [34, 46, 58, 70, 82, 94, 100] as const;
 
 /** Interactive 7-level visibility model — replaces the home dark closing CTA */
 export function VisibilityModelBand() {
@@ -24,7 +24,7 @@ export function VisibilityModelBand() {
   const active = visibilityLevels.find((l) => l.level === activeLevel) ?? visibilityLevels[6];
 
   return (
-    <section className="relative overflow-hidden border-t border-heno-blue-100 bg-heno-blue-50 py-14 sm:py-16">
+    <section className="relative overflow-hidden border-t border-heno-blue-100 bg-heno-blue-50 py-14 sm:py-16 lg:py-20">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_-10%,rgba(74,158,196,0.16),transparent_55%)]"
         aria-hidden
@@ -46,7 +46,7 @@ export function VisibilityModelBand() {
           </header>
         </Reveal>
 
-        <Reveal>
+        <Reveal delay={0.05}>
           <div className="mt-8 flex flex-col items-center gap-2.5">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-500">
               {visibilityModelCopy.legendLabel}
@@ -66,10 +66,10 @@ export function VisibilityModelBand() {
           </div>
         </Reveal>
 
-        <Reveal>
-          <div className="mt-10">
+        <Reveal delay={0.1}>
+          <div className="mt-10 sm:mt-12">
             <div
-              className="flex items-end justify-center gap-2 sm:gap-3 md:gap-4"
+              className="mx-auto grid w-full max-w-5xl grid-cols-7 items-end gap-2 sm:gap-3 md:gap-4 lg:gap-5"
               role="tablist"
               aria-label="Visibility maturity levels"
             >
@@ -78,7 +78,7 @@ export function VisibilityModelBand() {
                 const heightPct = BAR_HEIGHTS[index];
 
                 return (
-                  <div key={level.level} className="flex min-w-0 flex-1 flex-col items-center sm:max-w-[5.5rem]">
+                  <div key={level.level} className="flex min-w-0 flex-col items-center">
                     <button
                       type="button"
                       role="tab"
@@ -89,31 +89,31 @@ export function VisibilityModelBand() {
                       onFocus={() => setActiveLevel(level.level)}
                       onClick={() => setActiveLevel(level.level)}
                       className={cn(
-                        'group relative flex w-full max-w-[4.5rem] flex-col items-center justify-end rounded-t-xl outline-none transition-transform duration-300',
+                        'group relative flex w-full flex-col items-center justify-end rounded-t-2xl outline-none transition-transform duration-300',
                         'focus-visible:ring-2 focus-visible:ring-heno-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-heno-blue-50',
-                        isActive ? 'scale-[1.04]' : 'hover:scale-[1.02]',
+                        isActive ? 'scale-[1.03]' : 'hover:scale-[1.015]',
                       )}
-                      style={{ height: `${Math.max(heightPct * 1.4, 56)}px` }}
+                      style={{ height: `${Math.max(heightPct * 1.85, 72)}px` }}
                     >
                       <span
                         className={cn(
-                          'absolute inset-x-0 bottom-0 rounded-t-xl transition-shadow duration-300',
-                          isActive && 'shadow-[0_0_28px_-4px_rgba(242,120,48,0.5)]',
+                          'absolute inset-x-0 bottom-0 rounded-t-2xl transition-shadow duration-300',
+                          isActive && 'shadow-[0_0_32px_-4px_rgba(242,120,48,0.55)]',
                         )}
                         style={{
                           height: `${heightPct}%`,
-                          minHeight: '2.5rem',
+                          minHeight: '3.25rem',
                           backgroundColor: level.barColor,
                         }}
                         aria-hidden
                       />
-                      <span className="relative z-10 pb-2 text-sm font-semibold text-white sm:text-base">
+                      <span className="relative z-10 pb-2.5 text-base font-semibold text-white sm:text-lg">
                         {level.level}
                       </span>
                     </button>
                     <p
                       className={cn(
-                        'mt-3 min-h-[2.5rem] text-center text-[11px] font-medium leading-snug text-neutral-500 sm:text-xs',
+                        'mt-3 min-h-[2.75rem] text-center text-[11px] font-medium leading-snug text-neutral-500 sm:text-xs',
                         (level.level === 1 || level.level === 7 || isActive) && 'text-neutral-700',
                       )}
                     >
@@ -133,7 +133,7 @@ export function VisibilityModelBand() {
               })}
             </div>
 
-            <p className="mt-1 text-center text-sm text-neutral-500">
+            <p className="mt-2 text-center text-sm text-neutral-500">
               {visibilityModelCopy.interactionHint}
             </p>
           </div>
