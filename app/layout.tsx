@@ -54,9 +54,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
       { url: '/images/brand/heno-o-logo-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: { url: '/images/brand/heno-o-logo-180.png', sizes: '180x180', type: 'image/png' },
+    shortcut: [{ url: '/favicon.ico' }],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/images/brand/heno-o-logo-180.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
 };
 

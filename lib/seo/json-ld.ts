@@ -8,6 +8,8 @@ export function organizationJsonLd() {
     name: siteConfig.name,
     legalName: siteConfig.legalEntity,
     url: siteConfig.url,
+    logo: `${siteConfig.url}/images/brand/heno-o-logo-180.png`,
+    image: `${siteConfig.url}/images/brand/heno-o-logo-180.png`,
     description: siteConfig.description,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
@@ -34,6 +36,10 @@ export function caseStudyArticleJsonLd(study: CaseStudy, pageUrl: string) {
       '@type': 'Organization',
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteConfig.url}/images/brand/heno-o-logo-180.png`,
+      },
     },
     about: {
       '@type': 'Organization',
