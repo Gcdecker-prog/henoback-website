@@ -179,16 +179,16 @@ export const intacctMatters = {
   headline: 'Most back offices don\u2019t break. They\u2019re set up for accounting, not project visibility.',
   cards: [
     {
-      title: 'You have the tool. You just need the structure.',
-      body: 'When data isn’t structured for how you sell and deliver, project reporting takes extra work to assemble—and decisions wait.',
+      title: 'You have the tool. You need the structure.',
+      body: 'Without the right data shape, project reporting takes extra work—and decisions wait.',
     },
     {
-      title: 'We help you get set up for how project-based firms actually operate.',
-      body: 'Revenue, delivery, and accounting are connected, so your reporting reflects how your business really runs.',
+      title: 'Built for how project firms actually operate.',
+      body: 'Revenue, delivery, and accounting stay connected so reporting mirrors the real business.',
     },
     {
-      title: 'A consistent back office, with dashboards you can count on.',
-      body: 'Reliable reporting so leadership can make decisions with confidence.',
+      title: 'A back office leadership can trust.',
+      body: 'Consistent close rhythm and dashboards that give one clear answer, every time.',
     },
   ] as const,
   calloutTag: 'Mid-implementation or post go-live?',

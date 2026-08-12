@@ -92,6 +92,24 @@ export const scrollSlideLabel: Variants = {
   },
 };
 
+/** Three-up pillars — soft left slide, even stagger */
+export const pillarSlideStagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.14, delayChildren: 0.08 },
+  },
+};
+
+export const pillarSlideItem: Variants = {
+  hidden: { opacity: 0, x: -28, y: 10 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.7, ease: motionEase },
+  },
+};
+
 /** Split editorial panels — copy and visual enter from opposite sides */
 export const editorialPanelStagger: Variants = {
   hidden: {},

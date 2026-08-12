@@ -6,6 +6,8 @@ import { Container } from '@/components/layout/Container';
 import { HomeOutcomeDashboard } from '@/components/marketing/HomeOutcomeDashboard';
 import { intacctMatters } from '@/lib/content/home-intacct';
 import {
+  pillarSlideItem,
+  pillarSlideStagger,
   scrollSlideItem,
   scrollSlideLabel,
   scrollSlideStagger,
@@ -36,19 +38,25 @@ export function IntacctMattersSection() {
         </motion.div>
 
         <motion.ul
-          className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-3 md:gap-6 lg:gap-8"
+          className="mt-8 grid items-stretch gap-6 sm:mt-10 md:grid-cols-3 md:gap-6 lg:gap-8"
           initial={reduce ? false : 'hidden'}
           whileInView="visible"
-          viewport={{ once: true, margin: '0px 0px -8% 0px', amount: 0.18 }}
-          variants={scrollSlideStagger}
+          viewport={{ once: true, margin: '0px 0px -6% 0px', amount: 0.25 }}
+          variants={pillarSlideStagger}
         >
           {intacctMatters.cards.map((card) => (
-            <motion.li key={card.title} variants={scrollSlideItem} className="min-w-0">
-              <div className="h-full border-l-[3px] border-heno-blue-900 pl-4 sm:pl-5">
-                <h3 className={cn('text-[1.05rem] font-semibold leading-snug sm:text-lg', brandUi.pillarTitle)}>
+            <motion.li key={card.title} variants={pillarSlideItem} className="flex h-full min-w-0">
+              <div className="flex h-full w-full flex-col border-l-[3px] border-heno-blue-900 pl-4 sm:pl-5">
+                <h3
+                  className={cn(
+                    'text-[1.05rem] font-semibold leading-snug sm:text-lg',
+                    'md:min-h-[3.5rem]',
+                    brandUi.pillarTitle,
+                  )}
+                >
                   {card.title}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-neutral-600 sm:text-[0.95rem]">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-600 sm:text-[0.95rem]">
                   {card.body}
                 </p>
               </div>
