@@ -9,6 +9,8 @@ import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { intacctHero, intacctHeroTabs } from '@/lib/content/home-intacct';
 import { assessmentUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
+import { WaveField } from '@/components/marketing/WaveField';
+import { chapterBodyClass, chapterClaimScale } from '@/components/marketing/ChapterHeadline';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
 
 type Tab = (typeof intacctHeroTabs)[number];
@@ -224,40 +226,15 @@ export function IntacctHomeHero() {
 
   return (
     <section
-      className="relative bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
+      className="relative isolate bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
       aria-labelledby="intacct-hero-heading"
     >
-      <svg
-        className="pointer-events-none absolute inset-0 h-full w-full overflow-hidden text-heno-blue-100"
-        viewBox="0 0 1440 760"
-        fill="none"
-        aria-hidden
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <path
-          d="M-40 140C220 40 420 210 700 160C980 110 1180 40 1480 120"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          opacity="0.7"
-        />
-        <path
-          d="M-40 280C260 180 480 360 760 290C1040 220 1240 150 1480 240"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          opacity="0.55"
-        />
-        <path
-          d="M-40 440C240 360 520 520 820 450C1120 380 1300 320 1480 400"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          opacity="0.45"
-        />
-      </svg>
+      <WaveField />
 
       <Container className="relative">
         <motion.h1
           id="intacct-hero-heading"
-          className="max-w-4xl text-[1.75rem] leading-[1.28] tracking-[-0.015em] sm:text-[2.25rem] sm:leading-[1.28] lg:max-w-5xl lg:text-[2.65rem] lg:leading-[1.24]"
+          className={chapterClaimScale}
           initial={reduce ? false : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: motionEase }}
@@ -276,7 +253,7 @@ export function IntacctHomeHero() {
             variants={staggerContainer}
           >
             <motion.p
-              className="text-body leading-[1.7] text-neutral-600 sm:text-body-lg"
+              className={chapterBodyClass}
               variants={staggerItem}
             >
               {intacctHero.summary}

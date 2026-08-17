@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Container } from '@/components/layout/Container';
 import { Reveal } from '@/components/motion/Reveal';
+import { NavyBand } from '@/components/marketing/NavyBand';
 import { intacctFaq } from '@/lib/content/home-intacct';
 import { cn } from '@/lib/cn';
 
@@ -11,10 +12,7 @@ export function IntacctFaqSection() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section
-      className="relative overflow-hidden bg-heno-blue-900 pb-16 pt-16 sm:pb-20 sm:pt-20"
-      aria-labelledby="intacct-faq-heading"
-    >
+    <NavyBand className="pb-16 pt-16 sm:pb-20 sm:pt-20" aria-labelledby="intacct-faq-heading">
       <Container className="relative">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
@@ -62,6 +60,6 @@ export function IntacctFaqSection() {
           </ul>
         </Reveal>
       </Container>
-    </section>
+    </NavyBand>
   );
 }

@@ -336,7 +336,7 @@ export const intacctFaq = {
 } as const;
 
 export const intacctClosingCta = {
-  headline: 'Start improving your back office today',
+  headline: 'Start improving your back\u00a0office today',
   body: 'See where your current setup can improve—and what it takes to create reliable financial visibility.',
   cta: 'Get your back office assessment',
 } as const;

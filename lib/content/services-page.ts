@@ -4,8 +4,8 @@
 
 export const servicesPage = {
   hero: {
-    pageLabel: 'How It Works',
-    headline: 'How Heno BackOffice Works',
+    kicker: 'How it works',
+    headline: 'Built around how your back office operates',
     subheadline:
       'Most outsourced accounting models focus on completing tasks. Heno focuses on how the entire back office operates.',
   },
@@ -133,7 +133,7 @@ export const servicesPage = {
     },
   ] as const,
   cta: {
-    headline: 'Start improving your back office today',
+    headline: 'Start improving your back\u00a0office today',
     body: 'See where your current setup is misaligned—and what it takes to create reliable financial visibility.',
     primaryLabel: 'Get your back office assessment',
   },

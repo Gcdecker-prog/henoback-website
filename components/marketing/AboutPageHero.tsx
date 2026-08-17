@@ -1,16 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { AboutStatCard } from '@/components/marketing/AboutStatCard';
+import { ChapterHeadline, chapterBodyClass } from '@/components/marketing/ChapterHeadline';
+import { PhotoFrame, ProductInset, ProductShell } from '@/components/marketing/ProductShell';
+import { WaveField } from '@/components/marketing/WaveField';
 import type { AboutStatIconType } from '@/components/marketing/AboutStatGraphic';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
-import { pageThemes } from '@/lib/ui/page-themes';
-import { cn } from '@/lib/cn';
 
 type AboutPageHeroProps = {
+  kicker: string;
   headline: string;
   paragraphs: readonly string[];
   imageSrc: string;
@@ -19,6 +20,7 @@ type AboutPageHeroProps = {
 };
 
 export function AboutPageHero({
+  kicker,
   headline,
   paragraphs,
   imageSrc,
@@ -26,66 +28,50 @@ export function AboutPageHero({
   stats,
 }: AboutPageHeroProps) {
   const reduce = useReducedMotion();
-  const theme = pageThemes.about;
+  const [summary, ...rest] = paragraphs;
 
   return (
-    <section className="relative overflow-hidden bg-transparent pb-16 pt-8 sm:pb-20 sm:pt-10">
-      <div
-        className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${theme.glowAccent}, transparent 70%)` }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -left-20 top-1/3 h-64 w-64 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${theme.glowWash}, transparent 70%)` }}
-        aria-hidden
-      />
+    <section className="relative isolate bg-white pb-14 pt-10 sm:pb-16 sm:pt-12 lg:pb-20 lg:pt-14">
+      <WaveField />
 
       <Container className="relative">
-        <motion.nav
-          className="text-sm text-neutral-500"
-          aria-label="Breadcrumb"
-          initial={reduce ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: motionEase }}
-        >
-          <Link href="/" className={cn('transition-colors', theme.linkHoverClass)}>
-            Home
-          </Link>
-          <span className="mx-2 text-neutral-300" aria-hidden>
-            →
-          </span>
-          <span className="font-medium text-neutral-700">About Us</span>
-        </motion.nav>
-
-        <motion.div
-          className="mt-10"
-          initial={reduce ? false : 'hidden'}
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-            <motion.div variants={staggerItem} className="min-w-0">
-              <div className="flex gap-3 sm:gap-4">
-                <span
-                  className={cn('mt-2 w-1 shrink-0 rounded-full', theme.railClass)}
-                  aria-hidden
-                />
-                <div>
-                  <h1 className="text-display-md font-semibold tracking-tight text-neutral-900 sm:text-display-lg">
-                    {headline}
-                  </h1>
-                  <div className="mt-6 space-y-4 text-body-lg leading-relaxed text-neutral-600">
-                    {paragraphs.map((p) => (
-                      <p key={p.slice(0, 40)}>{p}</p>
-                    ))}
-                  </div>
-                </div>
-              </div>
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
+          <motion.div
+            className="min-w-0"
+            initial={reduce ? false : 'hidden'}
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.div variants={staggerItem}>
+              <ChapterHeadline kicker={kicker} headline={headline} kickerVariant="claim" />
             </motion.div>
+            {summary ? (
+              <motion.p className={`mt-7 ${chapterBodyClass}`} variants={staggerItem}>
+                {summary}
+              </motion.p>
+            ) : null}
+            {rest.length ? (
+              <motion.div className="mt-5 max-w-xl space-y-3.5" variants={staggerItem}>
+                {rest.map((item) => (
+                  <p
+                    key={item.slice(0, 48)}
+                    className="text-[0.875rem] leading-relaxed text-pretty text-neutral-500 sm:text-[0.9375rem]"
+                  >
+                    {item}
+                  </p>
+                ))}
+              </motion.div>
+            ) : null}
+          </motion.div>
 
-            <motion.div variants={staggerItem} className="min-w-0">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 shadow-[0_28px_72px_-28px_rgba(23,23,23,0.18)]">
+          <motion.div
+            className="w-full min-w-0"
+            initial={reduce ? false : { opacity: 0, x: 36 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: motionEase, delay: 0.12 }}
+          >
+            <ProductShell className="p-3 sm:p-3.5">
+              <PhotoFrame className="aspect-[4/3] w-full shadow-none ring-0">
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
@@ -94,25 +80,33 @@ export function AboutPageHero({
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
-              </div>
-            </motion.div>
-          </div>
+              </PhotoFrame>
+            </ProductShell>
+          </motion.div>
+        </div>
 
-          <motion.ul
-            variants={staggerItem}
-            className="mt-10 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-3 md:gap-6"
-          >
-            {stats.map((stat, i) => (
-              <li key={stat.label} className="min-w-0">
-                <AboutStatCard
-                  value={stat.value}
-                  label={stat.label}
-                  icon={stat.icon}
-                  index={i}
-                />
-              </li>
-            ))}
-          </motion.ul>
+        <motion.div
+          className="mt-12 lg:mt-14"
+          initial={reduce ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.16, ease: motionEase }}
+        >
+          <ProductShell>
+            <ProductInset className="p-0 sm:p-0">
+              <ul className="grid grid-cols-1 divide-y divide-heno-blue-50 md:grid-cols-3 md:divide-x md:divide-y-0">
+                {stats.map((stat, i) => (
+                  <li key={stat.label} className="min-w-0">
+                    <AboutStatCard
+                      value={stat.value}
+                      label={stat.label}
+                      icon={stat.icon}
+                      index={i}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </ProductInset>
+          </ProductShell>
         </motion.div>
       </Container>
     </section>

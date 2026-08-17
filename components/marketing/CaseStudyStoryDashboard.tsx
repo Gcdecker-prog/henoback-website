@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ProductInset, ProductShell } from '@/components/marketing/ProductShell';
 import type { CaseStudy, CaseStudyMetric, CaseStudyTimelineVisual } from '@/lib/content/case-studies';
 import { brandUi } from '@/lib/ui/brand-ui';
 import { motionEase } from '@/lib/motion/variants';
@@ -123,8 +124,8 @@ function ChapterTabs({
             className={cn(
               'relative shrink-0 rounded-full border px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow]',
               isActive
-                ? 'border-heno-orange-500/25 bg-white text-neutral-900 shadow-[0_8px_24px_-14px_rgba(242,120,48,0.18)]'
-                : 'border-transparent bg-transparent text-neutral-500 hover:border-neutral-200 hover:bg-neutral-50 hover:text-neutral-800',
+                ? 'border-transparent bg-heno-blue-900 text-white shadow-[0_8px_18px_-10px_rgba(27,54,93,0.65)]'
+                : 'border-transparent text-heno-blue-500 hover:bg-white/70 hover:text-heno-blue-900',
             )}
           >
             {step.label}
@@ -157,7 +158,7 @@ function StagePanel({ study, activeId }: { study: CaseStudy; activeId: string })
             <p className={cn('text-[11px] font-semibold uppercase tracking-[0.18em]', brandUi.eyebrow)}>
               {activeStep.label}
             </p>
-            <h3 className="mt-2 max-w-xl text-xl font-semibold leading-snug tracking-tight text-neutral-900 sm:text-2xl">
+            <h3 className="mt-2 max-w-xl text-xl font-semibold leading-snug tracking-tight text-heno-blue-900 sm:text-2xl">
               {activeStep.title}
             </h3>
             <p className="mt-4 max-w-2xl text-[0.9375rem] leading-relaxed text-neutral-600 sm:text-base">
@@ -197,14 +198,16 @@ export function CaseStudyStoryDashboard({ study }: CaseStudyStoryDashboardProps)
   const [activeId, setActiveId] = useState(study.timeline[0]?.id ?? '');
 
   return (
-    <div className="mx-auto max-w-4xl">
-      <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-400">
-        Select a chapter
-      </p>
-      <ChapterTabs study={study} activeId={activeId} onSelect={setActiveId} />
-      <div className="mt-6 sm:mt-8">
-        <StagePanel study={study} activeId={activeId} />
-      </div>
-    </div>
+    <ProductShell className="mx-auto max-w-4xl">
+      <ProductInset className="sm:p-7">
+        <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-400">
+          Select a chapter
+        </p>
+        <ChapterTabs study={study} activeId={activeId} onSelect={setActiveId} />
+        <div className="mt-6 sm:mt-8">
+          <StagePanel study={study} activeId={activeId} />
+        </div>
+      </ProductInset>
+    </ProductShell>
   );
 }

@@ -28,10 +28,9 @@ export default function CampaignsPage() {
   return (
     <MarketingPageShell>
       <MarketingPageHero
-        pageLabel="Campaigns"
-        eyebrow="Internal · not indexed"
+        kicker="Internal · not indexed"
         headline="Landing pages & UTM playbook"
-        subheadline="Copy inbound URLs for ads and email. Leads are stored in the GTM engine when visitors complete intake or assessment."
+        summary="Copy inbound URLs for ads and email. Leads are stored in the GTM engine when visitors complete intake or assessment."
       />
       <section className="bg-neutral-50/50 py-12 sm:py-16">
         <Container>

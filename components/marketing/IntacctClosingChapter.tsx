@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Reveal } from '@/components/motion/Reveal';
+import { NavyBand } from '@/components/marketing/NavyBand';
 import { homeClosingCta } from '@/lib/content/home';
 import { founderQuote } from '@/lib/content/team';
 import { media } from '@/lib/content/media';
@@ -56,27 +57,23 @@ export function IntacctClosingChapter() {
         </Container>
       </div>
 
-      <div className="relative overflow-hidden bg-heno-blue-900 py-16 text-white sm:py-20">
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
-          aria-hidden
-        />
-        <Container className="relative text-center">
+      <NavyBand as="div" className="py-16 sm:py-20">
+        <Container className="text-center">
           <Reveal>
-            <h2 className="text-display-md font-semibold tracking-tight text-white sm:text-display-lg">
+            <h2 className="mx-auto max-w-3xl text-balance text-[1.75rem] font-semibold tracking-tight text-white sm:text-[2.15rem] lg:text-[2.45rem]">
               {homeClosingCta.headline}
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-body text-white/70">{homeClosingCta.body}</p>
+            <p className="mx-auto mt-4 max-w-xl text-pretty text-[0.9375rem] leading-relaxed text-white/70 sm:text-body">{homeClosingCta.body}</p>
             <GtmOutboundButton
               href={pageCtaUrl('home', 'assessment', { content: 'footer-cta' })}
               size="lg"
-              className="mt-8"
+              className="mt-8 whitespace-nowrap"
             >
               {primaryCta.label}
             </GtmOutboundButton>
           </Reveal>
         </Container>
-      </div>
+      </NavyBand>
     </section>
   );
 }

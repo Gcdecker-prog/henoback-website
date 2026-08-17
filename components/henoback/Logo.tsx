@@ -20,13 +20,11 @@ export function Logo({ className, size = 'default' }: LogoProps) {
       <Image
         src={siteConfig.logo.src}
         alt={siteConfig.logo.alt}
-        width={isLarge ? 360 : 200}
-        height={isLarge ? 76 : 48}
+        width={isLarge ? 428 : 214}
+        height={isLarge ? 202 : 101}
         className={cn(
           'w-auto object-contain object-left',
-          /* White-backed PNG: multiply drops the white plate over any header tone */
-          'mix-blend-multiply',
-          isLarge ? 'h-[3.25rem] w-auto sm:h-[3.6rem] lg:h-16' : 'h-9 w-auto sm:h-10',
+          isLarge ? 'h-[2.35rem] w-auto sm:h-[2.6rem] lg:h-11' : 'h-9 w-auto sm:h-10',
         )}
         priority
       />

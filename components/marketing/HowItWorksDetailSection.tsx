@@ -128,7 +128,7 @@ export function HowItWorksDetailSection({ section, index }: HowItWorksDetailSect
           >
             <motion.h2
               id={`${section.id}-heading`}
-              className="max-w-lg text-display-md font-semibold tracking-tight text-neutral-900"
+              className="max-w-lg text-pretty text-[1.65rem] font-semibold tracking-tight text-heno-blue-900 sm:text-[1.95rem] lg:text-[2.15rem]"
               variants={scrollSlideLabel}
             >
               {section.headline}

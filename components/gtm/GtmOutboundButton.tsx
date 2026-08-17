@@ -16,7 +16,7 @@ const variants = {
   primary:
     'bg-heno-orange-500 text-white hover:bg-heno-orange-600 shadow-[0_1px_0_rgba(0,0,0,0.05),0_8px_24px_-8px_rgba(242,120,48,0.45)]',
   secondary:
-    'border border-neutral-200 bg-white text-neutral-900 hover:border-neutral-300 hover:bg-neutral-50',
+    'border border-heno-blue-400/50 bg-white text-heno-blue-900 hover:border-heno-blue-500 hover:bg-heno-blue-50/60',
   ghost: 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
 };
 
@@ -33,7 +33,7 @@ function GtmOutboundButtonInner({
   className,
 }: GtmOutboundButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heno-orange-500 focus-visible:ring-offset-2',
+    'inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heno-orange-500 focus-visible:ring-offset-2',
     variants[variant],
     sizes[size],
     className,
@@ -54,7 +54,7 @@ export function GtmOutboundButton(props: GtmOutboundButtonProps) {
         <a
           href={props.href}
           className={cn(
-            'inline-flex items-center justify-center rounded-full font-medium opacity-90',
+            'inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium opacity-90',
             variants[props.variant ?? 'primary'],
             sizes[props.size ?? 'md'],
             props.className,

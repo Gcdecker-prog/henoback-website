@@ -10,9 +10,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { AboutStatGraphic, type AboutStatIconType } from '@/components/marketing/AboutStatGraphic';
-import { glassStat } from '@/lib/ui/glass';
 import { motionEase } from '@/lib/motion/variants';
-import { cn } from '@/lib/cn';
 
 type AboutStatCardProps = {
   value: string;
@@ -63,44 +61,26 @@ export function AboutStatCard({ value, label, icon, index = 0 }: AboutStatCardPr
   return (
     <motion.div
       ref={ref}
-      className={cn(
-        glassStat,
-        'group relative flex flex-col gap-4 px-6 py-6 text-left sm:px-7 sm:py-7',
-        'transition-[box-shadow,border-color] duration-500',
-        'hover:border-heno-orange-500/25 hover:shadow-[0_24px_56px_-18px_rgba(242,120,48,0.16),inset_0_1px_0_0_rgba(255,255,255,1)]',
-      )}
-      initial={reduce ? false : { opacity: 0, y: 20, scale: 0.98 }}
-      animate={
-        inView || reduce
-          ? { opacity: 1, y: 0, scale: 1 }
-          : { opacity: 0, y: 20, scale: 0.98 }
-      }
+      className="flex h-full items-start gap-4 px-6 py-6 sm:px-7 sm:py-7"
+      initial={reduce ? false : { opacity: 0, y: 12 }}
+      animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
       transition={{
-        duration: 0.55,
-        delay: reduce ? 0 : index * 0.1,
+        duration: 0.5,
+        delay: reduce ? 0 : index * 0.08,
         ease: motionEase,
       }}
-      whileHover={reduce ? undefined : { y: -3, transition: { duration: 0.25, ease: motionEase } }}
     >
       <div
-        className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[radial-gradient(circle,rgba(242,120,48,0.12),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        aria-hidden
-      />
-
-      <div
-        className="flex size-14 items-center justify-center rounded-xl border border-heno-orange-500/10 bg-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,1)]"
+        className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-heno-blue-50 sm:size-12"
         aria-hidden
       >
-        <AboutStatGraphic type={icon} className="size-9" />
+        <AboutStatGraphic type={icon} className="size-7" />
       </div>
-
-      <div>
-        <p className="text-3xl font-semibold leading-none tracking-tight text-neutral-900 sm:text-[2rem]">
+      <div className="min-w-0">
+        <p className="text-[1.75rem] font-semibold leading-none tracking-tight text-heno-blue-900 sm:text-[2rem]">
           <AnimatedStatValue value={value} />
         </p>
-        <p className="mt-3 text-pretty text-sm font-medium leading-relaxed text-heno-orange-600">
-          {label}
-        </p>
+        <p className="mt-2 text-[0.8125rem] font-medium leading-snug text-neutral-500">{label}</p>
       </div>
     </motion.div>
   );

@@ -36,9 +36,9 @@ export const pageThemes: Record<PageThemeId, PageTheme> = {
     linkHoverClass: 'hover:text-heno-orange-600',
     navActiveClass: 'text-heno-orange-700',
     railClass: 'bg-heno-orange-500',
-    glowAccent: `${henoback.orange[500]}24`,
-    glowWash: `${henoback.blue[900]}0f`,
-    ctaOrb: 'rgba(242,120,48,0.22)',
+    glowAccent: `${henoback.blue[400]}1a`,
+    glowWash: `${henoback.blue[900]}0c`,
+    ctaOrb: 'rgba(27,54,93,0.28)',
   },
   /** Trust depth — deep navy */
   about: {
@@ -75,8 +75,8 @@ export const pageThemes: Record<PageThemeId, PageTheme> = {
     linkHoverClass: 'hover:text-heno-blue-700',
     navActiveClass: 'text-heno-blue-700',
     railClass: 'bg-heno-blue-700',
-    glowAccent: `${henoback.blue[700]}22`,
-    glowWash: `${henoback.orange[500]}18`,
+    glowAccent: `${henoback.blue[400]}18`,
+    glowWash: `${henoback.blue[700]}14`,
     ctaOrb: 'rgba(27,74,110,0.32)',
   },
   /** Action — brighter converted orange */
@@ -88,9 +88,9 @@ export const pageThemes: Record<PageThemeId, PageTheme> = {
     linkHoverClass: 'hover:text-heno-orange-600',
     navActiveClass: 'text-heno-orange-700',
     railClass: 'bg-heno-orange-600',
-    glowAccent: `${henoback.orange[600]}2a`,
-    glowWash: `${henoback.orange[500]}1f`,
-    ctaOrb: 'rgba(224,101,32,0.3)',
+    glowAccent: `${henoback.blue[400]}16`,
+    glowWash: `${henoback.blue[900]}0c`,
+    ctaOrb: 'rgba(27,54,93,0.28)',
   },
 } as const;
 

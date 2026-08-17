@@ -9,6 +9,7 @@ import { Logo } from '@/components/henoback/Logo';
 import { siteConfig, headerCta } from '@/lib/site-config';
 import { assessmentUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
+import { glassHeaderBar, glassHeaderBarScrolled } from '@/lib/ui/glass';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,12 +24,13 @@ export function Header() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 border-b border-neutral-100 bg-white transition-shadow duration-300',
-        scrolled && 'shadow-[0_8px_30px_-12px_rgba(23,23,23,0.08)]',
+        'sticky top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300',
+        glassHeaderBar,
+        scrolled && glassHeaderBarScrolled,
       )}
     >
-      <Container className="flex h-[5.25rem] items-center gap-2 sm:h-[5.75rem] sm:gap-3 lg:gap-4">
-        <Logo size="large" className="shrink-0 max-w-[min(52vw,360px)]" />
+      <Container className="flex h-[4.75rem] items-center gap-2 sm:h-[5.25rem] sm:gap-3 lg:gap-4">
+        <Logo size="large" className="shrink-0 max-w-[min(48vw,280px)]" />
         <PrimaryNav />
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">

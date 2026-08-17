@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
 import { Reveal } from '@/components/motion/Reveal';
+import { NavyBand } from '@/components/marketing/NavyBand';
 import { intacctTestimonials } from '@/lib/content/home-intacct';
 
 /** Navy testimonials — compact marquee cards with balanced quote marks. */
@@ -10,11 +11,11 @@ export function IntacctTestimonialsMarquee() {
   const loop = [...intacctTestimonials.items, ...intacctTestimonials.items];
 
   return (
-    <section
-      className="relative overflow-hidden bg-heno-blue-900 pb-12 pt-11 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
+    <NavyBand
+      className="pb-12 pt-11 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
       aria-labelledby="intacct-trust-heading"
     >
-      <Container className="relative">
+      <Container>
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <h2
@@ -68,6 +69,6 @@ export function IntacctTestimonialsMarquee() {
           ))}
         </div>
       </div>
-    </section>
+    </NavyBand>
   );
 }

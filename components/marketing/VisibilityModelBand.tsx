@@ -11,6 +11,7 @@ import {
   visibilityModelCopy,
   type VisibilityLevel,
 } from '@/lib/content/visibility-model';
+import { WaveField } from '@/components/marketing/WaveField';
 import { pageCtaUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
 import { glassPanel } from '@/lib/ui/glass';
@@ -24,15 +25,8 @@ export function VisibilityModelBand() {
   const active = visibilityLevels.find((l) => l.level === activeLevel) ?? visibilityLevels[6];
 
   return (
-    <section className="relative overflow-hidden border-t border-heno-blue-100 bg-heno-blue-50 py-14 sm:py-16 lg:py-20">
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_-10%,rgba(74,158,196,0.16),transparent_55%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-28 left-1/2 h-56 w-[36rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(242,120,48,0.1),transparent_70%)] blur-3xl"
-        aria-hidden
-      />
+    <section className="relative isolate overflow-hidden border-t border-heno-blue-100 bg-white py-14 sm:py-16 lg:py-20">
+      <WaveField />
 
       <Container className="relative">
         <Reveal>
@@ -90,7 +84,7 @@ export function VisibilityModelBand() {
                       onClick={() => setActiveLevel(level.level)}
                       className={cn(
                         'group relative flex w-full flex-col items-center justify-end rounded-t-2xl outline-none transition-transform duration-300',
-                        'focus-visible:ring-2 focus-visible:ring-heno-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-heno-blue-50',
+                        'focus-visible:ring-2 focus-visible:ring-heno-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white',
                         isActive ? 'scale-[1.03]' : 'hover:scale-[1.015]',
                       )}
                       style={{ height: `${Math.max(heightPct * 1.85, 72)}px` }}
@@ -98,7 +92,7 @@ export function VisibilityModelBand() {
                       <span
                         className={cn(
                           'absolute inset-x-0 bottom-0 rounded-t-2xl transition-shadow duration-300',
-                          isActive && 'shadow-[0_0_32px_-4px_rgba(242,120,48,0.55)]',
+                          isActive && 'shadow-[0_12px_28px_-14px_rgba(27,54,93,0.4)]',
                         )}
                         style={{
                           height: `${heightPct}%`,

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
 import { Reveal } from '@/components/motion/Reveal';
+import { NavyBand } from '@/components/marketing/NavyBand';
 import { intacctSolution } from '@/lib/content/home-intacct';
 import { assessmentUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
@@ -11,16 +12,12 @@ import { cn } from '@/lib/cn';
 /** Solution band — navy surface, full-width white title, copy + team photo. */
 export function IntacctSolutionSection() {
   return (
-    <section
-      className="relative bg-heno-blue-900 py-16 text-white sm:py-20 lg:py-24"
+    <NavyBand
+      className="py-16 sm:py-20 lg:py-24"
       aria-labelledby="intacct-solution-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 overflow-hidden bg-[radial-gradient(ellipse_70%_55%_at_80%_20%,rgba(74,158,196,0.16),transparent_60%)]"
-        aria-hidden
-      />
 
-      <Container className="relative">
+      <Container>
         <Reveal>
           <h2
             id="intacct-solution-heading"
@@ -77,6 +74,6 @@ export function IntacctSolutionSection() {
           </Reveal>
         </div>
       </Container>
-    </section>
+    </NavyBand>
   );
 }

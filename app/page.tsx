@@ -32,7 +32,7 @@ export default function HomePage() {
         <IntacctHomeHero />
       </FlowBand>
 
-      <FlowBand stage={1} as="div">
+      <FlowBand stage={1} as="div" surfaceClassName="bg-transparent">
         <IntacctTestimonialsMarquee />
       </FlowBand>
 
@@ -44,7 +44,7 @@ export default function HomePage() {
         <IntacctMattersSection />
       </FlowBand>
 
-      <FlowBand stage={4} as="div">
+      <FlowBand stage={4} as="div" surfaceClassName="bg-transparent">
         <IntacctSolutionSection />
       </FlowBand>
 
@@ -58,7 +58,7 @@ export default function HomePage() {
         <IntacctTimelineSection />
       </FlowBand>
 
-      <FlowBand stage={1} as="div">
+      <FlowBand stage={1} as="div" surfaceClassName="bg-transparent">
         <IntacctFaqSection />
       </FlowBand>
 

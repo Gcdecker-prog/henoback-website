@@ -1,5 +1,6 @@
 import { Container } from '@/components/layout/Container';
 import { Reveal } from '@/components/motion/Reveal';
+import { WaveField } from '@/components/marketing/WaveField';
 import { glass } from '@/lib/ui/glass';
 import { cn } from '@/lib/cn';
 
@@ -20,10 +21,7 @@ export function PageCtaBand({ eyebrow, headline, body, children, className }: Pa
         className,
       )}
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_100%,rgba(242,120,48,0.08),transparent)]"
-        aria-hidden
-      />
+      <WaveField />
       <Container className="relative">
         <Reveal>
           <div className={cn(glass(), 'mx-auto max-w-3xl px-8 py-12 text-center sm:px-12')}>

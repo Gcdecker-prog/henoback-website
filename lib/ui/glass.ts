@@ -3,6 +3,13 @@ import { cn } from '@/lib/cn';
 
 /** 2027 glass system — frosted surfaces on white, ambient depth, no heavy chrome */
 
+/** Sticky site header — wave/atmosphere shows through; needs a transparent logo mark */
+export const glassHeaderBar =
+  'border-b border-white/80 bg-white/70 backdrop-blur-xl backdrop-saturate-150';
+
+export const glassHeaderBarScrolled =
+  'border-neutral-200/50 bg-white/85 shadow-[0_8px_30px_-12px_rgba(23,23,23,0.08)]';
+
 export const glassPanel =
   'rounded-3xl border border-white/90 bg-white/75 shadow-[0_24px_80px_-24px_rgba(23,23,23,0.1),inset_0_1px_0_0_rgba(255,255,255,1)] backdrop-blur-2xl backdrop-saturate-150';
 

@@ -214,7 +214,7 @@ export const homeIndustriesBand = {
 } as const;
 
 export const homeClosingCta = {
-  headline: 'Start improving your back office today',
+  headline: 'Start improving your back\u00a0office today',
   body: 'See where your current setup can improve—and what it takes to create reliable financial visibility.',
 } as const;
 

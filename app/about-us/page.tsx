@@ -20,6 +20,7 @@ export default function AboutUsPage() {
     <MarketingPageShell theme="about">
       <FlowBand stage={0} as="div">
         <AboutPageHero
+          kicker={hero.kicker}
           headline={hero.headline}
           paragraphs={hero.paragraphs}
           imageSrc={heroImage.imageSrc}

@@ -1,102 +1,115 @@
 'use client';
 
-import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
-import { pageThemes, type PageThemeId } from '@/lib/ui/page-themes';
+import { ChapterCtas } from '@/components/marketing/ChapterCtas';
+import { ChapterHeadline, chapterBodyClass } from '@/components/marketing/ChapterHeadline';
+import { WaveField } from '@/components/marketing/WaveField';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
 export type MarketingPageHeroProps = {
-  pageLabel: string;
+  /** Sky register — the given */
+  kicker?: string;
+  /** Navy register — the claim (H1) */
   headline: string;
-  subheadline?: string;
-  /** Small caps line above the H1 — proof line, section label, etc. */
-  eyebrow?: string;
-  /** Soft page identity for washes + accent eyebrow */
-  theme?: PageThemeId;
+  summary?: string;
+  outcomes?: readonly string[];
+  primaryCta?: { href: string; label: string };
+  secondaryCta?: { href: string; label: string };
+  visual?: React.ReactNode;
   className?: string;
 };
 
 export function MarketingPageHero({
-  pageLabel,
+  kicker,
   headline,
-  subheadline,
-  eyebrow,
-  theme = 'home',
+  summary,
+  outcomes,
+  primaryCta,
+  secondaryCta,
+  visual,
   className,
 }: MarketingPageHeroProps) {
   const reduce = useReducedMotion();
-  const t = pageThemes[theme];
+  const hasCopyColumn = Boolean(summary || outcomes?.length || primaryCta);
 
   return (
     <section
-      className={cn(
-        'relative overflow-hidden border-b border-neutral-100/80 bg-transparent pb-12 pt-8 sm:pb-16 sm:pt-10',
-        className,
-      )}
+      className={cn('relative isolate bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14', className)}
     >
-      <div
-        className="pointer-events-none absolute -left-32 top-0 h-80 w-80 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${t.glowAccent}, transparent 70%)` }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-16 top-1/4 h-64 w-64 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${t.glowWash}, transparent 70%)` }}
-        aria-hidden
-      />
+      <WaveField />
 
       <Container className="relative">
-        <motion.nav
-          className="text-sm text-neutral-500"
-          aria-label="Breadcrumb"
-          initial={reduce ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: motionEase }}
-        >
-          <Link href="/" className={cn('transition-colors', t.linkHoverClass)}>
-            Home
-          </Link>
-          <span className="mx-2 text-neutral-300" aria-hidden>
-            →
-          </span>
-          <span className="font-medium text-neutral-700">{pageLabel}</span>
-        </motion.nav>
-
         <motion.div
-          className="mt-10 max-w-3xl"
-          initial={reduce ? false : 'hidden'}
-          animate="visible"
-          variants={staggerContainer}
+          initial={reduce ? false : { opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: motionEase }}
         >
-          {eyebrow ? (
-            <motion.p
-              variants={staggerItem}
-              className={cn('text-[11px] font-semibold uppercase tracking-[0.28em]', t.eyebrowClass)}
-            >
-              {eyebrow}
-            </motion.p>
-          ) : null}
-          <motion.h1 variants={staggerItem} className={cnHeadline(!!eyebrow)}>
-            {headline}
-          </motion.h1>
-          {subheadline ? (
-            <motion.p
-              variants={staggerItem}
-              className="mt-5 text-body-lg leading-relaxed text-neutral-600 sm:text-xl sm:leading-relaxed"
-            >
-              {subheadline}
-            </motion.p>
-          ) : null}
+          <ChapterHeadline kicker={kicker} headline={headline} />
         </motion.div>
+
+        {hasCopyColumn || visual ? (
+          <div
+            className={cn(
+              'mt-10 lg:mt-12',
+              visual &&
+                'grid items-start gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-12 xl:gap-14',
+            )}
+          >
+            {hasCopyColumn ? (
+              <motion.div
+                className={cn(!visual && 'max-w-xl')}
+                initial={reduce ? false : 'hidden'}
+                animate="visible"
+                variants={staggerContainer}
+              >
+                {summary ? (
+                  <motion.p
+                    className={chapterBodyClass}
+                    variants={staggerItem}
+                  >
+                    {summary}
+                  </motion.p>
+                ) : null}
+                {outcomes?.length ? (
+                  <motion.ul className="mt-7 space-y-3.5" variants={staggerItem}>
+                    {outcomes.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-sm text-neutral-700 sm:text-[0.95rem]"
+                      >
+                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-heno-orange-500" aria-hidden />
+                        {item}
+                      </li>
+                    ))}
+                  </motion.ul>
+                ) : null}
+                {primaryCta ? (
+                  <motion.div variants={staggerItem}>
+                    <ChapterCtas
+                      primary={primaryCta}
+                      secondary={secondaryCta}
+                      className={summary || outcomes?.length ? 'mt-9' : 'mt-8'}
+                    />
+                  </motion.div>
+                ) : null}
+              </motion.div>
+            ) : null}
+
+            {visual ? (
+              <motion.div
+                className="w-full min-w-0"
+                initial={reduce ? false : { opacity: 0, x: 36 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.75, ease: motionEase, delay: 0.12 }}
+              >
+                {visual}
+              </motion.div>
+            ) : null}
+          </div>
+        ) : null}
       </Container>
     </section>
   );
-}
-
-function cnHeadline(hasEyebrow: boolean) {
-  return hasEyebrow
-    ? 'mt-5 text-display-md font-semibold tracking-tight text-neutral-900 sm:text-display-lg'
-    : 'text-display-md font-semibold tracking-tight text-neutral-900 sm:text-display-lg';
 }

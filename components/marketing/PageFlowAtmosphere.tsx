@@ -10,7 +10,8 @@ import {
 import { usePageFlow } from '@/components/marketing/PageFlowContext';
 
 /**
- * Scroll-linked ambient orbs — no spectrum bars under the header.
+ * Quiet sky wash only — no orange ember, no veil across navy closes.
+ * Heroes carry their own WaveField; this just keeps the page from going flat.
  */
 export function PageFlowAtmosphere() {
   const { theme, flow } = usePageFlow();
@@ -23,65 +24,57 @@ export function PageFlowAtmosphere() {
   const orbATop = useTransform(
     smooth,
     [0, 0.45, 1],
-    path === 'deepDrift' ? ['0%', '22%', '40%'] : path === 'actionPull' ? ['0%', '12%', '28%'] : ['0%', '16%', '34%'],
+    path === 'deepDrift' ? ['0%', '18%', '28%'] : path === 'actionPull' ? ['0%', '10%', '20%'] : ['0%', '12%', '24%'],
   );
   const orbALeft = useTransform(
     smooth,
     [0, 1],
-    path === 'processSlide' ? ['-28%', '-8%'] : path === 'proofCross' ? ['-30%', '-18%'] : ['-26%', '-14%'],
+    path === 'processSlide' ? ['-28%', '-12%'] : ['-26%', '-16%'],
   );
   const orbBTop = useTransform(
     smooth,
     [0, 0.5, 1],
-    path === 'warmRise' ? ['28%', '42%', '55%'] : path === 'actionPull' ? ['20%', '38%', '48%'] : ['30%', '45%', '58%'],
+    path === 'warmRise' ? ['18%', '28%', '36%'] : ['22%', '32%', '40%'],
   );
   const orbBRight = useTransform(
     smooth,
     [0, 1],
-    path === 'proofCross' ? ['-18%', '-6%'] : path === 'processSlide' ? ['-22%', '-10%'] : ['-20%', '-12%'],
+    path === 'proofCross' ? ['-18%', '-10%'] : ['-20%', '-12%'],
   );
-  const orbAOpacity = useTransform(smooth, [0, 0.35, 0.7, 1], [0.95, 0.55, 0.72, 0.4]);
-  const orbBOpacity = useTransform(smooth, [0, 0.4, 0.75, 1], [0.7, 0.85, 0.5, 0.35]);
-  const veilOpacity = useTransform(smooth, [0.15, 0.45, 0.8], [0, 0.55, 0.2]);
+  const orbAOpacity = useTransform(smooth, [0, 0.4, 1], [0.45, 0.28, 0.12]);
+  const orbBOpacity = useTransform(smooth, [0, 0.5, 1], [0.32, 0.22, 0.08]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
       {reduce ? (
         <>
           <div
-            className="absolute -left-1/4 top-0 h-[480px] w-[480px] rounded-full blur-3xl"
-            style={{ background: `radial-gradient(circle, ${theme.glowAccent}, transparent 70%)` }}
+            className="absolute -left-1/4 top-0 h-[420px] w-[420px] rounded-full blur-3xl"
+            style={{ background: `radial-gradient(circle, ${theme.glowWash}, transparent 72%)` }}
           />
           <div
-            className="absolute -right-1/4 top-1/3 h-[400px] w-[400px] rounded-full blur-3xl"
-            style={{ background: `radial-gradient(circle, ${theme.glowWash}, transparent 70%)` }}
+            className="absolute -right-1/4 top-[12%] h-[360px] w-[360px] rounded-full blur-3xl"
+            style={{ background: `radial-gradient(circle, ${theme.glowAccent}, transparent 72%)` }}
           />
         </>
       ) : (
         <>
           <motion.div
-            className="absolute h-[520px] w-[520px] rounded-full blur-3xl"
+            className="absolute h-[460px] w-[460px] rounded-full blur-3xl"
             style={{
               top: orbATop,
               left: orbALeft,
               opacity: orbAOpacity,
-              background: `radial-gradient(circle, ${theme.glowAccent}, transparent 72%)`,
+              background: `radial-gradient(circle, ${theme.glowWash}, transparent 74%)`,
             }}
           />
           <motion.div
-            className="absolute h-[440px] w-[440px] rounded-full blur-3xl"
+            className="absolute h-[380px] w-[380px] rounded-full blur-3xl"
             style={{
               top: orbBTop,
               right: orbBRight,
               opacity: orbBOpacity,
-              background: `radial-gradient(circle, ${theme.glowWash}, transparent 72%)`,
-            }}
-          />
-          <motion.div
-            className="absolute inset-x-0 top-1/3 h-[50vh]"
-            style={{
-              opacity: veilOpacity,
-              background: `linear-gradient(180deg, transparent, ${theme.glowAccent}22, transparent)`,
+              background: `radial-gradient(circle, ${theme.glowAccent}, transparent 74%)`,
             }}
           />
         </>

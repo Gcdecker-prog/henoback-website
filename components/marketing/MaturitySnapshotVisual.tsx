@@ -80,7 +80,7 @@ export function MaturitySnapshotVisual({ className }: { className?: string }) {
                 <span
                   className={cn(
                     'absolute inset-x-0 bottom-0 rounded-t-xl transition-shadow duration-300',
-                    isActive && 'shadow-[0_0_28px_-4px_rgba(242,120,48,0.5)]',
+                    isActive && 'shadow-[0_10px_24px_-12px_rgba(27,54,93,0.35)]',
                   )}
                   style={{
                     height: `${heightPct}%`,

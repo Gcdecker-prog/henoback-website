@@ -1,61 +1,52 @@
 'use client';
 
-import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
+import { ChapterCtas } from '@/components/marketing/ChapterCtas';
+import { ChapterHeadline, chapterBodyClass } from '@/components/marketing/ChapterHeadline';
 import { MaturitySnapshotVisual } from '@/components/marketing/MaturitySnapshotVisual';
+import { ProductInset, ProductShell } from '@/components/marketing/ProductShell';
+import { WaveField } from '@/components/marketing/WaveField';
 import { getStartedPage } from '@/lib/content/get-started-page';
-import { pageThemes } from '@/lib/ui/page-themes';
+import { assessmentUrl } from '@/lib/gtm-links';
+import { headerCta } from '@/lib/site-config';
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
 import { cn } from '@/lib/cn';
 
-const theme = pageThemes.getStarted;
+const CTA_HREF = assessmentUrl({ content: 'get-started-hero' });
 
-/** One clean composition: headline → bars → soft supporting line */
+/** Conversion chapter — same hero voice as home, visual in a product tray. */
 export function GetStartedHero() {
   const reduce = useReducedMotion();
-  const { headline, underGraphic } = getStartedPage;
+  const { kicker, headline, underGraphic } = getStartedPage;
 
   return (
-    <section className="relative overflow-hidden pb-16 pt-8 sm:pb-20 sm:pt-10">
-      <div
-        className="pointer-events-none absolute -left-32 top-0 h-80 w-80 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${theme.glowAccent}, transparent 70%)` }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-16 top-1/4 h-64 w-64 rounded-full blur-3xl"
-        style={{ background: `radial-gradient(circle, ${theme.glowWash}, transparent 70%)` }}
-        aria-hidden
-      />
+    <section className="relative isolate bg-white pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
+      <WaveField />
 
       <Container className="relative">
         <motion.div
-          className="mx-auto max-w-3xl text-center"
+          className="max-w-4xl"
           initial={reduce ? false : 'hidden'}
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.nav
-            className="text-sm text-neutral-500"
-            aria-label="Breadcrumb"
+          <motion.div variants={staggerItem}>
+            <ChapterHeadline kicker={kicker} headline={headline} />
+          </motion.div>
+          <motion.p
+            className={cn('mt-7', chapterBodyClass)}
             variants={staggerItem}
           >
-            <Link href="/" className={cn('transition-colors', theme.linkHoverClass)}>
-              Home
-            </Link>
-            <span className="mx-2 text-neutral-300" aria-hidden>
-              →
-            </span>
-            <span className="font-medium text-neutral-700">Get Started</span>
-          </motion.nav>
-
-          <motion.h1
-            variants={staggerItem}
-            className="mt-8 text-display-md font-semibold tracking-tight text-neutral-900 sm:text-display-lg"
-          >
-            {headline}
-          </motion.h1>
+            {underGraphic}
+          </motion.p>
+          <motion.div variants={staggerItem}>
+            <ChapterCtas
+              primary={{ href: CTA_HREF, label: headerCta.label }}
+              secondary={{ href: '/services', label: 'See how it works' }}
+              className="mt-9"
+            />
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -64,17 +55,12 @@ export function GetStartedHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.12, ease: motionEase }}
         >
-          <MaturitySnapshotVisual />
+          <ProductShell>
+            <ProductInset>
+              <MaturitySnapshotVisual />
+            </ProductInset>
+          </ProductShell>
         </motion.div>
-
-        <motion.p
-          className="mx-auto mt-10 max-w-md text-center text-sm leading-relaxed text-neutral-600 sm:mt-12 sm:text-base"
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.22, ease: motionEase }}
-        >
-          {underGraphic}
-        </motion.p>
       </Container>
     </section>
   );

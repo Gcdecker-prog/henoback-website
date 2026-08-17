@@ -5,7 +5,8 @@
 export const aboutUsPage = {
   title: 'About Us',
   hero: {
-    headline: "Most outsourced accounting models don't fix the problem—they manage it",
+    kicker: "Most outsourced accounting models\ndon't fix the problem—",
+    headline: 'they manage\u00a0it',
     paragraphs: [
       "Most companies outsource accounting expecting clarity—but end up with the same visibility problems. The issue isn't effort—it's how the back office is structured.",
       "Adding more people doesn't fix inconsistent data, disconnected processes, or unreliable reporting. This is why most outsourced accounting relationships fall short.",

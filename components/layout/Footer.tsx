@@ -8,7 +8,7 @@ import { assessmentUrl } from '@/lib/gtm-links';
 
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-200 bg-neutral-50">
+    <footer className="relative isolate z-10 border-t border-heno-blue-100 bg-white">
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div>
@@ -35,7 +35,7 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Explore</p>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link href="/" className="text-sm text-neutral-700 hover:text-heno-orange-600">
+                <Link href="/" className="text-sm text-neutral-700 hover:text-heno-blue-900">
                   Home
                 </Link>
               </li>
@@ -43,7 +43,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-neutral-700 hover:text-heno-orange-600"
+                    className="text-sm text-neutral-700 hover:text-heno-blue-900"
                   >
                     {item.label}
                   </Link>
