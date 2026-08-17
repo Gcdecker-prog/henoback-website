@@ -41,7 +41,7 @@ export function ChapterHeadline({
         ) : null}
         <span
           className={cn(
-            'block text-balance font-semibold text-heno-blue-900',
+            'block text-balance font-bold text-heno-blue-900',
             kicker && 'mt-2.5 sm:mt-3',
           )}
         >
@@ -57,7 +57,7 @@ export function ChapterHeadline({
       <span
         className={cn(
           chapterClaimScale,
-          'block text-balance font-semibold text-heno-blue-900',
+          'block text-balance font-bold text-heno-blue-900',
           kicker && 'mt-3 sm:mt-3.5',
         )}
       >

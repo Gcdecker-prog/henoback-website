@@ -14,7 +14,7 @@ export const intacctHero = {
   /** nbsp keeps the close from orphaning on wrap */
   line2: 'Get the project profitability Intacct is built to\u00a0deliver.',
   summary:
-    'We configure dimensions, tighten the operating rhythm, and stay alongside your team—so project margin shows up clearly in Intacct.',
+    'Our team will configure dimensions, tighten the operating rhythm, and stay alongside yours—so project margin shows up clearly in Intacct.',
   outcomes: [
     'Project P&L by dimension',
     'Dashboards leadership can trust',
@@ -23,12 +23,28 @@ export const intacctHero = {
   primaryCta: 'See where you stand',
   secondaryCta: 'See how it works',
   secondaryCtaHref: '/services',
+  beforeAfter: {
+    eyebrow: 'One source of truth',
+    sub: 'Our team turns disconnected systems and conflicting reports into one number leadership can trust.',
+    beforeLabel: 'Before Heno',
+    beforeValue: 'Three conflicting answers',
+    afterLabel: 'After Heno',
+    afterValue: 'One answer, every time',
+  },
 } as const;
+
+/** Primary hero dashboard views — full set on desktop; subset on mobile */
+export const intacctHeroPrimaryTabIds = [
+  'project-profitability',
+  'cash-flow',
+  'net-income',
+] as const;
 
 export const intacctHeroTabs = [
   {
     id: 'project-profitability',
     label: 'Project Profitability',
+    shortLabel: 'Project P&L',
     caption: 'Revenue, costs, and net income for every project.',
     chart: 'horizontal' as const,
     series: [
@@ -41,6 +57,7 @@ export const intacctHeroTabs = [
   {
     id: 'bookings-backlog',
     label: 'Bookings & Backlog',
+    shortLabel: 'Bookings',
     caption: "What you've sold vs. what's left to deliver.",
     chart: 'bars-line' as const,
     series: [
@@ -54,6 +71,7 @@ export const intacctHeroTabs = [
   {
     id: 'cash-flow',
     label: 'Cash Flow',
+    shortLabel: 'Cash Flow',
     caption: 'Inflows, outflows, and the drivers behind them.',
     chart: 'bars-accent' as const,
     series: [
@@ -67,6 +85,7 @@ export const intacctHeroTabs = [
   {
     id: 'revenue-margin',
     label: 'Revenue & Margin',
+    shortLabel: 'Revenue',
     caption: 'Revenue categories, gross margin, and recurring revenue vs. cost.',
     chart: 'bars-curve' as const,
     series: [
@@ -80,6 +99,7 @@ export const intacctHeroTabs = [
   {
     id: 'net-income',
     label: 'Net Income',
+    shortLabel: 'Net Income',
     caption: 'The bottom line, tracked continuously.',
     chart: 'area' as const,
     series: [
@@ -158,9 +178,10 @@ export const intacctTestimonials = {
 } as const;
 
 export const intacctProblem = {
-  headline: 'You\u2019ve already invested in Intacct. Now get the visibility it was built to provide.',
+  headline:
+    'You\u2019ve already invested in Intacct. Now let our team unlock the visibility it was built to provide.',
   intro:
-    'You moved to Intacct for better visibility into performance, profitability, and growth. With the right structure, reporting, and operating rhythm, the platform can deliver it.',
+    'You moved to Intacct for better visibility into performance, profitability, and growth. With the right structure, reporting, and operating rhythm, Heno and Intacct can deliver it.',
   bullets: [
     'A month-end close that runs with consistency',
     'Clear visibility into project, client, and service-line profitability',
@@ -193,7 +214,7 @@ export const intacctMatters = {
   ] as const,
   calloutTag: 'Mid-implementation or post go-live?',
   calloutBody:
-    'If your Intacct rollout is underway\u2014or live but not yet delivering the reporting you expected\u2014we can help. We step in alongside your team, strengthen the implementation, and get the project visibility the platform is designed to provide.',
+    'If your Intacct rollout is underway\u2014or live but not yet delivering the reporting you expected\u2014our team can help. We step in alongside yours, strengthen the implementation, and get the project visibility the platform is designed to provide.',
   emphasisLead: 'The opportunity is rarely a new system.',
   emphasisFollow:
     'Most often, the biggest gains come from aligned data, consistent processes, and reporting leadership can trust.',
@@ -202,15 +223,15 @@ export const intacctMatters = {
   beforeAfter: {
     eyebrow: 'One source of truth',
     title: 'Before vs after',
-    sub: 'We turn disconnected systems and conflicting reports into one number your team can trust.',
-    beforeLabel: 'Disconnected reports',
-    beforeValue: 'Three answers',
-    afterLabel: 'One reliable system',
+    sub: 'Our team turns disconnected systems and conflicting reports into one number leadership can trust.',
+    beforeLabel: 'Before Heno',
+    beforeValue: 'Three conflicting answers',
+    afterLabel: 'After Heno',
     afterValue: 'One answer, every time',
   },
   stat: {
     value: '$50M to over $1B',
-    label: 'The range of firms we\u2019ve helped scale with stronger back office operations.',
+    label: 'The range of firms our team has helped scale with stronger back office operations.',
   },
   partnerLogos: [
     {

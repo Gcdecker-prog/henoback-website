@@ -21,7 +21,7 @@ export function IntacctSolutionSection() {
         <Reveal>
           <h2
             id="intacct-solution-heading"
-            className="max-w-4xl text-display-md font-semibold tracking-tight text-white sm:text-display-lg lg:max-w-5xl"
+            className="max-w-4xl text-display-md font-bold tracking-tight text-white sm:text-display-lg lg:max-w-5xl"
           >
             {intacctSolution.headlineBefore}{' '}
             <span className="text-heno-blue-400">{intacctSolution.headlineAccent}</span>.

@@ -82,7 +82,6 @@ export function Footer() {
             © {siteConfig.copyrightYear} {siteConfig.legalEntity}. Part of {siteConfig.platform}{' '}
             · {siteConfig.parent}.
           </p>
-          <p className="text-neutral-400">Internal slug: henoback-www</p>
         </div>
       </Container>
     </footer>

@@ -7,7 +7,7 @@ function trimTrailingSlash(value: string): string {
 
 export const siteConfig = {
   /** Product name — nav, hero, CTAs */
-  name: 'HenoBack Office',
+  name: 'Heno BackOffice',
   /** Legal entity — footer only */
   legalEntity: 'Heno BackOffice Services',
   parent: 'IFI Professionals',

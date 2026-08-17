@@ -35,7 +35,7 @@ export function IntacctProblemSection() {
                       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-heno-blue-100">
                         {intacctProblem.overlayTitle}
                       </p>
-                      <p className="mt-1.5 text-base font-semibold tracking-tight text-heno-orange-500">
+                      <p className="mt-1.5 text-base font-bold tracking-tight text-heno-orange-500">
                         {intacctProblem.overlayStatus}
                       </p>
                     </div>
@@ -49,7 +49,7 @@ export function IntacctProblemSection() {
             <div>
               <h2
                 id="intacct-problem-heading"
-                className="text-display-md font-semibold tracking-tight text-heno-blue-900"
+                className="text-display-md font-bold tracking-tight text-heno-blue-900"
               >
                 {intacctProblem.headline}
               </h2>

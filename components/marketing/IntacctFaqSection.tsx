@@ -18,7 +18,7 @@ export function IntacctFaqSection() {
           <div className="mx-auto max-w-2xl text-center">
             <h2
               id="intacct-faq-heading"
-              className="text-display-md font-semibold tracking-tight text-white sm:text-display-lg"
+              className="text-display-md font-bold tracking-tight text-white sm:text-display-lg"
             >
               {intacctFaq.headline}
             </h2>

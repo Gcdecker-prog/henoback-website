@@ -67,7 +67,7 @@ export function IntacctIndustriesAndStudies() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-heno-orange-600">
               Case studies
             </p>
-            <h2 className="mt-3 text-display-md font-semibold tracking-tight text-neutral-900 sm:text-display-lg">
+            <h2 className="mt-3 text-display-md font-bold tracking-tight text-neutral-900 sm:text-display-lg">
               {intacctCaseStudies.headline}
             </h2>
             <p className="mt-3 max-w-2xl text-body leading-relaxed text-neutral-600">
@@ -100,14 +100,14 @@ export function IntacctIndustriesAndStudies() {
 
                     {/* Shared overlay template — identical vertical rhythm on both cards */}
                     <div className="relative mt-auto grid w-full grid-rows-[auto_auto_minmax(4.5rem,auto)_auto] gap-4 p-6 sm:gap-5 sm:p-7">
-                      <h3 className="text-[1.45rem] font-semibold tracking-tight text-white sm:text-[1.6rem]">
+                      <h3 className="text-[1.45rem] font-bold tracking-tight text-white sm:text-[1.6rem]">
                         {study.clientName}
                       </h3>
 
                       <dl className="grid grid-cols-3 gap-3 border-y border-white/15 py-4">
                         {study.metrics.map((metric) => (
                           <div key={metric.label} className="min-w-0">
-                            <dt className="text-[1.05rem] font-semibold tracking-tight text-white sm:text-[1.15rem]">
+                            <dt className="text-[1.05rem] font-bold tracking-tight text-white sm:text-[1.15rem]">
                               {metric.value}
                             </dt>
                             <dd className="mt-1 text-[0.7rem] leading-snug text-white/70 sm:text-[0.75rem]">

@@ -65,7 +65,7 @@ export function IntacctTimelineSection() {
         >
           <motion.h2
             id="intacct-timeline-heading"
-            className="text-display-md font-semibold tracking-tight text-heno-blue-900 sm:text-display-lg"
+            className="text-display-md font-bold tracking-tight text-heno-blue-900 sm:text-display-lg"
             variants={scrollSlideLabel}
           >
             {intacctTimeline.headline}

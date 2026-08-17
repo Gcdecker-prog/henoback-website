@@ -31,7 +31,7 @@ export function VisibilityModelBand() {
       <Container className="relative">
         <Reveal>
           <header className="mx-auto max-w-2xl text-center">
-            <h2 className="text-display-md font-semibold tracking-tight text-heno-blue-900 sm:text-display-lg">
+            <h2 className="text-display-md font-bold tracking-tight text-heno-blue-900 sm:text-display-lg">
               {visibilityModelCopy.title}
             </h2>
             <p className="mt-3 text-body leading-relaxed text-neutral-600 sm:text-body-lg">

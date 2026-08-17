@@ -168,9 +168,9 @@ export const visibilityLevels: readonly VisibilityLevel[] = [
 ] as const;
 
 export const visibilityModelCopy = {
-  title: 'The 7-Level Data Visibility Model',
+  title: 'The 7 Steps to Project Profit Visibility',
   intro:
-    'From disconnected systems at Level 1 to real-time monitoring and a continuous close at Level 7.',
+    'With Heno, move from disconnected systems to reporting leadership trusts—using our proprietary 7-step accounting and data model.',
   legendLabel: 'The eight areas we assess',
   interactionHint: 'Hover or tap a level to explore each area.',
   footerLead: 'Most firms sit at Level 2 or 3.',

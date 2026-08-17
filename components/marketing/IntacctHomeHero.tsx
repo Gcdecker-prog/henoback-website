@@ -6,7 +6,12 @@ import { Check } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { GtmOutboundButton } from '@/components/gtm/GtmOutboundButton';
-import { intacctHero, intacctHeroTabs } from '@/lib/content/home-intacct';
+import { BeforeAfterChart } from '@/components/marketing/BeforeAfterChart';
+import {
+  intacctHero,
+  intacctHeroPrimaryTabIds,
+  intacctHeroTabs,
+} from '@/lib/content/home-intacct';
 import { assessmentUrl } from '@/lib/gtm-links';
 import { cn } from '@/lib/cn';
 import { WaveField } from '@/components/marketing/WaveField';
@@ -14,6 +19,8 @@ import { chapterBodyClass, chapterClaimScale } from '@/components/marketing/Chap
 import { motionEase, staggerContainer, staggerItem } from '@/lib/motion/variants';
 
 type Tab = (typeof intacctHeroTabs)[number];
+
+const PRIMARY_TAB_SET = new Set<string>(intacctHeroPrimaryTabIds);
 
 const BAR_TONES = {
   orange: 'bg-heno-orange-500',
@@ -218,44 +225,86 @@ function DashboardChart({ tab, reduce }: { tab: Tab; reduce: boolean | null }) {
   return <AreaChart series={tab.series} reduce={reduce} />;
 }
 
-/** Intacct homepage hero — revision dashboard box with site fonts + larger bars. */
+function HeroTabButton({
+  tab,
+  isActive,
+  compact,
+  onSelect,
+  className,
+}: {
+  tab: Tab;
+  isActive: boolean;
+  compact: boolean;
+  onSelect: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={isActive}
+      onClick={onSelect}
+      className={cn(
+        'min-w-0 rounded-full text-center font-semibold leading-snug tracking-tight transition-colors',
+        compact ? 'px-2 py-2.5 text-[0.6875rem] sm:px-2.5 sm:text-xs' : 'flex-1 px-2 py-2 text-[0.7rem] lg:text-[0.72rem]',
+        isActive
+          ? 'bg-heno-blue-900 text-white shadow-[0_8px_18px_-10px_rgba(27,54,93,0.65)]'
+          : 'text-heno-blue-500 hover:bg-white/70 hover:text-heno-blue-900',
+        className,
+      )}
+    >
+      <span className="block text-pretty">{compact ? tab.shortLabel : tab.label}</span>
+    </button>
+  );
+}
+
+/** Intacct homepage hero — before/after proof, then dashboard views. */
 export function IntacctHomeHero() {
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState<Tab['id']>(intacctHeroTabs[0].id);
+  const [showMoreTabs, setShowMoreTabs] = useState(false);
   const active = intacctHeroTabs.find((t) => t.id === activeId) ?? intacctHeroTabs[0];
+
+  const primaryTabs = intacctHeroTabs.filter((tab) => PRIMARY_TAB_SET.has(tab.id));
+  const secondaryTabs = intacctHeroTabs.filter((tab) => !PRIMARY_TAB_SET.has(tab.id));
+
+  const handleToggleMoreTabs = () => {
+    setShowMoreTabs((open) => {
+      const next = !open;
+      if (!next && !PRIMARY_TAB_SET.has(activeId)) {
+        setActiveId(intacctHeroPrimaryTabIds[0]);
+      }
+      return next;
+    });
+  };
 
   return (
     <section
-      className="relative isolate bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
+      className="relative isolate bg-white pb-8 pt-10 sm:pb-10 sm:pt-12 lg:pb-12 lg:pt-14"
       aria-labelledby="intacct-hero-heading"
     >
       <WaveField />
 
-      <Container className="relative">
-        <motion.h1
-          id="intacct-hero-heading"
-          className={chapterClaimScale}
-          initial={reduce ? false : { opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: motionEase }}
-        >
-          <span className="block font-medium text-heno-blue-500">{intacctHero.line1}</span>
-          <span className="mt-2.5 block text-balance font-semibold text-heno-blue-900 sm:mt-3">
-            {intacctHero.line2}
-          </span>
-        </motion.h1>
-
-        <div className="mt-10 grid items-start gap-10 lg:mt-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-12 xl:gap-14">
+      <Container className="relative max-w-7xl">
+        <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-9 xl:gap-10">
           <motion.div
-            className="max-w-xl"
+            className="min-w-0 lg:pt-1"
             initial={reduce ? false : 'hidden'}
             animate="visible"
             variants={staggerContainer}
           >
-            <motion.p
-              className={chapterBodyClass}
+            <motion.h1
+              id="intacct-hero-heading"
+              className={chapterClaimScale}
               variants={staggerItem}
             >
+              <span className="block font-medium text-heno-blue-500">{intacctHero.line1}</span>
+              <span className="mt-2.5 block text-balance font-bold text-heno-blue-900 sm:mt-3">
+                {intacctHero.line2}
+              </span>
+            </motion.h1>
+
+            <motion.p className={cn(chapterBodyClass, 'mt-7 lg:mt-8')} variants={staggerItem}>
               {intacctHero.summary}
             </motion.p>
             <motion.ul className="mt-7 space-y-3.5" variants={staggerItem}>
@@ -292,34 +341,85 @@ export function IntacctHomeHero() {
                 'rounded-[1.5rem] bg-[#F3F6F9] p-4 shadow-[0_28px_70px_-30px_rgba(27,54,93,0.35)] sm:p-5',
                 'ring-1 ring-heno-blue-900/[0.04]',
               )}
+              role="region"
+              aria-label={`${intacctHero.beforeAfter.eyebrow} dashboard preview`}
             >
-              <div className="grid grid-cols-5 gap-1" role="tablist" aria-label="Dashboard views">
-                {intacctHeroTabs.map((tab) => {
-                  const isActive = tab.id === activeId;
-                  return (
-                    <button
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-heno-orange-500">
+                {intacctHero.beforeAfter.eyebrow}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600 sm:text-[0.9375rem]">
+                {intacctHero.beforeAfter.sub}
+              </p>
+
+              <BeforeAfterChart
+                reduce={!!reduce}
+                variant="compact"
+                className="mt-3 sm:mt-4"
+                beforeLabel={intacctHero.beforeAfter.beforeLabel}
+                beforeValue={intacctHero.beforeAfter.beforeValue}
+                afterLabel={intacctHero.beforeAfter.afterLabel}
+                afterValue={intacctHero.beforeAfter.afterValue}
+              />
+
+              <div className="mt-4 sm:mt-5">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-heno-blue-500/80">
+                  Live reporting views
+                </p>
+
+                {/* Mobile — primary tabs + optional secondary row */}
+                <div className="md:hidden">
+                  <div className="grid grid-cols-3 gap-1.5" role="tablist" aria-label="Dashboard views">
+                    {primaryTabs.map((tab) => (
+                      <HeroTabButton
+                        key={tab.id}
+                        tab={tab}
+                        compact
+                        isActive={tab.id === activeId}
+                        onSelect={() => setActiveId(tab.id)}
+                      />
+                    ))}
+                  </div>
+
+                  {showMoreTabs ? (
+                    <div className="mt-1.5 grid grid-cols-2 gap-1.5" role="tablist" aria-label="Additional dashboard views">
+                      {secondaryTabs.map((tab) => (
+                        <HeroTabButton
+                          key={tab.id}
+                          tab={tab}
+                          compact
+                          isActive={tab.id === activeId}
+                          onSelect={() => setActiveId(tab.id)}
+                        />
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <button
+                    type="button"
+                    onClick={handleToggleMoreTabs}
+                    className="mt-2 w-full rounded-full py-1.5 text-center text-[0.6875rem] font-semibold text-heno-blue-500 transition-colors hover:text-heno-blue-900"
+                    aria-expanded={showMoreTabs}
+                  >
+                    {showMoreTabs ? 'Fewer views' : 'More views'}
+                  </button>
+                </div>
+
+                {/* Desktop — full-width tab row */}
+                <div className="hidden md:flex md:w-full md:gap-1" role="tablist" aria-label="Dashboard views">
+                  {intacctHeroTabs.map((tab) => (
+                    <HeroTabButton
                       key={tab.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={isActive}
-                      onClick={() => setActiveId(tab.id)}
-                      className={cn(
-                        'min-w-0 rounded-full px-1 py-2 text-center text-[0.58rem] font-semibold leading-tight tracking-tight transition-colors sm:px-1.5 sm:text-[0.68rem] md:text-[0.72rem]',
-                        isActive
-                          ? 'bg-heno-blue-900 text-white shadow-[0_8px_18px_-10px_rgba(27,54,93,0.65)]'
-                          : 'text-heno-blue-500 hover:bg-white/70 hover:text-heno-blue-900',
-                      )}
-                    >
-                      <span className="block truncate sm:whitespace-normal sm:break-words">
-                        {tab.label}
-                      </span>
-                    </button>
-                  );
-                })}
+                      tab={tab}
+                      compact={false}
+                      isActive={tab.id === activeId}
+                      onSelect={() => setActiveId(tab.id)}
+                    />
+                  ))}
+                </div>
               </div>
 
-              <div className="mt-4 rounded-[1.15rem] bg-white p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:mt-5 sm:p-5">
-                <div className="relative h-[15.5rem] sm:h-[16.75rem]">
+              <div className="mt-3 rounded-[1.15rem] bg-white p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:mt-4 sm:p-5">
+                <div className="relative h-[14.5rem] sm:h-[16rem] lg:h-[16.75rem]">
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.div
                       key={active.id}
@@ -329,7 +429,7 @@ export function IntacctHomeHero() {
                       exit={reduce ? undefined : { opacity: 0, y: -4 }}
                       transition={{ duration: 0.22, ease: motionEase }}
                     >
-                      <p className="shrink-0 text-[0.9rem] font-medium leading-snug text-heno-blue-900/80 sm:text-[0.95rem]">
+                      <p className="shrink-0 text-[0.875rem] font-medium leading-snug text-heno-blue-900/80 sm:text-[0.95rem]">
                         {active.caption}
                       </p>
                       <div className="mt-3 min-h-0 flex-1">

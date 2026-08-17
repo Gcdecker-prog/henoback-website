@@ -12,7 +12,7 @@ export function IntacctTestimonialsMarquee() {
 
   return (
     <NavyBand
-      className="pb-12 pt-11 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14"
+      className="pb-12 pt-8 sm:pb-14 sm:pt-9 lg:pb-16 lg:pt-10"
       aria-labelledby="intacct-trust-heading"
     >
       <Container>
@@ -20,7 +20,7 @@ export function IntacctTestimonialsMarquee() {
           <div className="mx-auto max-w-2xl text-center">
             <h2
               id="intacct-trust-heading"
-              className="text-display-md font-semibold tracking-tight text-white sm:text-display-lg"
+              className="text-display-md font-bold tracking-tight text-white sm:text-display-lg"
             >
               {intacctTestimonials.headline}
             </h2>
@@ -29,7 +29,7 @@ export function IntacctTestimonialsMarquee() {
         </Reveal>
       </Container>
 
-      <div className="platform-marquee-mask relative mt-8 overflow-hidden sm:mt-9">
+      <div className="platform-marquee-mask relative mt-7 min-h-[9.5rem] overflow-hidden sm:mt-8 sm:min-h-[10rem]">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-heno-blue-900 to-transparent sm:w-24" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-heno-blue-900 to-transparent sm:w-24" />
         <div className="testimonial-marquee-track flex w-max items-stretch gap-4 px-4 sm:gap-5 sm:px-5">

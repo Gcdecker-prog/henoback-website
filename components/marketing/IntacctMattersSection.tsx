@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
-import { HomeOutcomeDashboard } from '@/components/marketing/HomeOutcomeDashboard';
+import { TrustScaleStrip } from '@/components/marketing/TrustScaleStrip';
 import { intacctMatters } from '@/lib/content/home-intacct';
 import {
   pillarSlideItem,
@@ -13,9 +13,10 @@ import {
   scrollSlideStagger,
 } from '@/lib/motion/variants';
 import { brandUi } from '@/lib/ui/brand-ui';
+import { dashboardCard } from '@/lib/ui/dashboard-card';
 import { cn } from '@/lib/cn';
 
-/** Why visibility — pillars → before/after → single elegant next-step band. */
+/** Why visibility — pillars, scale proof, next-step band. */
 export function IntacctMattersSection() {
   const reduce = useReducedMotion();
 
@@ -30,7 +31,7 @@ export function IntacctMattersSection() {
         >
           <motion.h2
             id="intacct-matters-heading"
-            className="max-w-3xl text-display-md font-semibold tracking-tight text-heno-blue-900 sm:text-display-lg"
+            className="max-w-3xl text-display-md font-bold tracking-tight text-heno-blue-900 sm:text-display-lg"
             variants={scrollSlideLabel}
           >
             {intacctMatters.headline}
@@ -64,22 +65,16 @@ export function IntacctMattersSection() {
           ))}
         </motion.ul>
 
-        <div className="mt-12 sm:mt-14">
-          <HomeOutcomeDashboard
-            className="w-full"
-            copy={{
-              eyebrow: intacctMatters.beforeAfter.eyebrow,
-              title: intacctMatters.beforeAfter.title,
-              sub: intacctMatters.beforeAfter.sub,
-              beforeLabel: intacctMatters.beforeAfter.beforeLabel,
-              beforeValue: intacctMatters.beforeAfter.beforeValue,
-              afterLabel: intacctMatters.beforeAfter.afterLabel,
-              afterValue: intacctMatters.beforeAfter.afterValue,
-            }}
-          />
-        </div>
+        <motion.div
+          className={cn(dashboardCard, 'mt-12 overflow-hidden sm:mt-14')}
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '0px 0px -8% 0px', amount: 0.2 }}
+          transition={{ duration: 0.55 }}
+        >
+          <TrustScaleStrip reduce={!!reduce} className="rounded-[1.5rem]" />
+        </motion.div>
 
-        {/* Light next-step band — less navy mass */}
         <motion.div
           className="mt-8 grid overflow-hidden rounded-[1.35rem] border border-neutral-200/80 bg-[#f7f8fa] sm:mt-10 lg:grid-cols-2"
           initial={reduce ? false : 'hidden'}

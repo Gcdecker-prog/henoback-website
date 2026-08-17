@@ -32,9 +32,7 @@ export default function HomePage() {
         <IntacctHomeHero />
       </FlowBand>
 
-      <FlowBand stage={1} as="div" surfaceClassName="bg-transparent">
-        <IntacctTestimonialsMarquee />
-      </FlowBand>
+      <IntacctTestimonialsMarquee />
 
       <FlowBand stage={2} as="div">
         <IntacctProblemSection />
